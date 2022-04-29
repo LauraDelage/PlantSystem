@@ -7,8 +7,15 @@
 public class Plant {
     String plantName;
     String plantSpecies;
+    //int plantTypeIndex;
     String plantType;
+    String plantTypeInfo;
     int waterReq;
+
+    Plant(int plantTypeIndex) {
+      plantType = Global.plantType[plantTypeIndex];
+      plantTypeInfo = Global.plantTypeInfo[plantTypeIndex];
+    }
 
     public String getName() {
         return plantName;
