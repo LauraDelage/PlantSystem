@@ -3,7 +3,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -25,19 +27,23 @@ public class PlantDriver extends Application {
     Pane plantNameCanvas = new Pane();
     Pane plantSpeciesCanvas = new Pane();
     Pane plantTypeCanvas = new Pane();
+    Pane plantWaterCanvas = new Pane();
 
     Button addPlant = new Button("Add Plant");
     Button plantName = new Button("Submit Plant Name");
     Button plantSpecies = new Button("Submit Plant Species");
     Button plantType = new Button("Submit Plant Type");
+    Button plantWater = new Button("Submit Water Percentage");
 
     Text plantNameText = new Text(30, 75, "What is your plant's name?");
     Text plantSpeciesText = new Text(30, 75, "What is your plant's species?");
     Text plantTypeText = new Text(30, 75, "Select your plant type.");
+    Text plantWaterText = new Text(30, 75, "Water requirements (% moisture) of your plant?");
 
     TextField plantNameInput = new TextField();
     TextField plantSpeciesInput = new TextField();
-    TextField plantTypeInput = new TextField();
+    ComboBox<PlantType> plantTypeInput = new ComboBox<PlantType>();
+    TextField plantWaterInput = new TextField();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -45,6 +51,7 @@ public class PlantDriver extends Application {
         Scene plantNameScene = new Scene(plantNameCanvas, 510, 300, Color.WHITE);
         Scene plantSpeciesScene = new Scene(plantSpeciesCanvas, 510, 300, Color.WHITE);
         Scene plantTypeScene = new Scene(plantTypeCanvas, 510, 300, Color.WHITE);
+        Scene plantWaterScene = new Scene(plantWaterCanvas, 510, 300, Color.WHITE);
         primaryStage.setScene(homeScene);
         primaryStage.show();
         startHomeScene();
@@ -84,6 +91,19 @@ public class PlantDriver extends Application {
                 //Initiate user input scene:
                 startPlantTypeScene();
                 primaryStage.setScene(plantTypeScene);
+            }
+        });
+
+        plantType.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                //Remove elements from home scene:
+                plantTypeCanvas.getChildren().remove(plantType);
+                plantTypeCanvas.getChildren().remove(plantTypeText);
+                plantTypeCanvas.getChildren().remove(plantTypeInput);
+                //Initiate user input scene:
+                startPlantWaterScene();
+                primaryStage.setScene(plantWaterScene);
             }
         });
 
@@ -172,12 +192,11 @@ public class PlantDriver extends Application {
         //Defining text:
         plantTypeText.setFont(buttonFont);
         plantTypeText.setFill(Color.rgb(72, 137, 64));
-        //Defining text box:
+        //Defining drop down list:
+        plantTypeInput.getItems().setAll(PlantType.values());
         plantTypeInput.setLayoutX(30);
         plantTypeInput.setLayoutY(95);
-        plantTypeInput.setPrefHeight(95);
-        plantTypeInput.setPrefWidth(405);
-        plantTypeInput.setFont(textBoxFont);
+        plantTypeInput.setStyle("-fx-background-color: #488940");
         //Defining submit button:
         plantType.setStyle("-fx-background-color: #488940");
         plantType.setLayoutX(30);
@@ -189,6 +208,33 @@ public class PlantDriver extends Application {
         plantTypeCanvas.getChildren().add(plantTypeText);
         plantTypeCanvas.getChildren().add(plantTypeInput);
         plantTypeCanvas.setStyle("-fx-background-color: white;");
+    }
+
+    public void startPlantWaterScene() {
+        plantWaterCanvas.setStyle("-fx-background-color: white;");
+        Font buttonFont = new Font("Impact", 20); //Impact
+        Font textBoxFont = new Font("Arial", 12);
+        //Defining text:
+        plantWaterText.setFont(buttonFont);
+        plantWaterText.setFill(Color.rgb(72, 137, 64));
+        //Defining text box:
+        plantWaterInput.setLayoutX(30);
+        plantWaterInput.setLayoutY(95);
+        plantWaterInput.setPrefHeight(95);
+        plantWaterInput.setPrefWidth(405);
+        plantWaterInput.setFont(textBoxFont);
+        //Defining submit button:
+        plantWater.setStyle("-fx-background-color: #488940");
+        plantWater.setLayoutX(30);
+        plantWater.setLayoutY(210);
+        plantWater.setTextFill(Color.WHITE);
+        plantWater.setFont(buttonFont);
+        //Adding all elements to the canvas:
+        plantWaterCanvas.getChildren().add(plantWater);
+        plantWaterCanvas.getChildren().add(plantWaterText);
+        plantWaterCanvas.getChildren().add(plantWaterInput);
+        plantWaterCanvas.setStyle("-fx-background-color: white;");
+
     }
 }
 
