@@ -47,33 +47,39 @@ class PlantSorterTest {
 
         craig.setCurrWaterVal(9);
         craig.calcWaterNeeded();
-        allPlants.add(craig);
 
         bob.setCurrWaterVal(5);
         bob.calcWaterNeeded();
-        allPlants.add(bob);
 
         donut.setCurrWaterVal(2);
         donut.calcWaterNeeded();
-        allPlants.add(donut);
 
         bean.setCurrWaterVal(3);
         bean.calcWaterNeeded();
-        allPlants.add(bean);
 
         anna.setCurrWaterVal(7);
         anna.calcWaterNeeded();
+
+        allPlants.add(craig);
+        allPlants.add(bob);
+        allPlants.add(donut);
+        allPlants.add(bean);
         allPlants.add(anna);
 
         System.out.println("Unsorted:");
-        plantAssistant.printWaterReq(allPlants);
+        plantAssistant.printWaterInfo(allPlants);
 
         allPlants = plantAssistant.waterSort(allPlants);
 
         System.out.println();
         System.out.println("Sorted:");
-        plantAssistant.printWaterReq(allPlants);
-        plantAssistant.printNames(allPlants);
+        plantAssistant.printWaterInfo(allPlants);
+    }
 
+    @Test
+    void waterCalcTest() {
+        Plant bob = new Plant("bob", "coriander", 3, 10);
+        bob.setCurrWaterVal(9);
+        System.out.println(bob.calcWaterNeeded());
     }
 }

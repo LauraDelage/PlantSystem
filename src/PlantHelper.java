@@ -83,8 +83,11 @@ public class PlantHelper {
         }
     }
 
-    public void printWaterReq(ArrayList<Plant> plantList) {
+    public void printWaterInfo(ArrayList<Plant> plantList) {
         for (int i = 0; i < plantList.size(); i++) {
+            System.out.println(plantList.get(i).getName());
+            System.out.println(plantList.get(i).getWaterReq());
+            System.out.println(plantList.get(i).getCurrWaterVal());
             System.out.println(plantList.get(i).calcWaterNeeded());
         }
     }
