@@ -9,7 +9,9 @@ public class Plant {
     String plantSpecies;
     String plantType;
     String plantTypeInfo;
-    int waterReq;
+    int waterReq;   //plant's water requirements (% moisture of soil)
+    int currWaterVal; //current % moisture in soil
+    int waterNeeded; //% of water currently required to meet the waterReq
 
     Plant(String name, String species, int plantTypeIndex, int waterRequirements) {
         plantName = name;
@@ -27,5 +29,13 @@ public class Plant {
         return waterReq;
     }
 
+    public int getCurrWaterVal() {return currWaterVal;}
+
+    public void setCurrWaterVal(int waterVal) {currWaterVal = waterVal;}
+
+    public int calcWaterNeeded() {
+        waterNeeded = waterReq - currWaterVal;
+        return waterNeeded;
+    }
 
 }

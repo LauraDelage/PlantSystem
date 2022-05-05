@@ -18,6 +18,12 @@ public class PlantHelper {
         }
     }
 
+    private static void plantSwap(Plant[] plantArr, int firstIndex, int secondIndex) {
+        Plant temp = plantArr[firstIndex];
+        plantArr[firstIndex] = plantArr[secondIndex];
+        plantArr[secondIndex] = temp;
+    }
+
     public ArrayList<Plant> alphaSort(ArrayList<Plant> plantList) {
         plantArr = listToArr(plantList);
         for (int i = 0; i < plantArr.length; i++) {
@@ -32,6 +38,26 @@ public class PlantHelper {
         plantList = arrToList(plantArr);
         return plantList;
     }
+
+    public ArrayList<Plant> waterSort (ArrayList<Plant> plantList) {
+        plantArr = listToArr(plantList);
+
+        int bubbleCounter = -1;
+
+        while (bubbleCounter != 0) {
+            bubbleCounter = 0;
+            for(int i = 0; i < plantArr.length - 1; i++) {
+                if (plantArr[i].calcWaterNeeded() > plantArr[i + 1].calcWaterNeeded()) {
+                    plantSwap(plantArr, i, i + 1);
+                    bubbleCounter++;
+                }
+            }
+        }
+
+        plantList = arrToList(plantArr);
+        return plantList;
+    }
+
 
     private Plant[] listToArr(ArrayList<Plant> plantList) {
         plantArr = new Plant[plantList.size()];
@@ -51,16 +77,25 @@ public class PlantHelper {
         return plantList;
     }
 
-    private static void plantSwap(Plant[] plantArr, int firstIndex, int secondIndex) {
-        Plant temp = plantArr[firstIndex];
-        plantArr[firstIndex] = plantArr[secondIndex];
-        plantArr[secondIndex] = temp;
-    }
-
     public void printNames(ArrayList<Plant> plantList) {
         for (int i = 0; i < plantList.size(); i++) {
             System.out.println(plantList.get(i).getName());
         }
     }
+
+    public void printWaterReq(ArrayList<Plant> plantList) {
+        for (int i = 0; i < plantList.size(); i++) {
+            System.out.println(plantList.get(i).calcWaterNeeded());
+        }
+    }
+
+    /* ignore for now, just an idea
+    public ArrayList<Plant> refreshWaterValues(ArrayList<Plant> plantList) {
+        for (int i = 0; i < plantList.size(); i++) {
+            plantList.get(i).calcWaterNeeded();
+        }
+        return plantList;
+    }
+     */
 
 }
