@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 
 public class PlantDriver extends Application {
     ImageView startImage = new ImageView();
+    ImageView tulip = new ImageView();
 
     Pane homeCanvas = new Pane();
     Pane plantNameCanvas = new Pane();
@@ -45,13 +46,15 @@ public class PlantDriver extends Application {
     ComboBox<PlantType> plantTypeInput = new ComboBox<PlantType>();
     TextField plantWaterInput = new TextField();
 
+    String plantTypeString;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         Scene homeScene = new Scene(homeCanvas, 600, 780, Color.WHITE);
-        Scene plantNameScene = new Scene(plantNameCanvas, 510, 300, Color.WHITE);
-        Scene plantSpeciesScene = new Scene(plantSpeciesCanvas, 510, 300, Color.WHITE);
-        Scene plantTypeScene = new Scene(plantTypeCanvas, 510, 300, Color.WHITE);
-        Scene plantWaterScene = new Scene(plantWaterCanvas, 510, 300, Color.WHITE);
+        Scene plantNameScene = new Scene(plantNameCanvas, 510, 410, Color.WHITE);
+        Scene plantSpeciesScene = new Scene(plantSpeciesCanvas, 510, 410, Color.WHITE);
+        Scene plantTypeScene = new Scene(plantTypeCanvas, 510, 370, Color.WHITE);
+        Scene plantWaterScene = new Scene(plantWaterCanvas, 510, 410, Color.WHITE);
         primaryStage.setScene(homeScene);
         primaryStage.show();
         startHomeScene();
@@ -60,8 +63,8 @@ public class PlantDriver extends Application {
             @Override
             public void handle(ActionEvent e) {
                 //Remove elements from home scene:
-                homeCanvas.getChildren().remove(startImage);
-                homeCanvas.getChildren().remove(addPlant);
+                /*homeCanvas.getChildren().remove(startImage);
+                homeCanvas.getChildren().remove(addPlant);*/
                 //Initiate user input scene:
                 startPlantNameScene();
                 primaryStage.setScene(plantNameScene);
@@ -72,9 +75,9 @@ public class PlantDriver extends Application {
             @Override
             public void handle(ActionEvent e) {
                 //Remove elements from home scene:
-                plantNameCanvas.getChildren().remove(plantName);
+                /*plantNameCanvas.getChildren().remove(plantName);
                 plantNameCanvas.getChildren().remove(plantNameText);
-                plantNameCanvas.getChildren().remove(plantNameInput);
+                plantNameCanvas.getChildren().remove(plantNameInput);*/
                 //Initiate user input scene:
                 startPlantSpeciesScene();
                 primaryStage.setScene(plantSpeciesScene);
@@ -85,9 +88,9 @@ public class PlantDriver extends Application {
             @Override
             public void handle(ActionEvent e) {
                 //Remove elements from home scene:
-                plantSpeciesCanvas.getChildren().remove(plantSpecies);
+                /*plantSpeciesCanvas.getChildren().remove(plantSpecies);
                 plantSpeciesCanvas.getChildren().remove(plantSpeciesText);
-                plantSpeciesCanvas.getChildren().remove(plantSpeciesInput);
+                plantSpeciesCanvas.getChildren().remove(plantSpeciesInput);*/
                 //Initiate user input scene:
                 startPlantTypeScene();
                 primaryStage.setScene(plantTypeScene);
@@ -98,12 +101,20 @@ public class PlantDriver extends Application {
             @Override
             public void handle(ActionEvent e) {
                 //Remove elements from home scene:
-                plantTypeCanvas.getChildren().remove(plantType);
+                /*plantTypeCanvas.getChildren().remove(plantType);
                 plantTypeCanvas.getChildren().remove(plantTypeText);
-                plantTypeCanvas.getChildren().remove(plantTypeInput);
+                plantTypeCanvas.getChildren().remove(plantTypeInput);*/
                 //Initiate user input scene:
                 startPlantWaterScene();
                 primaryStage.setScene(plantWaterScene);
+            }
+        });
+
+        plantType.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+
+
             }
         });
 
@@ -152,7 +163,14 @@ public class PlantDriver extends Application {
         plantName.setLayoutY(210);
         plantName.setTextFill(Color.WHITE);
         plantName.setFont(buttonFont);
+        //tulip picture
+        tulip.setImage(new Image("tulips.png"));
+        tulip.setX(-10);
+        tulip.setY(84);
+        tulip.setFitWidth(525);
+        tulip.setPreserveRatio(true);
         //Adding all elements to the canvas:
+        plantNameCanvas.getChildren().add(tulip);
         plantNameCanvas.getChildren().add(plantName);
         plantNameCanvas.getChildren().add(plantNameText);
         plantNameCanvas.getChildren().add(plantNameInput);
@@ -179,6 +197,7 @@ public class PlantDriver extends Application {
         plantSpecies.setTextFill(Color.WHITE);
         plantSpecies.setFont(buttonFont);
         //Adding all elements to the canvas:
+        plantSpeciesCanvas.getChildren().add(tulip);
         plantSpeciesCanvas.getChildren().add(plantSpecies);
         plantSpeciesCanvas.getChildren().add(plantSpeciesText);
         plantSpeciesCanvas.getChildren().add(plantSpeciesInput);
@@ -196,14 +215,19 @@ public class PlantDriver extends Application {
         plantTypeInput.getItems().setAll(PlantType.values());
         plantTypeInput.setLayoutX(30);
         plantTypeInput.setLayoutY(95);
-        plantTypeInput.setStyle("-fx-background-color: #488940");
+        plantTypeInput.setPrefHeight(40);
+        plantTypeInput.setPrefWidth(200);
+        plantTypeInput.setStyle("-fx-background-color: #91C031");
         //Defining submit button:
         plantType.setStyle("-fx-background-color: #488940");
         plantType.setLayoutX(30);
-        plantType.setLayoutY(210);
+        plantType.setLayoutY(155);
         plantType.setTextFill(Color.WHITE);
         plantType.setFont(buttonFont);
+        //change tulip layout
+        tulip.setY(54);
         //Adding all elements to the canvas:
+        plantTypeCanvas.getChildren().add(tulip);
         plantTypeCanvas.getChildren().add(plantType);
         plantTypeCanvas.getChildren().add(plantTypeText);
         plantTypeCanvas.getChildren().add(plantTypeInput);
@@ -229,11 +253,19 @@ public class PlantDriver extends Application {
         plantWater.setLayoutY(210);
         plantWater.setTextFill(Color.WHITE);
         plantWater.setFont(buttonFont);
+        //change tulip layout back
+        tulip.setY(84);
         //Adding all elements to the canvas:
+        plantWaterCanvas.getChildren().add(tulip);
         plantWaterCanvas.getChildren().add(plantWater);
         plantWaterCanvas.getChildren().add(plantWaterText);
         plantWaterCanvas.getChildren().add(plantWaterInput);
         plantWaterCanvas.setStyle("-fx-background-color: white;");
+
+    }
+
+    public void findPlantTypeIndex() {
+        plantTypeString = plantTypeInput.getTypeSelector();
 
     }
 }

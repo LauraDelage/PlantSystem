@@ -5,7 +5,7 @@
  */
 
 public interface Global {
-    String[] plantType = {"flower", "succulent", "herb", "fruit plant", "tree type", "fern type", "other"};
+    String[] plantType = {"FLOWER", "SUCCULENT", "HERB", "FRUIT", "TREE", "FERN", "OTHER"};
     String[] plantTypeInfo = {
             "In general, flowers need consistent watering and bright but indirect sunlight. However, there are many types of flowering plants with differing care requirements.",
             "Succulents are easy beginner plants. They require direct sunlight, but do not need frequent watering.",
