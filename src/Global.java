@@ -5,10 +5,10 @@
  */
 
 public interface Global {
-    String[] plantType = {"flower", "succulent/cactus", "herb", "fruit plant", "tree type", "fern type", "other"};
+    String[] plantType = {"flower", "succulent", "herb", "fruit plant", "tree type", "fern type", "other"};
     String[] plantTypeInfo = {
             "In general, flowers need consistent watering and bright but indirect sunlight. However, there are many types of flowering plants with differing care requirements.",
-            "Succulents and cacti are easy beginner plants. They require direct sunlight, but do not need frequent watering.",
+            "Succulents are easy beginner plants. They require direct sunlight, but do not need frequent watering.",
             "Herbs are easy and useful beginner plants. They do best when receiving 6-8 hours of direct sunlight per day.",
             "Care for fruit plants varies depending on the fruit, and can be challenging but very rewarding to grow. It's best to do research on your individual fruit plant.",
             "Tree type plants are generally easy to grow and can become several feet high. For a shorter plant, make sure you are pruning your tree.",
