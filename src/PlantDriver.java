@@ -46,6 +46,8 @@ public class PlantDriver extends Application {
     ComboBox<PlantType> plantTypeInput = new ComboBox<PlantType>();
     TextField plantWaterInput = new TextField();
 
+    String plantTypeString;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         Scene homeScene = new Scene(homeCanvas, 600, 780, Color.WHITE);
@@ -105,6 +107,14 @@ public class PlantDriver extends Application {
                 //Initiate user input scene:
                 startPlantWaterScene();
                 primaryStage.setScene(plantWaterScene);
+            }
+        });
+
+        plantType.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+
+
             }
         });
 
@@ -251,6 +261,11 @@ public class PlantDriver extends Application {
         plantWaterCanvas.getChildren().add(plantWaterText);
         plantWaterCanvas.getChildren().add(plantWaterInput);
         plantWaterCanvas.setStyle("-fx-background-color: white;");
+
+    }
+
+    public void findPlantTypeIndex() {
+        plantTypeString = plantTypeInput.getTypeSelector();
 
     }
 }
