@@ -1,3 +1,7 @@
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  * Plant class
  * Creates the structure for an individual plant object.
@@ -12,6 +16,8 @@ public class Plant {
     int waterReq;   //plant's water requirements (% moisture of soil)
     int currWaterVal; //current % moisture in soil
     int waterNeeded; //% of water currently required to meet the waterReq
+    ArrayList<Date> waterDates = new ArrayList<>();
+
 
 
     Plant(String name, String species, int plantTypeIndex, int waterRequirements) {
@@ -49,6 +55,17 @@ public class Plant {
     public int calcWaterNeeded() {
         waterNeeded = waterReq - currWaterVal;
         return waterNeeded;
+    }
+
+    public void hasBeenWatered() {
+        //SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        //waterDates.add(formatter.format(date));
+        waterDates.add(date);
+    }
+
+    public ArrayList<Date> getWaterDates() {
+        return waterDates;
     }
 
 }

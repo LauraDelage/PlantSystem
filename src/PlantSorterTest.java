@@ -1,6 +1,9 @@
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Testing class to evaluate the functionality of the PlantSorter class
  * @author Laura Delage

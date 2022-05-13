@@ -92,13 +92,4 @@ public class PlantHelper {
         }
     }
 
-    /* ignore for now, just an idea
-    public ArrayList<Plant> refreshWaterValues(ArrayList<Plant> plantList) {
-        for (int i = 0; i < plantList.size(); i++) {
-            plantList.get(i).calcWaterNeeded();
-        }
-        return plantList;
-    }
-     */
-
 }
