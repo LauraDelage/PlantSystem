@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 import java.util.Date;
 
-public class PlantStats {
+public class PlantStats implements Global {
+
     PlantStats() {
     }
     public void recordWaterings(Plant plant) {
@@ -26,5 +27,14 @@ public class PlantStats {
         System.out.println("Watering history:");
         System.out.println(waterSince);
     }
+
+    public void addData(ArrayList<Integer> dataChunk) {
+        Global.allWaterLevels.addAll(dataChunk);
+    }
+
+    /*
+
+
+     */
 }
 

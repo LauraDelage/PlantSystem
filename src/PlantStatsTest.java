@@ -49,4 +49,10 @@ public class PlantStatsTest {
         bobStats.calcWaterings(bob,date);
         //System.out.println(bob.getWaterDates());
     }
+
+    @Test
+    void waterValTest() {
+        System.out.println(Global.allWaterLevels);
+    }
+
 }

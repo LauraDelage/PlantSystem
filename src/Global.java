@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  Global interface
  @author: Laura Delage
@@ -17,5 +19,7 @@ public interface Global {
     };
 
     int fakePastWaterVal = 60;
+
+    ArrayList<Integer> allWaterLevels = new ArrayList<>();
 
 }
