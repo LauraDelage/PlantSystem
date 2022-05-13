@@ -13,6 +13,7 @@ public class Plant {
     int currWaterVal; //current % moisture in soil
     int waterNeeded; //% of water currently required to meet the waterReq
 
+
     Plant(String name, String species, int plantTypeIndex, int waterRequirements) {
         plantName = name;
         plantSpecies = species;

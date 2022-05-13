@@ -48,8 +48,11 @@ public class PlantDriver extends Application {
 
     String plantTypeString;
 
+    CircuitBoardConnection connector = new CircuitBoardConnection();
+
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         Scene homeScene = new Scene(homeCanvas, 600, 780, Color.WHITE);
         Scene plantNameScene = new Scene(plantNameCanvas, 510, 410, Color.WHITE);
         Scene plantSpeciesScene = new Scene(plantSpeciesCanvas, 510, 410, Color.WHITE);
