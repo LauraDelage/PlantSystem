@@ -19,6 +19,7 @@ public class Plant {
     ArrayList<Date> waterDates = new ArrayList<>();
 
 
+
     Plant(String name, String species, int plantTypeIndex, int waterRequirements) {
         plantName = name;
         plantSpecies = species;
