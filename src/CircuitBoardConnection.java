@@ -11,13 +11,21 @@ import java.util.Scanner;
 
 public class CircuitBoardConnection {
     static boolean beginGeneratingWaterLevels = true;
-
+    private static CircuitBoardConnection singleton;
+    static ArrayList<Integer> waterLevelsArray;
 
     public static void main(String[] args) {
         while(beginGeneratingWaterLevels) {
             generate();
             read();
         }
+    }
+
+    public static CircuitBoardConnection getArray() {
+        if (singleton == null) {
+            singleton = new CircuitBoardConnection();
+        }
+        return singleton;
     }
 
     public static void generate() {
@@ -31,8 +39,6 @@ public class CircuitBoardConnection {
             System.out.println("Outputting to file...");
             for(int count = 0; count < 10 ;count++ ) {
                 int value = waterPercentageGenerator.nextInt(100);
-                int smallerValue = value;
-
                 output.println(value);
                 System.out.println(value);
                 sleep(2000); //every 10 seconds data is simulated
@@ -46,10 +52,8 @@ public class CircuitBoardConnection {
     }
 
     public static ArrayList<Integer> read() {
-        ArrayList<Integer> waterLevelsArray = new ArrayList<>();
         File waterLevelsTxt;
         Scanner fileInput = null;
-
         try{
             waterLevelsTxt = new File("WaterLevels.txt");
             fileInput = new Scanner(waterLevelsTxt);
