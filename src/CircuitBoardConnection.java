@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 public class CircuitBoardConnection {
     static boolean beginGeneratingWaterLevels = true;
-    private static CircuitBoardConnection singleton;
     static ArrayList<Integer> waterLevelsArray;
 
     public static void main(String[] args) {
@@ -21,11 +20,11 @@ public class CircuitBoardConnection {
         }
     }
 
-    public static CircuitBoardConnection getArray() {
-        if (singleton == null) {
-            singleton = new CircuitBoardConnection();
+    public static ArrayList<Integer> getArray() {
+        if (waterLevelsArray == null) {
+            waterLevelsArray = new ArrayList<>();
         }
-        return singleton;
+        return waterLevelsArray;
     }
 
     public static void generate() {
@@ -51,7 +50,7 @@ public class CircuitBoardConnection {
         }
     }
 
-    public static ArrayList<Integer> read() {
+    public static void read() {
         File waterLevelsTxt;
         Scanner fileInput = null;
         try{
@@ -75,7 +74,6 @@ public class CircuitBoardConnection {
             System.out.println("Did not find file");
             System.exit(-1);
         }
-        return waterLevelsArray;
     }
 
 
