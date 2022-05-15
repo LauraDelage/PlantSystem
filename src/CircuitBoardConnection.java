@@ -10,6 +10,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class CircuitBoardConnection {
+    //
     static boolean beginGeneratingWaterLevels = true;
     static ArrayList<Integer> waterLevelsArray;
 
