@@ -9,13 +9,12 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class CircuitBoardConnection {
+public class CircuitBoardConnection implements Global {
     //
-    static boolean beginGeneratingWaterLevels = true;
     static ArrayList<Integer> waterLevelsArray;
 
     public static void main(String[] args) {
-        while(beginGeneratingWaterLevels) {
+        while(generateCircuitBoard) {
             generate();
             read();
         }

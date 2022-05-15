@@ -1,4 +1,3 @@
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -23,10 +22,12 @@ public class Plant {
     Plant(String name, String species, int plantTypeIndex, int waterRequirements) {
         plantName = name;
         plantSpecies = species;
-        plantType = Global.plantType[plantTypeIndex];
+        plantType = Global.plantTypeCompareArray[plantTypeIndex];
         plantTypeInfo = Global.plantTypeInfo[plantTypeIndex];
         waterReq = waterRequirements;
     }
+
+
 
     public String getName() {
         return plantName;

@@ -1,3 +1,3 @@
 public enum PlantType {
-    FLOWER, SUCCULENT, HERB, FRUIT, TREE, FERN, OTHER;
+    Flower, Succulent, Herb, Fruit, Tree, Fern, Other;
 }

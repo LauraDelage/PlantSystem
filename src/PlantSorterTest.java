@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Test;
+/*import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import java.text.SimpleDateFormat;
@@ -9,6 +9,7 @@ import java.util.Date;
  * @author Laura Delage
  */
 
+/*
 class PlantSorterTest {
 
     @Test
@@ -86,3 +87,5 @@ class PlantSorterTest {
         System.out.println(bob.calcWaterNeeded());
     }
 }
+ */
+

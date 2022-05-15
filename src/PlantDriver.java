@@ -14,13 +14,15 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 /**
  * This is the PlantDriver Class
  * This class controls the GUI and facilitates user input and output
  * @author: Keelin Saranchuk
  * */
 
-public class PlantDriver extends Application {
+public class PlantDriver extends Application implements Global {
     ImageView startImage = new ImageView();
     ImageView tulip = new ImageView();
 
@@ -48,6 +50,8 @@ public class PlantDriver extends Application {
 
     String plantTypeString;
 
+    ArrayList<Plant> plantArrayList;
+
     CircuitBoardConnection connector = new CircuitBoardConnection();
 
     @Override
@@ -66,8 +70,8 @@ public class PlantDriver extends Application {
             @Override
             public void handle(ActionEvent e) {
                 //Remove elements from home scene:
-                /*homeCanvas.getChildren().remove(startImage);
-                homeCanvas.getChildren().remove(addPlant);*/
+                homeCanvas.getChildren().remove(startImage);
+                homeCanvas.getChildren().remove(addPlant);
                 //Initiate user input scene:
                 startPlantNameScene();
                 primaryStage.setScene(plantNameScene);
@@ -78,9 +82,9 @@ public class PlantDriver extends Application {
             @Override
             public void handle(ActionEvent e) {
                 //Remove elements from home scene:
-                /*plantNameCanvas.getChildren().remove(plantName);
+                plantNameCanvas.getChildren().remove(plantName);
                 plantNameCanvas.getChildren().remove(plantNameText);
-                plantNameCanvas.getChildren().remove(plantNameInput);*/
+                plantNameCanvas.getChildren().remove(plantNameInput);
                 //Initiate user input scene:
                 startPlantSpeciesScene();
                 primaryStage.setScene(plantSpeciesScene);
@@ -91,9 +95,9 @@ public class PlantDriver extends Application {
             @Override
             public void handle(ActionEvent e) {
                 //Remove elements from home scene:
-                /*plantSpeciesCanvas.getChildren().remove(plantSpecies);
+                plantSpeciesCanvas.getChildren().remove(plantSpecies);
                 plantSpeciesCanvas.getChildren().remove(plantSpeciesText);
-                plantSpeciesCanvas.getChildren().remove(plantSpeciesInput);*/
+                plantSpeciesCanvas.getChildren().remove(plantSpeciesInput);
                 //Initiate user input scene:
                 startPlantTypeScene();
                 primaryStage.setScene(plantTypeScene);
@@ -104,20 +108,34 @@ public class PlantDriver extends Application {
             @Override
             public void handle(ActionEvent e) {
                 //Remove elements from home scene:
-                /*plantTypeCanvas.getChildren().remove(plantType);
+                plantTypeCanvas.getChildren().remove(plantType);
                 plantTypeCanvas.getChildren().remove(plantTypeText);
-                plantTypeCanvas.getChildren().remove(plantTypeInput);*/
+                plantTypeCanvas.getChildren().remove(plantTypeInput);
                 //Initiate user input scene:
                 startPlantWaterScene();
                 primaryStage.setScene(plantWaterScene);
             }
         });
 
-        plantType.setOnAction(new EventHandler<ActionEvent>() {
+        plantWater.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                plantWaterCanvas.getChildren().remove(plantWater);
+                plantWaterCanvas.getChildren().remove(plantWaterText);
+                plantWaterCanvas.getChildren().remove(plantWaterInput);
+                primaryStage.setScene(homeScene);
+                startHomeScene();
+
+                //temporary parameters
+                String name = plantNameInput.getText();
+                String species = plantSpeciesInput.getText();
+                PlantType typeEnum = plantTypeInput.getValue();
+                String type = typeEnum.toString();
+                String waterString = plantWaterInput.getText();
+                int water = Integer.parseInt(waterString);
 
 
+                System.out.println(name + " " + species + " " + type + " " + water);
             }
         });
 
@@ -267,9 +285,10 @@ public class PlantDriver extends Application {
 
     }
 
-    public void findPlantTypeIndex() {
-        plantTypeString = plantTypeInput.getTypeSelector();
+    public void findPlantTypeIndex(String plantType) {
+        for(int count = 0; count < plantTypeCompareArray.length; count++) {
 
+        }
     }
 }
 
