@@ -5,16 +5,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+
+import static javafx.scene.text.Font.getFontNames;
 
 /**
  * This is the PlantDriver Class
@@ -31,6 +33,16 @@ public class PlantDriver extends Application implements Global {
     Pane plantSpeciesCanvas = new Pane();
     Pane plantTypeCanvas = new Pane();
     Pane plantWaterCanvas = new Pane();
+    Pane plant1Canvas = new Pane();
+    Pane plant2Canvas = new Pane();
+    Pane plant3Canvas = new Pane();
+    Pane plant4Canvas = new Pane();
+    Pane plant5Canvas = new Pane();
+    Pane plant6Canvas = new Pane();
+    Pane plant7Canvas = new Pane();
+    Pane plant8Canvas = new Pane();
+    Pane plant9Canvas = new Pane();
+
 
     Button addPlant = new Button("Add Plant");
     Button plantName = new Button("Submit Plant Name");
@@ -48,23 +60,47 @@ public class PlantDriver extends Application implements Global {
     ComboBox<PlantType> plantTypeInput = new ComboBox<PlantType>();
     TextField plantWaterInput = new TextField();
 
-    String plantTypeString;
+    int plantCounter = 1;
+    ArrayList<Plant> plantArrayList = new ArrayList<>();
+    ArrayList<Button> correspondingButtonArrayList = new ArrayList<>();
+    Button button1 = new Button();
+    Button button2 = new Button();
+    Button button3 = new Button();
+    Button button4 = new Button();
+    Button button5 = new Button();
+    Button button6 = new Button();
+    Button button7 = new Button();
+    Button button8 = new Button();
+    Button button9 = new Button();
 
-    ArrayList<Plant> plantArrayList;
+    Plant plant1;
+    Plant plant2;
+    Plant plant3;
+    Plant plant4;
+    Plant plant5;
+    Plant plant6;
+    Plant plant7;
+    Plant plant8;
+    Plant plant9;
 
     CircuitBoardConnection connector = new CircuitBoardConnection();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
         Scene homeScene = new Scene(homeCanvas, 600, 780, Color.WHITE);
         Scene plantNameScene = new Scene(plantNameCanvas, 510, 410, Color.WHITE);
         Scene plantSpeciesScene = new Scene(plantSpeciesCanvas, 510, 410, Color.WHITE);
         Scene plantTypeScene = new Scene(plantTypeCanvas, 510, 370, Color.WHITE);
         Scene plantWaterScene = new Scene(plantWaterCanvas, 510, 410, Color.WHITE);
+        Scene plant1Scene = new Scene(plant1Canvas, 600, 410, Color.WHITE);
+        Scene plant2Scene = new Scene(plant2Canvas, 600, 410, Color.WHITE);
+        Scene plant3Scene = new Scene(plant3Canvas, 600, 410, Color.WHITE);
+        Scene plant4Scene = new Scene(plant4Canvas, 600, 410, Color.WHITE);
         primaryStage.setScene(homeScene);
         primaryStage.show();
         startHomeScene();
+
+        System.out.println(getFontNames());
 
         addPlant.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -72,6 +108,9 @@ public class PlantDriver extends Application implements Global {
                 //Remove elements from home scene:
                 homeCanvas.getChildren().remove(startImage);
                 homeCanvas.getChildren().remove(addPlant);
+                for(int i = 0; i < correspondingButtonArrayList.size(); i++) {
+                    homeCanvas.getChildren().remove(correspondingButtonArrayList.get(i));
+                }
                 //Initiate user input scene:
                 startPlantNameScene();
                 primaryStage.setScene(plantNameScene);
@@ -130,13 +169,22 @@ public class PlantDriver extends Application implements Global {
                 String name = plantNameInput.getText();
                 String species = plantSpeciesInput.getText();
                 PlantType typeEnum = plantTypeInput.getValue();
-                String type = typeEnum.toString();
+                String typeString = typeEnum.toString();
+                int type = findPlantTypeIndex(typeString);
                 String waterString = plantWaterInput.getText();
                 int water = Integer.parseInt(waterString);
 
-
-                System.out.println(name + " " + species + " " + type + " " + water);
+                drawPlantMainScene(name, species, type, water, plantCounter);
             }
+        });
+
+        button1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                primaryStage.setScene(plant1Scene);
+                plant1.drawPlant(plant1Canvas, plant1);
+            }
+
         });
 
     }
@@ -284,11 +332,463 @@ public class PlantDriver extends Application implements Global {
         plantWaterCanvas.setStyle("-fx-background-color: white;");
 
     }
+    public void drawPlantMainScene(String name, String species, int plantTypeIndex, int waterRequirements, int plantIDCounter) {
 
-    public void findPlantTypeIndex(String plantType) {
-        for(int count = 0; count < plantTypeCompareArray.length; count++) {
+        if(plantIDCounter == 1) {
+            ImageView image = new ImageView();
+            /*Rectangle rectangle = new Rectangle();
+            rectangle.setX(45);
+            rectangle.setY(140);
+            rectangle.setArcHeight(15);
+            rectangle.setArcWidth(15);
+            rectangle.setHeight(150);
+            rectangle.setWidth(200);
+            rectangle.setStyle("-fx-stroke: #b6fc8b");
+            homeCanvas.getChildren().add(rectangle);*/
 
+            plant1 = new Plant(name, species, plantTypeIndex, waterRequirements, plantIDCounter);
+            plantArrayList.add(plant1);
+            correspondingButtonArrayList.add(button1);
+            button1.setStyle("-fx-background-color: #FFFFFF");
+            button1.setLayoutX(50);
+            button1.setLayoutY(140);
+
+            if(plantTypeIndex == 0) {
+                image.setImage(new Image("flower.png"));
+                image.setFitHeight(156);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 1) {
+                image.setImage(new Image("succulent.png"));
+                image.setFitHeight(160);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 2) {
+                image.setImage(new Image("herb.png"));
+                image.setFitHeight(150);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 3) {
+                image.setImage(new Image("fruit.png"));
+                image.setFitHeight(150);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 4) {
+                image.setImage(new Image("tree.png"));
+                image.setFitHeight(153);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 5) {
+                image.setImage(new Image("fern.png"));
+                image.setFitHeight(153);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 6) {
+                image.setImage(new Image("other.png"));
+                image.setFitHeight(148);
+                image.setPreserveRatio(true);
+            }
+            button1.setGraphic(image);
         }
+
+        if(plantIDCounter == 2) {
+            ImageView image = new ImageView();
+
+            plant2 = new Plant(name, species, plantTypeIndex, waterRequirements, plantIDCounter);
+            plantArrayList.add(plant2);
+            correspondingButtonArrayList.add(button2);
+            button2.setStyle("-fx-background-color: #FFFFFF");
+            button2.setLayoutX(225);
+            button2.setLayoutY(140);
+
+            if(plantTypeIndex == 0) {
+                image.setImage(new Image("flower.png"));
+                image.setFitHeight(156);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 1) {
+                image.setImage(new Image("succulent.png"));
+                image.setFitHeight(160);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 2) {
+                image.setImage(new Image("herb.png"));
+                image.setFitHeight(150);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 3) {
+                image.setImage(new Image("fruit.png"));
+                image.setFitHeight(150);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 4) {
+                image.setImage(new Image("tree.png"));
+                image.setFitHeight(153);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 5) {
+                image.setImage(new Image("fern.png"));
+                image.setFitHeight(153);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 6) {
+                image.setImage(new Image("other.png"));
+                image.setFitHeight(148);
+                image.setPreserveRatio(true);
+            }
+            button2.setGraphic(image);
+        }
+
+        if(plantIDCounter == 3) {
+            ImageView image = new ImageView();
+
+            plant3 = new Plant(name, species, plantTypeIndex, waterRequirements, plantIDCounter);
+            plantArrayList.add(plant3);
+            correspondingButtonArrayList.add(button3);
+            button3.setStyle("-fx-background-color: #FFFFFF");
+            button3.setLayoutX(400);
+            button3.setLayoutY(140);
+
+            if(plantTypeIndex == 0) {
+                image.setImage(new Image("flower.png"));
+                image.setFitHeight(156);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 1) {
+                image.setImage(new Image("succulent.png"));
+                image.setFitHeight(160);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 2) {
+                image.setImage(new Image("herb.png"));
+                image.setFitHeight(150);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 3) {
+                image.setImage(new Image("fruit.png"));
+                image.setFitHeight(150);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 4) {
+                image.setImage(new Image("tree.png"));
+                image.setFitHeight(153);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 5) {
+                image.setImage(new Image("fern.png"));
+                image.setFitHeight(153);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 6) {
+                image.setImage(new Image("other.png"));
+                image.setFitHeight(148);
+                image.setPreserveRatio(true);
+            }
+            button3.setGraphic(image);
+        }
+
+        if(plantIDCounter == 4) {
+            ImageView image = new ImageView();
+
+            plant4 = new Plant(name, species, plantTypeIndex, waterRequirements, plantIDCounter);
+            plantArrayList.add(plant4);
+            correspondingButtonArrayList.add(button4);
+            button4.setStyle("-fx-background-color: #FFFFFF");
+            button4.setLayoutX(50);
+            button4.setLayoutY(320);
+
+            if(plantTypeIndex == 0) {
+                image.setImage(new Image("flower.png"));
+                image.setFitHeight(156);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 1) {
+                image.setImage(new Image("succulent.png"));
+                image.setFitHeight(160);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 2) {
+                image.setImage(new Image("herb.png"));
+                image.setFitHeight(150);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 3) {
+                image.setImage(new Image("fruit.png"));
+                image.setFitHeight(150);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 4) {
+                image.setImage(new Image("tree.png"));
+                image.setFitHeight(153);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 5) {
+                image.setImage(new Image("fern.png"));
+                image.setFitHeight(153);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 6) {
+                image.setImage(new Image("other.png"));
+                image.setFitHeight(148);
+                image.setPreserveRatio(true);
+            }
+            button4.setGraphic(image);
+        }
+
+        if(plantIDCounter == 5) {
+            ImageView image = new ImageView();
+
+            plant5 = new Plant(name, species, plantTypeIndex, waterRequirements, plantIDCounter);
+            plantArrayList.add(plant5);
+            correspondingButtonArrayList.add(button5);
+            button5.setStyle("-fx-background-color: #FFFFFF");
+            button5.setLayoutX(225);
+            button5.setLayoutY(320);
+
+            if(plantTypeIndex == 0) {
+                image.setImage(new Image("flower.png"));
+                image.setFitHeight(156);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 1) {
+                image.setImage(new Image("succulent.png"));
+                image.setFitHeight(160);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 2) {
+                image.setImage(new Image("herb.png"));
+                image.setFitHeight(150);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 3) {
+                image.setImage(new Image("fruit.png"));
+                image.setFitHeight(150);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 4) {
+                image.setImage(new Image("tree.png"));
+                image.setFitHeight(153);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 5) {
+                image.setImage(new Image("fern.png"));
+                image.setFitHeight(153);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 6) {
+                image.setImage(new Image("other.png"));
+                image.setFitHeight(148);
+                image.setPreserveRatio(true);
+            }
+            button5.setGraphic(image);
+        }
+
+        if(plantIDCounter == 6) {
+            ImageView image = new ImageView();
+
+            plant6 = new Plant(name, species, plantTypeIndex, waterRequirements, plantIDCounter);
+            plantArrayList.add(plant6);
+            correspondingButtonArrayList.add(button6);
+            button6.setStyle("-fx-background-color: #FFFFFF");
+            button6.setLayoutX(400);
+            button6.setLayoutY(320);
+
+            if(plantTypeIndex == 0) {
+                image.setImage(new Image("flower.png"));
+                image.setFitHeight(156);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 1) {
+                image.setImage(new Image("succulent.png"));
+                image.setFitHeight(160);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 2) {
+                image.setImage(new Image("herb.png"));
+                image.setFitHeight(150);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 3) {
+                image.setImage(new Image("fruit.png"));
+                image.setFitHeight(150);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 4) {
+                image.setImage(new Image("tree.png"));
+                image.setFitHeight(153);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 5) {
+                image.setImage(new Image("fern.png"));
+                image.setFitHeight(153);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 6) {
+                image.setImage(new Image("other.png"));
+                image.setFitHeight(148);
+                image.setPreserveRatio(true);
+            }
+            button6.setGraphic(image);
+        }
+
+        if(plantIDCounter == 7) {
+            ImageView image = new ImageView();
+
+            plant7 = new Plant(name, species, plantTypeIndex, waterRequirements, plantIDCounter);
+            plantArrayList.add(plant7);
+            correspondingButtonArrayList.add(button7);
+            button7.setStyle("-fx-background-color: #FFFFFF");
+            button7.setLayoutX(50);
+            button7.setLayoutY(500);
+
+            if(plantTypeIndex == 0) {
+                image.setImage(new Image("flower.png"));
+                image.setFitHeight(156);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 1) {
+                image.setImage(new Image("succulent.png"));
+                image.setFitHeight(160);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 2) {
+                image.setImage(new Image("herb.png"));
+                image.setFitHeight(150);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 3) {
+                image.setImage(new Image("fruit.png"));
+                image.setFitHeight(150);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 4) {
+                image.setImage(new Image("tree.png"));
+                image.setFitHeight(153);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 5) {
+                image.setImage(new Image("fern.png"));
+                image.setFitHeight(153);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 6) {
+                image.setImage(new Image("other.png"));
+                image.setFitHeight(148);
+                image.setPreserveRatio(true);
+            }
+            button7.setGraphic(image);
+        }
+
+        if(plantIDCounter == 8) {
+            ImageView image = new ImageView();
+
+            plant8 = new Plant(name, species, plantTypeIndex, waterRequirements, plantIDCounter);
+            plantArrayList.add(plant8);
+            correspondingButtonArrayList.add(button8);
+            button8.setStyle("-fx-background-color: #FFFFFF");
+            button8.setLayoutX(225);
+            button8.setLayoutY(500);
+
+            if(plantTypeIndex == 0) {
+                image.setImage(new Image("flower.png"));
+                image.setFitHeight(156);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 1) {
+                image.setImage(new Image("succulent.png"));
+                image.setFitHeight(160);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 2) {
+                image.setImage(new Image("herb.png"));
+                image.setFitHeight(150);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 3) {
+                image.setImage(new Image("fruit.png"));
+                image.setFitHeight(150);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 4) {
+                image.setImage(new Image("tree.png"));
+                image.setFitHeight(153);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 5) {
+                image.setImage(new Image("fern.png"));
+                image.setFitHeight(153);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 6) {
+                image.setImage(new Image("other.png"));
+                image.setFitHeight(148);
+                image.setPreserveRatio(true);
+            }
+            button8.setGraphic(image);
+        }
+
+        if(plantIDCounter == 9) {
+            ImageView image = new ImageView();
+
+            plant9 = new Plant(name, species, plantTypeIndex, waterRequirements, plantIDCounter);
+            plantArrayList.add(plant9);
+            correspondingButtonArrayList.add(button9);
+            button9.setStyle("-fx-background-color: #FFFFFF");
+            button9.setLayoutX(400);
+            button9.setLayoutY(500);
+
+            if(plantTypeIndex == 0) {
+                image.setImage(new Image("flower.png"));
+                image.setFitHeight(156);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 1) {
+                image.setImage(new Image("succulent.png"));
+                image.setFitHeight(160);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 2) {
+                image.setImage(new Image("herb.png"));
+                image.setFitHeight(150);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 3) {
+                image.setImage(new Image("fruit.png"));
+                image.setFitHeight(150);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 4) {
+                image.setImage(new Image("tree.png"));
+                image.setFitHeight(153);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 5) {
+                image.setImage(new Image("fern.png"));
+                image.setFitHeight(153);
+                image.setPreserveRatio(true);
+            }
+            else if(plantTypeIndex == 6) {
+                image.setImage(new Image("other.png"));
+                image.setFitHeight(148);
+                image.setPreserveRatio(true);
+            }
+            button9.setGraphic(image);
+        }
+
+        for(int i = 0; i < correspondingButtonArrayList.size(); i++) {
+            homeCanvas.getChildren().add(correspondingButtonArrayList.get(i));
+        }
+        plantCounter++;
+    }
+
+    public int findPlantTypeIndex(String plantType) {
+        int returnCount = 0;
+        for(int count = 0; count < plantTypeCompareArray.length; count++) {
+            if(plantType.compareTo(plantTypeCompareArray[count]) == 0) {
+                returnCount = count;
+            }
+        }
+        return returnCount;
     }
 }
 
