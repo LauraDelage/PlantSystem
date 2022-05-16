@@ -1,13 +1,10 @@
 import java.util.ArrayList;
 import java.util.Date;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.text.Font;
 
 /**
  * Plant class
@@ -19,7 +16,7 @@ public class Plant implements Global{
     private String plantName;
     private String plantSpecies;
     private String plantType;
-    private String plantTypeInfo;
+    private String plantTypeInfoString;
     int waterReq;   //plant's water requirements (% moisture of soil)
     int currWaterVal; //current % moisture in soil
     int waterNeeded; //% of water currently required to meet the waterReq
@@ -35,7 +32,7 @@ public class Plant implements Global{
         plantName = name;
         plantSpecies = species;
         plantType = Global.plantTypeCompareArray[plantTypeIndex];
-        plantTypeInfo = Global.plantTypeInfo[plantTypeIndex];
+        plantTypeInfoString = Global.plantTypeInfo[plantTypeIndex];
         waterReq = waterRequirements;
     }
 
@@ -54,7 +51,11 @@ public class Plant implements Global{
         name.setFont(bigFont);
 
         Text info = new Text();
-        info.setText(plantTypeIndex.[plant.getIndex()]);
+        info.setText(plantTypeInfo[plant.getIndex()]);
+        info.setLayoutX(30);
+        info.setLayoutY(250);
+        info.setFill(Color.rgb(51, 153, 51));
+        info.setFont(smallFont);
 
         Text species = new Text();
         species.setText("Species: " + plant.getSpecies());
@@ -91,7 +92,7 @@ public class Plant implements Global{
         waterNeeded.setFill(Color.rgb(51, 153, 51));
         waterNeeded.setFont(smallFont);
 
-        canvas.getChildren().addAll(name, species, plantType, waterReq, waterCurr, waterNeeded);
+        canvas.getChildren().addAll(name, species, plantType, waterReq, waterCurr, waterNeeded, info);
     }
 
     public int getIndex() { return plantIndex;}
@@ -113,7 +114,7 @@ public class Plant implements Global{
     }
 
     public String getInfo() {
-        return plantTypeInfo;
+        return plantTypeInfoString;
     }
 
     public int getWaterReq() {

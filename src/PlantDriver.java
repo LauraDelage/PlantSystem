@@ -57,7 +57,7 @@ public class PlantDriver extends Application implements Global {
 
     TextField plantNameInput = new TextField();
     TextField plantSpeciesInput = new TextField();
-    ComboBox<PlantType> plantTypeInput = new ComboBox<PlantType>();
+    ComboBox<PlantType> plantTypeInput = new ComboBox<>();
     TextField plantWaterInput = new TextField();
 
     int plantCounter = 1;
@@ -92,15 +92,20 @@ public class PlantDriver extends Application implements Global {
         Scene plantSpeciesScene = new Scene(plantSpeciesCanvas, 510, 410, Color.WHITE);
         Scene plantTypeScene = new Scene(plantTypeCanvas, 510, 370, Color.WHITE);
         Scene plantWaterScene = new Scene(plantWaterCanvas, 510, 410, Color.WHITE);
-        Scene plant1Scene = new Scene(plant1Canvas, 600, 410, Color.WHITE);
-        Scene plant2Scene = new Scene(plant2Canvas, 600, 410, Color.WHITE);
-        Scene plant3Scene = new Scene(plant3Canvas, 600, 410, Color.WHITE);
-        Scene plant4Scene = new Scene(plant4Canvas, 600, 410, Color.WHITE);
+        Scene plant1Scene = new Scene(plant1Canvas, 930, 280, Color.WHITE);
+        Scene plant2Scene = new Scene(plant2Canvas, 930, 280, Color.WHITE);
+        Scene plant3Scene = new Scene(plant3Canvas, 930, 280, Color.WHITE);
+        Scene plant4Scene = new Scene(plant4Canvas, 930, 280, Color.WHITE);
+        Scene plant5Scene = new Scene(plant5Canvas, 930, 280, Color.WHITE);
+        Scene plant6Scene = new Scene(plant6Canvas, 930, 280, Color.WHITE);
+        Scene plant7Scene = new Scene(plant7Canvas, 930, 280, Color.WHITE);
+        Scene plant8Scene = new Scene(plant8Canvas, 930, 280, Color.WHITE);
+        Scene plant9Scene = new Scene(plant9Canvas, 930, 280, Color.WHITE);
         primaryStage.setScene(homeScene);
         primaryStage.show();
         startHomeScene();
 
-        System.out.println(getFontNames());
+        //System.out.println(getFontNames());
 
         addPlant.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -184,9 +189,71 @@ public class PlantDriver extends Application implements Global {
                 primaryStage.setScene(plant1Scene);
                 plant1.drawPlant(plant1Canvas, plant1);
             }
-
         });
 
+        button2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                primaryStage.setScene(plant2Scene);
+                plant2.drawPlant(plant2Canvas, plant2);
+            }
+        });
+
+        button3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                primaryStage.setScene(plant3Scene);
+                plant3.drawPlant(plant3Canvas, plant3);
+            }
+        });
+
+        button4.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                primaryStage.setScene(plant4Scene);
+                plant4.drawPlant(plant4Canvas, plant4);
+            }
+        });
+
+        button5.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                primaryStage.setScene(plant5Scene);
+                plant5.drawPlant(plant5Canvas, plant5);
+            }
+        });
+
+        button6.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                primaryStage.setScene(plant6Scene);
+                plant6.drawPlant(plant6Canvas, plant6);
+            }
+        });
+
+        button7.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                primaryStage.setScene(plant7Scene);
+                plant7.drawPlant(plant7Canvas, plant7);
+            }
+        });
+
+        button8.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                primaryStage.setScene(plant8Scene);
+                plant8.drawPlant(plant8Canvas, plant8);
+            }
+        });
+
+        button9.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                primaryStage.setScene(plant9Scene);
+                plant9.drawPlant(plant9Canvas, plant9);
+            }
+        });
     }
 
     public static void main(String[] args) {
