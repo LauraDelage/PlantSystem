@@ -412,6 +412,14 @@ public class PlantDriver extends Application implements Global {
             rectangle.setWidth(200);
             rectangle.setStyle("-fx-stroke: #b6fc8b");
             homeCanvas.getChildren().add(rectangle);*/
+            Font font = new Font("Impact", 16);
+            Text text = new Text();
+            text.setText(name);
+            text.setFont(font);
+            text.setLayoutX(60);
+            text.setLayoutY(325);
+            text.setFill(Color.rgb(72, 137, 64));
+            homeCanvas.getChildren().add(text);
 
             plant1 = new Plant(name, species, plantTypeIndex, waterRequirements, plantIDCounter);
             plantArrayList.add(plant1);
@@ -468,6 +476,15 @@ public class PlantDriver extends Application implements Global {
             button2.setLayoutX(225);
             button2.setLayoutY(140);
 
+            Font font = new Font("Impact", 16);
+            Text text = new Text();
+            text.setText(name);
+            text.setFont(font);
+            text.setLayoutX(235);
+            text.setLayoutY(325);
+            text.setFill(Color.rgb(72, 137, 64));
+            homeCanvas.getChildren().add(text);
+
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(156);
@@ -515,6 +532,15 @@ public class PlantDriver extends Application implements Global {
             button3.setStyle("-fx-background-color: #FFFFFF");
             button3.setLayoutX(400);
             button3.setLayoutY(140);
+
+            Font font = new Font("Impact", 16);
+            Text text = new Text();
+            text.setText(name);
+            text.setFont(font);
+            text.setLayoutX(410);
+            text.setLayoutY(325);
+            text.setFill(Color.rgb(72, 137, 64));
+            homeCanvas.getChildren().add(text);
 
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
@@ -564,6 +590,15 @@ public class PlantDriver extends Application implements Global {
             button4.setLayoutX(50);
             button4.setLayoutY(320);
 
+            Font font = new Font("Impact", 16);
+            Text text = new Text();
+            text.setText(name);
+            text.setFont(font);
+            text.setLayoutX(50);
+            text.setLayoutY(505);
+            text.setFill(Color.rgb(72, 137, 64));
+            homeCanvas.getChildren().add(text);
+
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(156);
@@ -611,6 +646,15 @@ public class PlantDriver extends Application implements Global {
             button5.setStyle("-fx-background-color: #FFFFFF");
             button5.setLayoutX(225);
             button5.setLayoutY(320);
+
+            Font font = new Font("Impact", 16);
+            Text text = new Text();
+            text.setText(name);
+            text.setFont(font);
+            text.setLayoutX(235);
+            text.setLayoutY(505);
+            text.setFill(Color.rgb(72, 137, 64));
+            homeCanvas.getChildren().add(text);
 
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
@@ -660,6 +704,15 @@ public class PlantDriver extends Application implements Global {
             button6.setLayoutX(400);
             button6.setLayoutY(320);
 
+            Font font = new Font("Impact", 16);
+            Text text = new Text();
+            text.setText(name);
+            text.setFont(font);
+            text.setLayoutX(410);
+            text.setLayoutY(505);
+            text.setFill(Color.rgb(72, 137, 64));
+            homeCanvas.getChildren().add(text);
+
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(156);
@@ -707,6 +760,15 @@ public class PlantDriver extends Application implements Global {
             button7.setStyle("-fx-background-color: #FFFFFF");
             button7.setLayoutX(50);
             button7.setLayoutY(500);
+
+            Font font = new Font("Impact", 16);
+            Text text = new Text();
+            text.setText(name);
+            text.setFont(font);
+            text.setLayoutX(60);
+            text.setLayoutY(685);
+            text.setFill(Color.rgb(72, 137, 64));
+            homeCanvas.getChildren().add(text);
 
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
@@ -756,6 +818,15 @@ public class PlantDriver extends Application implements Global {
             button8.setLayoutX(225);
             button8.setLayoutY(500);
 
+            Font font = new Font("Impact", 16);
+            Text text = new Text();
+            text.setText(name);
+            text.setFont(font);
+            text.setLayoutX(235);
+            text.setLayoutY(685);
+            text.setFill(Color.rgb(72, 137, 64));
+            homeCanvas.getChildren().add(text);
+
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(156);
@@ -803,6 +874,15 @@ public class PlantDriver extends Application implements Global {
             button9.setStyle("-fx-background-color: #FFFFFF");
             button9.setLayoutX(400);
             button9.setLayoutY(500);
+
+            Font font = new Font("Impact", 16);
+            Text text = new Text();
+            text.setText(name);
+            text.setFont(font);
+            text.setLayoutX(410);
+            text.setLayoutY(685);
+            text.setFill(Color.rgb(72, 137, 64));
+            homeCanvas.getChildren().add(text);
 
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
