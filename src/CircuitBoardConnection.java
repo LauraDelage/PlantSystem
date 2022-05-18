@@ -11,9 +11,10 @@ import java.util.Scanner;
 
 public class CircuitBoardConnection implements Global {
     //
-    static ArrayList<Integer> waterLevelsArray;
+    static ArrayList<Integer> waterLevelsArrayList;
 
     public static void main(String[] args) {
+        getArray();
         while(generateCircuitBoard) {
             generate();
             read();
@@ -21,10 +22,10 @@ public class CircuitBoardConnection implements Global {
     }
 
     public static ArrayList<Integer> getArray() {
-        if (waterLevelsArray == null) {
-            waterLevelsArray = new ArrayList<>();
+        if (waterLevelsArrayList == null) {
+            waterLevelsArrayList = new ArrayList<>();
         }
-        return waterLevelsArray;
+        return waterLevelsArrayList;
     }
 
     public static void generate() {
@@ -36,7 +37,7 @@ public class CircuitBoardConnection implements Global {
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter output = new PrintWriter(bw);
             System.out.println("Outputting to file...");
-            for(int count = 0; count < 10 ;count++ ) {
+            for(int count = 0; count < 5 ;count++ ) {
                 int value = waterPercentageGenerator.nextInt(100);
                 output.println(value);
                 System.out.println(value);
@@ -57,10 +58,11 @@ public class CircuitBoardConnection implements Global {
             waterLevelsTxt = new File("WaterLevels.txt");
             fileInput = new Scanner(waterLevelsTxt);
             System.out.println("Reading file...");
+
             while (fileInput.hasNext()) {
                 try{
                     int value = fileInput.nextInt();
-                    waterLevelsArray.add(value);
+                    waterLevelsArrayList.add(value);
                     System.out.println(value);
                 }
                 catch(InputMismatchException ime){
