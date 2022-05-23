@@ -43,14 +43,12 @@ public class PlantDriver extends Application implements Global {
     Pane plant8Canvas = new Pane();
     Pane plant9Canvas = new Pane();
 
-
     Button addPlant = new Button("Add Plant");
     Button plantName = new Button("Submit Plant Name");
     Button plantSpecies = new Button("Submit Plant Species");
     Button plantType = new Button("Submit Plant Type");
     Button plantWater = new Button("Submit Water Percentage");
     Button sortByWater = new Button("Sort by Need of Water");
-
 
     Text plantNameText = new Text(30, 75, "What is your plant's name?");
     Text plantSpeciesText = new Text(30, 75, "What is your plant's species?");
@@ -104,7 +102,7 @@ public class PlantDriver extends Application implements Global {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Scene homeScene = new Scene(homeCanvas, 600, 840, Color.WHITE);
+        Scene homeScene = new Scene(homeCanvas, 600, 780, Color.WHITE);
         Scene plantNameScene = new Scene(plantNameCanvas, 510, 410, Color.WHITE);
         Scene plantSpeciesScene = new Scene(plantSpeciesCanvas, 510, 410, Color.WHITE);
         Scene plantTypeScene = new Scene(plantTypeCanvas, 510, 370, Color.WHITE);
@@ -344,6 +342,15 @@ public class PlantDriver extends Application implements Global {
             }
         });
 
+        deletePlant.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                primaryStage.setScene(homeScene);
+                deletePlant();
+                startHomeScene();
+            }
+        });
+
         sortByWater.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -359,25 +366,82 @@ public class PlantDriver extends Application implements Global {
         launch(args);
     }
 
+    public void deletePlant() {
+        if(plantIdentificator == 1) {
+            plant1.removePlant(plant1Canvas, plant1);
+            homeCanvas.getChildren().remove(button1);
+            homeCanvas.getChildren().remove(text1);
+            plantArrayList.remove(plant1);
+        }
+        else if(plantIdentificator == 2) {
+            plant2.removePlant(plant2Canvas, plant2);
+            homeCanvas.getChildren().remove(button2);
+            homeCanvas.getChildren().remove(text2);
+            plantArrayList.remove(plant2);
+        }
+        else if(plantIdentificator == 3) {
+            plant3.removePlant(plant3Canvas, plant3);
+            homeCanvas.getChildren().remove(button3);
+            homeCanvas.getChildren().remove(text3);
+            plantArrayList.remove(plant3);
+        }
+        else if(plantIdentificator == 4) {
+            plant4.removePlant(plant4Canvas, plant4);
+            homeCanvas.getChildren().remove(button4);
+            homeCanvas.getChildren().remove(text4);
+            plantArrayList.remove(plant4);
+        }
+        else if(plantIdentificator == 5) {
+            plant5.removePlant(plant5Canvas, plant5);
+            homeCanvas.getChildren().remove(button5);
+            homeCanvas.getChildren().remove(text5);
+            plantArrayList.remove(plant5);
+        }
+        else if(plantIdentificator == 6) {
+            plant6.removePlant(plant6Canvas, plant6);
+            homeCanvas.getChildren().remove(button6);
+            homeCanvas.getChildren().remove(text6);
+            plantArrayList.remove(plant6);
+        }
+        else if(plantIdentificator == 7) {
+            plant7.removePlant(plant7Canvas, plant7);
+            homeCanvas.getChildren().remove(button7);
+            homeCanvas.getChildren().remove(text7);
+            plantArrayList.remove(plant7);
+        }
+        else if(plantIdentificator == 8) {
+            plant8.removePlant(plant8Canvas, plant8);
+            homeCanvas.getChildren().remove(button8);
+            homeCanvas.getChildren().remove(text8);
+            plantArrayList.remove(plant8);
+        }
+        else if(plantIdentificator == 9) {
+            plant9.removePlant(plant9Canvas, plant9);
+            homeCanvas.getChildren().remove(button9);
+            homeCanvas.getChildren().remove(text9);
+            plantArrayList.remove(plant9);
+        }
+    }
+
     public void startHomeScene() {
         homeCanvas.setStyle("-fx-background-color: white;");
         Font font2 = new Font("Impact", 20); //Impact
         //Defining main title image:
         startImage.setImage(new Image("plantTitle.jpg"));
         startImage.setX(0);
-        startImage.setY(-20);
+        startImage.setY(-30);
         startImage.setFitWidth(600);
         startImage.setPreserveRatio(true);
         //Defining add plant button:
         addPlant.setStyle("-fx-background-color: #488940");
-        addPlant.setLayoutX(30);
-        addPlant.setLayoutY(775);
+        addPlant.setLayoutX(25);
+        addPlant.setLayoutY(725);
         addPlant.setTextFill(Color.WHITE);
         addPlant.setFont(font2);
         //Defining sort by water button:
         sortByWater.setStyle("-fx-background-color: #488940");
-        sortByWater.setLayoutX(150);
-        sortByWater.setLayoutY(775);
+        sortByWater.setLayoutX(145);
+        sortByWater.setLayoutY(725);
         sortByWater.setTextFill(Color.WHITE);
         sortByWater.setFont(font2);
         //Adding all elements to the canvas:
@@ -522,7 +586,7 @@ public class PlantDriver extends Application implements Global {
             text1.setText(name);
             text1.setFont(font);
             text1.setLayoutX(75);
-            text1.setLayoutY(315);
+            text1.setLayoutY(290);
             text1.setFill(Color.rgb(72, 137, 64));
             homeCanvas.getChildren().add(text1);
 
@@ -531,41 +595,41 @@ public class PlantDriver extends Application implements Global {
             correspondingButtonArrayList.add(button1);
             button1.setStyle("-fx-background-color: #FFFFFF");
             button1.setLayoutX(50);
-            button1.setLayoutY(140);
+            button1.setLayoutY(120);
 
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
-                image.setFitHeight(151);
+                image.setFitHeight(141);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 1) {
                 image.setImage(new Image("succulent.png"));
-                image.setFitHeight(152);
+                image.setFitHeight(142);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 2) {
                 image.setImage(new Image("herb.png"));
-                image.setFitHeight(145);
+                image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 3) {
                 image.setImage(new Image("fruit.png"));
-                image.setFitHeight(145);
+                image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 4) {
                 image.setImage(new Image("tree.png"));
-                image.setFitHeight(148);
+                image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 5) {
                 image.setImage(new Image("fern.png"));
-                image.setFitHeight(148);
+                image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 6) {
                 image.setImage(new Image("other.png"));
-                image.setFitHeight(143);
+                image.setFitHeight(133);
                 image.setPreserveRatio(true);
             }
             button1.setGraphic(image);
@@ -579,49 +643,49 @@ public class PlantDriver extends Application implements Global {
             correspondingButtonArrayList.add(button2);
             button2.setStyle("-fx-background-color: #FFFFFF");
             button2.setLayoutX(225);
-            button2.setLayoutY(140);
+            button2.setLayoutY(120);
 
             Font font = new Font("Impact", 16);
             text2.setText(name);
             text2.setFont(font);
             text2.setLayoutX(250);
-            text2.setLayoutY(315);
+            text2.setLayoutY(290);
             text2.setFill(Color.rgb(72, 137, 64));
             homeCanvas.getChildren().add(text2);
 
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
-                image.setFitHeight(151);
+                image.setFitHeight(141);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 1) {
                 image.setImage(new Image("succulent.png"));
-                image.setFitHeight(152);
+                image.setFitHeight(142);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 2) {
                 image.setImage(new Image("herb.png"));
-                image.setFitHeight(145);
+                image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 3) {
                 image.setImage(new Image("fruit.png"));
-                image.setFitHeight(145);
+                image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 4) {
                 image.setImage(new Image("tree.png"));
-                image.setFitHeight(148);
+                image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 5) {
                 image.setImage(new Image("fern.png"));
-                image.setFitHeight(148);
+                image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 6) {
                 image.setImage(new Image("other.png"));
-                image.setFitHeight(143);
+                image.setFitHeight(133);
                 image.setPreserveRatio(true);
             }
             button2.setGraphic(image);
@@ -635,49 +699,49 @@ public class PlantDriver extends Application implements Global {
             correspondingButtonArrayList.add(button3);
             button3.setStyle("-fx-background-color: #FFFFFF");
             button3.setLayoutX(400);
-            button3.setLayoutY(140);
+            button3.setLayoutY(120);
 
             Font font = new Font("Impact", 16);
             text3.setText(name);
             text3.setFont(font);
             text3.setLayoutX(425);
-            text3.setLayoutY(315);
+            text3.setLayoutY(290);
             text3.setFill(Color.rgb(72, 137, 64));
             homeCanvas.getChildren().add(text3);
 
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
-                image.setFitHeight(151);
+                image.setFitHeight(141);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 1) {
                 image.setImage(new Image("succulent.png"));
-                image.setFitHeight(152);
+                image.setFitHeight(142);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 2) {
                 image.setImage(new Image("herb.png"));
-                image.setFitHeight(145);
+                image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 3) {
                 image.setImage(new Image("fruit.png"));
-                image.setFitHeight(145);
+                image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 4) {
                 image.setImage(new Image("tree.png"));
-                image.setFitHeight(148);
+                image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 5) {
                 image.setImage(new Image("fern.png"));
-                image.setFitHeight(148);
+                image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 6) {
                 image.setImage(new Image("other.png"));
-                image.setFitHeight(143);
+                image.setFitHeight(133);
                 image.setPreserveRatio(true);
             }
             button3.setGraphic(image);
@@ -691,49 +755,49 @@ public class PlantDriver extends Application implements Global {
             correspondingButtonArrayList.add(button4);
             button4.setStyle("-fx-background-color: #FFFFFF");
             button4.setLayoutX(50);
-            button4.setLayoutY(350);
+            button4.setLayoutY(320);
 
             Font font = new Font("Impact", 16);
             text4.setText(name);
             text4.setFont(font);
             text4.setLayoutX(75);
-            text4.setLayoutY(525);
+            text4.setLayoutY(490);
             text4.setFill(Color.rgb(72, 137, 64));
             homeCanvas.getChildren().add(text4);
 
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
-                image.setFitHeight(151);
+                image.setFitHeight(141);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 1) {
                 image.setImage(new Image("succulent.png"));
-                image.setFitHeight(152);
+                image.setFitHeight(142);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 2) {
                 image.setImage(new Image("herb.png"));
-                image.setFitHeight(145);
+                image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 3) {
                 image.setImage(new Image("fruit.png"));
-                image.setFitHeight(145);
+                image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 4) {
                 image.setImage(new Image("tree.png"));
-                image.setFitHeight(148);
+                image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 5) {
                 image.setImage(new Image("fern.png"));
-                image.setFitHeight(148);
+                image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 6) {
                 image.setImage(new Image("other.png"));
-                image.setFitHeight(143);
+                image.setFitHeight(133);
                 image.setPreserveRatio(true);
             }
             button4.setGraphic(image);
@@ -747,49 +811,49 @@ public class PlantDriver extends Application implements Global {
             correspondingButtonArrayList.add(button5);
             button5.setStyle("-fx-background-color: #FFFFFF");
             button5.setLayoutX(225);
-            button5.setLayoutY(350);
+            button5.setLayoutY(320);
 
             Font font = new Font("Impact", 16);
             text5.setText(name);
             text5.setFont(font);
             text5.setLayoutX(250);
-            text5.setLayoutY(525);
+            text5.setLayoutY(490);
             text5.setFill(Color.rgb(72, 137, 64));
             homeCanvas.getChildren().add(text5);
 
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
-                image.setFitHeight(151);
+                image.setFitHeight(141);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 1) {
                 image.setImage(new Image("succulent.png"));
-                image.setFitHeight(152);
+                image.setFitHeight(142);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 2) {
                 image.setImage(new Image("herb.png"));
-                image.setFitHeight(145);
+                image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 3) {
                 image.setImage(new Image("fruit.png"));
-                image.setFitHeight(145);
+                image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 4) {
                 image.setImage(new Image("tree.png"));
-                image.setFitHeight(148);
+                image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 5) {
                 image.setImage(new Image("fern.png"));
-                image.setFitHeight(148);
+                image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 6) {
                 image.setImage(new Image("other.png"));
-                image.setFitHeight(143);
+                image.setFitHeight(133);
                 image.setPreserveRatio(true);
             }
             button5.setGraphic(image);
@@ -803,49 +867,49 @@ public class PlantDriver extends Application implements Global {
             correspondingButtonArrayList.add(button6);
             button6.setStyle("-fx-background-color: #FFFFFF");
             button6.setLayoutX(400);
-            button6.setLayoutY(350);
+            button6.setLayoutY(320);
 
             Font font = new Font("Impact", 16);
             text6.setText(name);
             text6.setFont(font);
             text6.setLayoutX(425);
-            text6.setLayoutY(525);
+            text6.setLayoutY(490);
             text6.setFill(Color.rgb(72, 137, 64));
             homeCanvas.getChildren().add(text6);
 
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
-                image.setFitHeight(151);
+                image.setFitHeight(141);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 1) {
                 image.setImage(new Image("succulent.png"));
-                image.setFitHeight(152);
+                image.setFitHeight(142);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 2) {
                 image.setImage(new Image("herb.png"));
-                image.setFitHeight(145);
+                image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 3) {
                 image.setImage(new Image("fruit.png"));
-                image.setFitHeight(145);
+                image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 4) {
                 image.setImage(new Image("tree.png"));
-                image.setFitHeight(148);
+                image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 5) {
                 image.setImage(new Image("fern.png"));
-                image.setFitHeight(148);
+                image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 6) {
                 image.setImage(new Image("other.png"));
-                image.setFitHeight(143);
+                image.setFitHeight(133);
                 image.setPreserveRatio(true);
             }
             button6.setGraphic(image);
@@ -859,49 +923,49 @@ public class PlantDriver extends Application implements Global {
             correspondingButtonArrayList.add(button7);
             button7.setStyle("-fx-background-color: #FFFFFF");
             button7.setLayoutX(50);
-            button7.setLayoutY(560);
+            button7.setLayoutY(525);
 
             Font font = new Font("Impact", 16);
             text7.setText(name);
             text7.setFont(font);
             text7.setLayoutX(75);
-            text7.setLayoutY(735);
+            text7.setLayoutY(695);
             text7.setFill(Color.rgb(72, 137, 64));
             homeCanvas.getChildren().add(text7);
 
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
-                image.setFitHeight(151);
+                image.setFitHeight(141);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 1) {
                 image.setImage(new Image("succulent.png"));
-                image.setFitHeight(152);
+                image.setFitHeight(142);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 2) {
                 image.setImage(new Image("herb.png"));
-                image.setFitHeight(145);
+                image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 3) {
                 image.setImage(new Image("fruit.png"));
-                image.setFitHeight(145);
+                image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 4) {
                 image.setImage(new Image("tree.png"));
-                image.setFitHeight(148);
+                image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 5) {
                 image.setImage(new Image("fern.png"));
-                image.setFitHeight(148);
+                image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 6) {
                 image.setImage(new Image("other.png"));
-                image.setFitHeight(143);
+                image.setFitHeight(133);
                 image.setPreserveRatio(true);
             }
             button7.setGraphic(image);
@@ -915,49 +979,49 @@ public class PlantDriver extends Application implements Global {
             correspondingButtonArrayList.add(button8);
             button8.setStyle("-fx-background-color: #FFFFFF");
             button8.setLayoutX(225);
-            button8.setLayoutY(560);
+            button8.setLayoutY(525);
 
             Font font = new Font("Impact", 16);
             text8.setText(name);
             text8.setFont(font);
             text8.setLayoutX(250);
-            text8.setLayoutY(735);
+            text8.setLayoutY(695);
             text8.setFill(Color.rgb(72, 137, 64));
             homeCanvas.getChildren().add(text8);
 
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
-                image.setFitHeight(151);
+                image.setFitHeight(141);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 1) {
                 image.setImage(new Image("succulent.png"));
-                image.setFitHeight(152);
+                image.setFitHeight(142);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 2) {
                 image.setImage(new Image("herb.png"));
-                image.setFitHeight(145);
+                image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 3) {
                 image.setImage(new Image("fruit.png"));
-                image.setFitHeight(145);
+                image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 4) {
                 image.setImage(new Image("tree.png"));
-                image.setFitHeight(148);
+                image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 5) {
                 image.setImage(new Image("fern.png"));
-                image.setFitHeight(148);
+                image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 6) {
                 image.setImage(new Image("other.png"));
-                image.setFitHeight(143);
+                image.setFitHeight(133);
                 image.setPreserveRatio(true);
             }
             button8.setGraphic(image);
@@ -971,49 +1035,49 @@ public class PlantDriver extends Application implements Global {
             correspondingButtonArrayList.add(button9);
             button9.setStyle("-fx-background-color: #FFFFFF");
             button9.setLayoutX(400);
-            button9.setLayoutY(560);
+            button9.setLayoutY(525);
 
             Font font = new Font("Impact", 16);
             text9.setText(name);
             text9.setFont(font);
             text9.setLayoutX(425);
-            text9.setLayoutY(735);
-            text9.setFill(Color.rgb(72, 137, 64));
+            text9.setLayoutY(695);
+            text9.setFill(Color.rgb(72,137, 64));
             homeCanvas.getChildren().add(text9);
 
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
-                image.setFitHeight(151);
+                image.setFitHeight(141);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 1) {
                 image.setImage(new Image("succulent.png"));
-                image.setFitHeight(152);
+                image.setFitHeight(142);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 2) {
                 image.setImage(new Image("herb.png"));
-                image.setFitHeight(145);
+                image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 3) {
                 image.setImage(new Image("fruit.png"));
-                image.setFitHeight(145);
+                image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 4) {
                 image.setImage(new Image("tree.png"));
-                image.setFitHeight(148);
+                image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 5) {
                 image.setImage(new Image("fern.png"));
-                image.setFitHeight(148);
+                image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 6) {
                 image.setImage(new Image("other.png"));
-                image.setFitHeight(143);
+                image.setFitHeight(133);
                 image.setPreserveRatio(true);
             }
             button9.setGraphic(image);

@@ -99,11 +99,17 @@ public class Plant implements Global{
         returnToHome.setTextFill(Color.WHITE);
         returnToHome.setFont(buttonFont);
 
-        canvas.getChildren().addAll(name, species, plantTypeDraw, waterReqDraw, waterCurrDraw, waterNeededDraw, info, returnToHome);
+        deletePlant.setStyle("-fx-background-color: #488940");
+        deletePlant.setLayoutX(630);
+        deletePlant.setLayoutY(20);
+        deletePlant.setTextFill(Color.WHITE);
+        deletePlant.setFont(buttonFont);
+
+        canvas.getChildren().addAll(name, species, plantTypeDraw, waterReqDraw, waterCurrDraw, waterNeededDraw, info, returnToHome, deletePlant);
     }
 
     public void removePlant(Pane canvas, Plant plant) {
-        canvas.getChildren().removeAll(name, species, plantTypeDraw, waterReqDraw, waterCurrDraw, waterNeededDraw, info, returnToHome);
+        canvas.getChildren().removeAll(name, species, plantTypeDraw, waterReqDraw, waterCurrDraw, waterNeededDraw, info, returnToHome, deletePlant);
     }
 
     public int getIndex() { return plantIndex;}
