@@ -23,7 +23,13 @@ public class Plant implements Global{
     int plantID;
     int plantIndex;
     ArrayList<Date> waterDates = new ArrayList<>();
-
+    Text name = new Text();
+    Text species = new Text();
+    Text info = new Text();
+    Text plantTypeDraw = new Text();
+    Text waterReqDraw = new Text();
+    Text waterCurrDraw = new Text();
+    Text waterNeededDraw = new Text();
 
 
     Plant(String name, String species, int plantTypeIndex, int waterRequirements, int ID) {
@@ -38,10 +44,11 @@ public class Plant implements Global{
 
 
     public void drawPlant(Pane canvas, Plant plant) {
+        Font buttonFont = new Font("Impact", 20); //Impact
+
         canvas.setStyle("-fx-background-color: white;");
         Font bigFont = new Font("Impact", 30);
         Font smallFont = new Font("Impact", 20);
-        Text name = new Text();
         name.setText(plant.getName());
         name.setLayoutX(30);
         name.setLayoutY(50);
@@ -50,49 +57,53 @@ public class Plant implements Global{
         name.setStrokeWidth(2);
         name.setFont(bigFont);
 
-        Text info = new Text();
         info.setText(plantTypeInfo[plant.getIndex()]);
         info.setLayoutX(30);
         info.setLayoutY(250);
         info.setFill(Color.rgb(51, 153, 51));
         info.setFont(smallFont);
 
-        Text species = new Text();
         species.setText("Species: " + plant.getSpecies());
         species.setLayoutX(30);
         species.setLayoutY(90);
         species.setFill(Color.rgb(51, 153, 51));
         species.setFont(smallFont);
 
-        Text plantType = new Text();
-        plantType.setText("Type: " + plant.getType());
-        plantType.setLayoutX(30);
-        plantType.setLayoutY(115);
-        plantType.setFill(Color.rgb(51, 153, 51));
-        plantType.setFont(smallFont);
+        plantTypeDraw.setText("Type: " + plant.getType());
+        plantTypeDraw.setLayoutX(30);
+        plantTypeDraw.setLayoutY(115);
+        plantTypeDraw.setFill(Color.rgb(51, 153, 51));
+        plantTypeDraw.setFont(smallFont);
 
-        Text waterReq = new Text();
-        waterReq.setText("Water Requirements: " + plant.getWaterReq());
-        waterReq.setLayoutX(30);
-        waterReq.setLayoutY(150);
-        waterReq.setFill(Color.rgb(51, 153, 51));
-        waterReq.setFont(smallFont);
+        waterReqDraw.setText("Water Requirements: " + plant.getWaterReq());
+        waterReqDraw.setLayoutX(30);
+        waterReqDraw.setLayoutY(150);
+        waterReqDraw.setFill(Color.rgb(51, 153, 51));
+        waterReqDraw.setFont(smallFont);
 
-        Text waterCurr = new Text();
-        waterCurr.setText("Current water level: " + plant.getCurrWaterVal());
-        waterCurr.setLayoutX(30);
-        waterCurr.setLayoutY(175);
-        waterCurr.setFill(Color.rgb(51, 153, 51));
-        waterCurr.setFont(smallFont);
+        waterCurrDraw.setText("Current water level: " + plant.getCurrWaterVal());
+        waterCurrDraw.setLayoutX(30);
+        waterCurrDraw.setLayoutY(175);
+        waterCurrDraw.setFill(Color.rgb(51, 153, 51));
+        waterCurrDraw.setFont(smallFont);
 
-        Text waterNeeded = new Text();
-        waterNeeded.setText("Water needed: " + plant.calcWaterNeeded());
-        waterNeeded.setLayoutX(30);
-        waterNeeded.setLayoutY(200);
-        waterNeeded.setFill(Color.rgb(51, 153, 51));
-        waterNeeded.setFont(smallFont);
+        waterNeededDraw.setText("Water needed: " + plant.calcWaterNeeded());
+        waterNeededDraw.setLayoutX(30);
+        waterNeededDraw.setLayoutY(200);
+        waterNeededDraw.setFill(Color.rgb(51, 153, 51));
+        waterNeededDraw.setFont(smallFont);
 
-        canvas.getChildren().addAll(name, species, plantType, waterReq, waterCurr, waterNeeded, info);
+        returnToHome.setStyle("-fx-background-color: #488940");
+        returnToHome.setLayoutX(805);
+        returnToHome.setLayoutY(20);
+        returnToHome.setTextFill(Color.WHITE);
+        returnToHome.setFont(buttonFont);
+
+        canvas.getChildren().addAll(name, species, plantTypeDraw, waterReqDraw, waterCurrDraw, waterNeededDraw, info, returnToHome);
+    }
+
+    public void removePlant(Pane canvas, Plant plant) {
+        canvas.getChildren().removeAll(name, species, plantTypeDraw, waterReqDraw, waterCurrDraw, waterNeededDraw, info, returnToHome);
     }
 
     public int getIndex() { return plantIndex;}
@@ -142,3 +153,7 @@ public class Plant implements Global{
     }
 
 }
+
+
+// remove plant
+// sort plant

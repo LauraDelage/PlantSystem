@@ -49,19 +49,35 @@ public class PlantDriver extends Application implements Global {
     Button plantSpecies = new Button("Submit Plant Species");
     Button plantType = new Button("Submit Plant Type");
     Button plantWater = new Button("Submit Water Percentage");
+    Button sortByWater = new Button("Sort by Need of Water");
+
 
     Text plantNameText = new Text(30, 75, "What is your plant's name?");
     Text plantSpeciesText = new Text(30, 75, "What is your plant's species?");
     Text plantTypeText = new Text(30, 75, "Select your plant type.");
     Text plantWaterText = new Text(30, 75, "Water requirements (% moisture) of your plant?");
 
+    Text text1 = new Text();
+    Text text2 = new Text();
+    Text text3 = new Text();
+    Text text4 = new Text();
+    Text text5 = new Text();
+    Text text6 = new Text();
+    Text text7 = new Text();
+    Text text8 = new Text();
+    Text text9 = new Text();
+
     TextField plantNameInput = new TextField();
     TextField plantSpeciesInput = new TextField();
     ComboBox<PlantType> plantTypeInput = new ComboBox<>();
     TextField plantWaterInput = new TextField();
 
+    int plantIdentificator;
+
     int plantCounter = 1;
     ArrayList<Plant> plantArrayList = new ArrayList<>();
+    ArrayList<Plant> sortedPlantArrayList = new ArrayList<>();
+
     ArrayList<Button> correspondingButtonArrayList = new ArrayList<>();
     Button button1 = new Button();
     Button button2 = new Button();
@@ -84,6 +100,7 @@ public class PlantDriver extends Application implements Global {
     Plant plant9;
 
     CircuitBoardConnection connector = new CircuitBoardConnection();
+    PlantHelper sorter = new PlantHelper(plantArrayList);
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -113,6 +130,7 @@ public class PlantDriver extends Application implements Global {
                 //Remove elements from home scene:
                 homeCanvas.getChildren().remove(startImage);
                 homeCanvas.getChildren().remove(addPlant);
+                homeCanvas.getChildren().remove(sortByWater);
                 for(int i = 0; i < correspondingButtonArrayList.size(); i++) {
                     homeCanvas.getChildren().remove(correspondingButtonArrayList.get(i));
                 }
@@ -186,74 +204,155 @@ public class PlantDriver extends Application implements Global {
         button1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                homeCanvas.getChildren().remove(startImage);
+                homeCanvas.getChildren().remove(addPlant);
+                homeCanvas.getChildren().remove(sortByWater);
                 primaryStage.setScene(plant1Scene);
                 plant1.drawPlant(plant1Canvas, plant1);
+                plantIdentificator = 1;
             }
         });
 
         button2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                homeCanvas.getChildren().remove(startImage);
+                homeCanvas.getChildren().remove(addPlant);
+                homeCanvas.getChildren().remove(sortByWater);
                 primaryStage.setScene(plant2Scene);
                 plant2.drawPlant(plant2Canvas, plant2);
+                plantIdentificator = 2;
             }
         });
 
         button3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                homeCanvas.getChildren().remove(startImage);
+                homeCanvas.getChildren().remove(addPlant);
+                homeCanvas.getChildren().remove(sortByWater);
                 primaryStage.setScene(plant3Scene);
                 plant3.drawPlant(plant3Canvas, plant3);
+                plantIdentificator = 3;
             }
         });
 
         button4.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                homeCanvas.getChildren().remove(startImage);
+                homeCanvas.getChildren().remove(addPlant);
+                homeCanvas.getChildren().remove(sortByWater);
                 primaryStage.setScene(plant4Scene);
                 plant4.drawPlant(plant4Canvas, plant4);
+                plantIdentificator = 4;
             }
         });
 
         button5.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                homeCanvas.getChildren().remove(startImage);
+                homeCanvas.getChildren().remove(addPlant);
+                homeCanvas.getChildren().remove(sortByWater);
                 primaryStage.setScene(plant5Scene);
                 plant5.drawPlant(plant5Canvas, plant5);
+                plantIdentificator = 5;
             }
         });
 
         button6.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                homeCanvas.getChildren().remove(startImage);
+                homeCanvas.getChildren().remove(addPlant);
+                homeCanvas.getChildren().remove(sortByWater);
                 primaryStage.setScene(plant6Scene);
                 plant6.drawPlant(plant6Canvas, plant6);
+                plantIdentificator = 6;
             }
         });
 
         button7.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                homeCanvas.getChildren().remove(startImage);
+                homeCanvas.getChildren().remove(addPlant);
+                homeCanvas.getChildren().remove(sortByWater);
                 primaryStage.setScene(plant7Scene);
                 plant7.drawPlant(plant7Canvas, plant7);
+                plantIdentificator = 7;
             }
         });
 
         button8.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                homeCanvas.getChildren().remove(startImage);
+                homeCanvas.getChildren().remove(addPlant);
+                homeCanvas.getChildren().remove(sortByWater);
                 primaryStage.setScene(plant8Scene);
                 plant8.drawPlant(plant8Canvas, plant8);
+                plantIdentificator = 8;
             }
         });
 
         button9.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                homeCanvas.getChildren().remove(startImage);
+                homeCanvas.getChildren().remove(addPlant);
+                homeCanvas.getChildren().remove(sortByWater);
                 primaryStage.setScene(plant9Scene);
                 plant9.drawPlant(plant9Canvas, plant9);
+                plantIdentificator = 9;
             }
         });
+
+        returnToHome.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                primaryStage.setScene(homeScene);
+                startHomeScene();
+                if(plantIdentificator == 1) {
+                    plant1.removePlant(plant1Canvas, plant1);
+                }
+                else if(plantIdentificator == 2) {
+                    plant2.removePlant(plant2Canvas, plant2);
+                }
+                else if(plantIdentificator == 3) {
+                    plant3.removePlant(plant3Canvas, plant3);
+                }
+                else if(plantIdentificator == 4) {
+                    plant4.removePlant(plant4Canvas, plant4);
+                }
+                else if(plantIdentificator == 5) {
+                    plant5.removePlant(plant5Canvas, plant5);
+                }
+                else if(plantIdentificator == 6) {
+                    plant6.removePlant(plant6Canvas, plant6);
+                }
+                else if(plantIdentificator == 7) {
+                    plant7.removePlant(plant7Canvas, plant7);
+                }
+                else if(plantIdentificator == 8) {
+                    plant8.removePlant(plant8Canvas, plant8);
+                }
+                else if(plantIdentificator == 9) {
+                    plant9.removePlant(plant9Canvas, plant9);
+                }
+            }
+        });
+
+        sortByWater.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                sortedPlantArrayList = sorter.waterSort(plantArrayList);
+                sortingPlants();
+            }
+        });
+
+
     }
 
     public static void main(String[] args) {
@@ -275,9 +374,16 @@ public class PlantDriver extends Application implements Global {
         addPlant.setLayoutY(775);
         addPlant.setTextFill(Color.WHITE);
         addPlant.setFont(font2);
+        //Defining sort by water button:
+        sortByWater.setStyle("-fx-background-color: #488940");
+        sortByWater.setLayoutX(150);
+        sortByWater.setLayoutY(775);
+        sortByWater.setTextFill(Color.WHITE);
+        sortByWater.setFont(font2);
         //Adding all elements to the canvas:
         homeCanvas.getChildren().add(startImage);
         homeCanvas.getChildren().add(addPlant);
+        homeCanvas.getChildren().add(sortByWater);
     }
 
     public void startPlantNameScene() {
@@ -413,13 +519,12 @@ public class PlantDriver extends Application implements Global {
             rectangle.setStyle("-fx-stroke: #b6fc8b");
             homeCanvas.getChildren().add(rectangle);*/
             Font font = new Font("Impact", 16);
-            Text text = new Text();
-            text.setText(name);
-            text.setFont(font);
-            text.setLayoutX(75);
-            text.setLayoutY(325);
-            text.setFill(Color.rgb(72, 137, 64));
-            homeCanvas.getChildren().add(text);
+            text1.setText(name);
+            text1.setFont(font);
+            text1.setLayoutX(75);
+            text1.setLayoutY(315);
+            text1.setFill(Color.rgb(72, 137, 64));
+            homeCanvas.getChildren().add(text1);
 
             plant1 = new Plant(name, species, plantTypeIndex, waterRequirements, plantIDCounter);
             plantArrayList.add(plant1);
@@ -435,7 +540,7 @@ public class PlantDriver extends Application implements Global {
             }
             else if(plantTypeIndex == 1) {
                 image.setImage(new Image("succulent.png"));
-                image.setFitHeight(155);
+                image.setFitHeight(152);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 2) {
@@ -477,13 +582,12 @@ public class PlantDriver extends Application implements Global {
             button2.setLayoutY(140);
 
             Font font = new Font("Impact", 16);
-            Text text = new Text();
-            text.setText(name);
-            text.setFont(font);
-            text.setLayoutX(250);
-            text.setLayoutY(325);
-            text.setFill(Color.rgb(72, 137, 64));
-            homeCanvas.getChildren().add(text);
+            text2.setText(name);
+            text2.setFont(font);
+            text2.setLayoutX(250);
+            text2.setLayoutY(315);
+            text2.setFill(Color.rgb(72, 137, 64));
+            homeCanvas.getChildren().add(text2);
 
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
@@ -492,7 +596,7 @@ public class PlantDriver extends Application implements Global {
             }
             else if(plantTypeIndex == 1) {
                 image.setImage(new Image("succulent.png"));
-                image.setFitHeight(155);
+                image.setFitHeight(152);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 2) {
@@ -534,13 +638,12 @@ public class PlantDriver extends Application implements Global {
             button3.setLayoutY(140);
 
             Font font = new Font("Impact", 16);
-            Text text = new Text();
-            text.setText(name);
-            text.setFont(font);
-            text.setLayoutX(425);
-            text.setLayoutY(325);
-            text.setFill(Color.rgb(72, 137, 64));
-            homeCanvas.getChildren().add(text);
+            text3.setText(name);
+            text3.setFont(font);
+            text3.setLayoutX(425);
+            text3.setLayoutY(315);
+            text3.setFill(Color.rgb(72, 137, 64));
+            homeCanvas.getChildren().add(text3);
 
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
@@ -549,7 +652,7 @@ public class PlantDriver extends Application implements Global {
             }
             else if(plantTypeIndex == 1) {
                 image.setImage(new Image("succulent.png"));
-                image.setFitHeight(155);
+                image.setFitHeight(152);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 2) {
@@ -591,13 +694,12 @@ public class PlantDriver extends Application implements Global {
             button4.setLayoutY(350);
 
             Font font = new Font("Impact", 16);
-            Text text = new Text();
-            text.setText(name);
-            text.setFont(font);
-            text.setLayoutX(75);
-            text.setLayoutY(535);
-            text.setFill(Color.rgb(72, 137, 64));
-            homeCanvas.getChildren().add(text);
+            text4.setText(name);
+            text4.setFont(font);
+            text4.setLayoutX(75);
+            text4.setLayoutY(525);
+            text4.setFill(Color.rgb(72, 137, 64));
+            homeCanvas.getChildren().add(text4);
 
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
@@ -606,7 +708,7 @@ public class PlantDriver extends Application implements Global {
             }
             else if(plantTypeIndex == 1) {
                 image.setImage(new Image("succulent.png"));
-                image.setFitHeight(155);
+                image.setFitHeight(152);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 2) {
@@ -648,13 +750,12 @@ public class PlantDriver extends Application implements Global {
             button5.setLayoutY(350);
 
             Font font = new Font("Impact", 16);
-            Text text = new Text();
-            text.setText(name);
-            text.setFont(font);
-            text.setLayoutX(250);
-            text.setLayoutY(535);
-            text.setFill(Color.rgb(72, 137, 64));
-            homeCanvas.getChildren().add(text);
+            text5.setText(name);
+            text5.setFont(font);
+            text5.setLayoutX(250);
+            text5.setLayoutY(525);
+            text5.setFill(Color.rgb(72, 137, 64));
+            homeCanvas.getChildren().add(text5);
 
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
@@ -663,7 +764,7 @@ public class PlantDriver extends Application implements Global {
             }
             else if(plantTypeIndex == 1) {
                 image.setImage(new Image("succulent.png"));
-                image.setFitHeight(155);
+                image.setFitHeight(152);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 2) {
@@ -705,13 +806,12 @@ public class PlantDriver extends Application implements Global {
             button6.setLayoutY(350);
 
             Font font = new Font("Impact", 16);
-            Text text = new Text();
-            text.setText(name);
-            text.setFont(font);
-            text.setLayoutX(425);
-            text.setLayoutY(535);
-            text.setFill(Color.rgb(72, 137, 64));
-            homeCanvas.getChildren().add(text);
+            text6.setText(name);
+            text6.setFont(font);
+            text6.setLayoutX(425);
+            text6.setLayoutY(525);
+            text6.setFill(Color.rgb(72, 137, 64));
+            homeCanvas.getChildren().add(text6);
 
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
@@ -720,7 +820,7 @@ public class PlantDriver extends Application implements Global {
             }
             else if(plantTypeIndex == 1) {
                 image.setImage(new Image("succulent.png"));
-                image.setFitHeight(155);
+                image.setFitHeight(152);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 2) {
@@ -759,16 +859,15 @@ public class PlantDriver extends Application implements Global {
             correspondingButtonArrayList.add(button7);
             button7.setStyle("-fx-background-color: #FFFFFF");
             button7.setLayoutX(50);
-            button7.setLayoutY(550);
+            button7.setLayoutY(560);
 
             Font font = new Font("Impact", 16);
-            Text text = new Text();
-            text.setText(name);
-            text.setFont(font);
-            text.setLayoutX(75);
-            text.setLayoutY(735);
-            text.setFill(Color.rgb(72, 137, 64));
-            homeCanvas.getChildren().add(text);
+            text7.setText(name);
+            text7.setFont(font);
+            text7.setLayoutX(75);
+            text7.setLayoutY(735);
+            text7.setFill(Color.rgb(72, 137, 64));
+            homeCanvas.getChildren().add(text7);
 
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
@@ -777,7 +876,7 @@ public class PlantDriver extends Application implements Global {
             }
             else if(plantTypeIndex == 1) {
                 image.setImage(new Image("succulent.png"));
-                image.setFitHeight(155);
+                image.setFitHeight(152);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 2) {
@@ -816,16 +915,15 @@ public class PlantDriver extends Application implements Global {
             correspondingButtonArrayList.add(button8);
             button8.setStyle("-fx-background-color: #FFFFFF");
             button8.setLayoutX(225);
-            button8.setLayoutY(550);
+            button8.setLayoutY(560);
 
             Font font = new Font("Impact", 16);
-            Text text = new Text();
-            text.setText(name);
-            text.setFont(font);
-            text.setLayoutX(250);
-            text.setLayoutY(735);
-            text.setFill(Color.rgb(72, 137, 64));
-            homeCanvas.getChildren().add(text);
+            text8.setText(name);
+            text8.setFont(font);
+            text8.setLayoutX(250);
+            text8.setLayoutY(735);
+            text8.setFill(Color.rgb(72, 137, 64));
+            homeCanvas.getChildren().add(text8);
 
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
@@ -834,7 +932,7 @@ public class PlantDriver extends Application implements Global {
             }
             else if(plantTypeIndex == 1) {
                 image.setImage(new Image("succulent.png"));
-                image.setFitHeight(155);
+                image.setFitHeight(152);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 2) {
@@ -873,16 +971,15 @@ public class PlantDriver extends Application implements Global {
             correspondingButtonArrayList.add(button9);
             button9.setStyle("-fx-background-color: #FFFFFF");
             button9.setLayoutX(400);
-            button9.setLayoutY(550);
+            button9.setLayoutY(560);
 
             Font font = new Font("Impact", 16);
-            Text text = new Text();
-            text.setText(name);
-            text.setFont(font);
-            text.setLayoutX(425);
-            text.setLayoutY(735);
-            text.setFill(Color.rgb(72, 137, 64));
-            homeCanvas.getChildren().add(text);
+            text9.setText(name);
+            text9.setFont(font);
+            text9.setLayoutX(425);
+            text9.setLayoutY(735);
+            text9.setFill(Color.rgb(72, 137, 64));
+            homeCanvas.getChildren().add(text9);
 
             if(plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
@@ -891,7 +988,7 @@ public class PlantDriver extends Application implements Global {
             }
             else if(plantTypeIndex == 1) {
                 image.setImage(new Image("succulent.png"));
-                image.setFitHeight(155);
+                image.setFitHeight(152);
                 image.setPreserveRatio(true);
             }
             else if(plantTypeIndex == 2) {
@@ -926,6 +1023,7 @@ public class PlantDriver extends Application implements Global {
             homeCanvas.getChildren().add(correspondingButtonArrayList.get(i));
         }
         plantCounter++;
+
     }
 
     public int findPlantTypeIndex(String plantType) {
@@ -937,6 +1035,523 @@ public class PlantDriver extends Application implements Global {
         }
         return returnCount;
     }
+
+    public void sortingPlants() {
+        for(int i = 0; i < sortedPlantArrayList.size(); i++) {
+            if(i == 0) {
+                if (sortedPlantArrayList.get(i) == plant1) {
+                    text1.setLayoutX(75);
+                    text1.setLayoutY(315);
+                    button1.setLayoutX(50);
+                    button1.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant2) {
+                    text2.setLayoutX(75);
+                    text2.setLayoutY(315);
+                    button2.setLayoutX(50);
+                    button2.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant3) {
+                    text3.setLayoutX(75);
+                    text3.setLayoutY(315);
+                    button3.setLayoutX(50);
+                    button3.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant4) {
+                    text4.setLayoutX(75);
+                    text4.setLayoutY(315);
+                    button4.setLayoutX(50);
+                    button4.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant5) {
+                    text5.setLayoutX(75);
+                    text5.setLayoutY(315);
+                    button5.setLayoutX(50);
+                    button5.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant6) {
+                    text6.setLayoutX(75);
+                    text6.setLayoutY(315);
+                    button6.setLayoutX(50);
+                    button6.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant7) {
+                    text7.setLayoutX(75);
+                    text7.setLayoutY(315);
+                    button7.setLayoutX(50);
+                    button7.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant8) {
+                    text8.setLayoutX(75);
+                    text8.setLayoutY(315);
+                    button8.setLayoutX(50);
+                    button8.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant9) {
+                    text9.setLayoutX(75);
+                    text9.setLayoutY(315);
+                    button9.setLayoutX(50);
+                    button9.setLayoutY(140);
+                }
+            }
+            else if(i == 1) {
+                if (sortedPlantArrayList.get(i) == plant1) {
+                    text1.setLayoutX(250);
+                    text1.setLayoutY(315);
+                    button1.setLayoutX(225);
+                    button1.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant2) {
+                    text2.setLayoutX(250);
+                    text2.setLayoutY(315);
+                    button2.setLayoutX(225);
+                    button2.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant3) {
+                    text3.setLayoutX(250);
+                    text3.setLayoutY(315);
+                    button3.setLayoutX(225);
+                    button3.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant4) {
+                    text4.setLayoutX(250);
+                    text4.setLayoutY(315);
+                    button4.setLayoutX(225);
+                    button4.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant5) {
+                    text5.setLayoutX(250);
+                    text5.setLayoutY(315);
+                    button5.setLayoutX(225);
+                    button5.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant6) {
+                    text6.setLayoutX(250);
+                    text6.setLayoutY(315);
+                    button6.setLayoutX(225);
+                    button6.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant7) {
+                    text7.setLayoutX(250);
+                    text7.setLayoutY(315);
+                    button7.setLayoutX(225);
+                    button7.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant8) {
+                    text8.setLayoutX(250);
+                    text8.setLayoutY(315);
+                    button8.setLayoutX(225);
+                    button8.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant9) {
+                    text9.setLayoutX(250);
+                    text9.setLayoutY(315);
+                    button9.setLayoutX(225);
+                    button9.setLayoutY(140);
+                }
+            }
+            else if(i == 2) {
+                if (sortedPlantArrayList.get(i) == plant1) {
+                    text1.setLayoutX(425);
+                    text1.setLayoutY(315);
+                    button1.setLayoutX(400);
+                    button1.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant2) {
+                    text2.setLayoutX(425);
+                    text2.setLayoutY(315);
+                    button2.setLayoutX(400);
+                    button2.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant3) {
+                    text3.setLayoutX(425);
+                    text3.setLayoutY(315);
+                    button3.setLayoutX(400);
+                    button3.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant4) {
+                    text4.setLayoutX(425);
+                    text4.setLayoutY(315);
+                    button4.setLayoutX(400);
+                    button4.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant5) {
+                    text5.setLayoutX(425);
+                    text5.setLayoutY(315);
+                    button5.setLayoutX(400);
+                    button5.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant6) {
+                    text6.setLayoutX(425);
+                    text6.setLayoutY(315);
+                    button6.setLayoutX(400);
+                    button6.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant7) {
+                    text7.setLayoutX(425);
+                    text7.setLayoutY(315);
+                    button7.setLayoutX(400);
+                    button7.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant8) {
+                    text8.setLayoutX(425);
+                    text8.setLayoutY(315);
+                    button8.setLayoutX(400);
+                    button8.setLayoutY(140);
+                }
+                else if (sortedPlantArrayList.get(i) == plant9) {
+                    text9.setLayoutX(425);
+                    text9.setLayoutY(315);
+                    button9.setLayoutX(400);
+                    button9.setLayoutY(140);
+                }
+            }
+            else if(i == 3) {
+                //plant 4
+                if (sortedPlantArrayList.get(i) == plant1) {
+                    text1.setLayoutX(75);
+                    text1.setLayoutY(525);
+                    button1.setLayoutX(50);
+                    button1.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant2) {
+                    text2.setLayoutX(75);
+                    text2.setLayoutY(525);
+                    button2.setLayoutX(50);
+                    button2.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant3) {
+                    text3.setLayoutX(75);
+                    text3.setLayoutY(525);
+                    button3.setLayoutX(50);
+                    button3.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant4) {
+                    text4.setLayoutX(75);
+                    text4.setLayoutY(525);
+                    button4.setLayoutX(50);
+                    button4.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant5) {
+                    text5.setLayoutX(75);
+                    text5.setLayoutY(525);
+                    button5.setLayoutX(50);
+                    button5.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant6) {
+                    text6.setLayoutX(75);
+                    text6.setLayoutY(525);
+                    button6.setLayoutX(50);
+                    button6.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant7) {
+                    text7.setLayoutX(75);
+                    text7.setLayoutY(525);
+                    button7.setLayoutX(50);
+                    button7.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant8) {
+                    text8.setLayoutX(75);
+                    text8.setLayoutY(525);
+                    button8.setLayoutX(50);
+                    button8.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant9) {
+                    text9.setLayoutX(75);
+                    text9.setLayoutY(525);
+                    button9.setLayoutX(50);
+                    button9.setLayoutY(350);
+                }
+            }
+            else if(i == 4) {
+                //plant 5
+                if (sortedPlantArrayList.get(i) == plant1) {
+                    text1.setLayoutX(250);
+                    text1.setLayoutY(525);
+                    button1.setLayoutX(225);
+                    button1.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant2) {
+                    text2.setLayoutX(250);
+                    text2.setLayoutY(525);
+                    button2.setLayoutX(225);
+                    button2.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant3) {
+                    text3.setLayoutX(250);
+                    text3.setLayoutY(525);
+                    button3.setLayoutX(225);
+                    button3.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant4) {
+                    text4.setLayoutX(250);
+                    text4.setLayoutY(525);
+                    button4.setLayoutX(225);
+                    button4.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant5) {
+                    text5.setLayoutX(250);
+                    text5.setLayoutY(525);
+                    button5.setLayoutX(225);
+                    button5.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant6) {
+                    text6.setLayoutX(250);
+                    text6.setLayoutY(525);
+                    button6.setLayoutX(225);
+                    button6.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant7) {
+                    text7.setLayoutX(250);
+                    text7.setLayoutY(525);
+                    button7.setLayoutX(225);
+                    button7.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant8) {
+                    text8.setLayoutX(250);
+                    text8.setLayoutY(525);
+                    button8.setLayoutX(225);
+                    button8.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant9) {
+                    text9.setLayoutX(250);
+                    text9.setLayoutY(525);
+                    button9.setLayoutX(225);
+                    button9.setLayoutY(350);
+                }
+            }
+            else if(i == 5) {
+                //plant 6
+                if (sortedPlantArrayList.get(i) == plant1) {
+                    text1.setLayoutX(425);
+                    text1.setLayoutY(525);
+                    button1.setLayoutX(400);
+                    button1.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant2) {
+                    text2.setLayoutX(425);
+                    text2.setLayoutY(525);
+                    button2.setLayoutX(400);
+                    button2.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant3) {
+                    text3.setLayoutX(425);
+                    text3.setLayoutY(525);
+                    button3.setLayoutX(400);
+                    button3.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant4) {
+                    text4.setLayoutX(425);
+                    text4.setLayoutY(525);
+                    button4.setLayoutX(400);
+                    button4.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant5) {
+                    text5.setLayoutX(425);
+                    text5.setLayoutY(525);
+                    button5.setLayoutX(400);
+                    button5.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant6) {
+                    text6.setLayoutX(425);
+                    text6.setLayoutY(525);
+                    button6.setLayoutX(400);
+                    button6.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant7) {
+                    text7.setLayoutX(425);
+                    text7.setLayoutY(525);
+                    button7.setLayoutX(400);
+                    button7.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant8) {
+                    text8.setLayoutX(425);
+                    text8.setLayoutY(525);
+                    button8.setLayoutX(400);
+                    button8.setLayoutY(350);
+                }
+                else if (sortedPlantArrayList.get(i) == plant9) {
+                    text9.setLayoutX(425);
+                    text9.setLayoutY(525);
+                    button9.setLayoutX(400);
+                    button9.setLayoutY(350);
+                }
+            }
+            else if(i == 6) {
+                //plant 7
+                if (sortedPlantArrayList.get(i) == plant1) {
+                    text1.setLayoutX(75);
+                    text1.setLayoutY(735);
+                    button1.setLayoutX(50);
+                    button1.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant2) {
+                    text2.setLayoutX(75);
+                    text2.setLayoutY(735);
+                    button2.setLayoutX(50);
+                    button2.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant3) {
+                    text3.setLayoutX(75);
+                    text3.setLayoutY(735);
+                    button3.setLayoutX(50);
+                    button3.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant4) {
+                    text4.setLayoutX(75);
+                    text4.setLayoutY(735);
+                    button4.setLayoutX(50);
+                    button4.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant5) {
+                    text5.setLayoutX(75);
+                    text5.setLayoutY(735);
+                    button5.setLayoutX(50);
+                    button5.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant6) {
+                    text6.setLayoutX(75);
+                    text6.setLayoutY(735);
+                    button6.setLayoutX(50);
+                    button6.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant7) {
+                    text7.setLayoutX(75);
+                    text7.setLayoutY(735);
+                    button7.setLayoutX(50);
+                    button7.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant8) {
+                    text8.setLayoutX(75);
+                    text8.setLayoutY(735);
+                    button8.setLayoutX(50);
+                    button8.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant9) {
+                    text9.setLayoutX(75);
+                    text9.setLayoutY(735);
+                    button9.setLayoutX(50);
+                    button9.setLayoutY(560);
+                }
+            }
+            else if(i == 7) {
+                //plant 8
+                if (sortedPlantArrayList.get(i) == plant1) {
+                    text1.setLayoutX(250);
+                    text1.setLayoutY(735);
+                    button1.setLayoutX(225);
+                    button1.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant2) {
+                    text2.setLayoutX(250);
+                    text2.setLayoutY(735);
+                    button2.setLayoutX(225);
+                    button2.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant3) {
+                    text3.setLayoutX(250);
+                    text3.setLayoutY(735);
+                    button3.setLayoutX(225);
+                    button3.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant4) {
+                    text4.setLayoutX(250);
+                    text4.setLayoutY(735);
+                    button4.setLayoutX(225);
+                    button4.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant5) {
+                    text5.setLayoutX(250);
+                    text5.setLayoutY(735);
+                    button5.setLayoutX(225);
+                    button5.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant6) {
+                    text6.setLayoutX(250);
+                    text6.setLayoutY(735);
+                    button6.setLayoutX(225);
+                    button6.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant7) {
+                    text7.setLayoutX(250);
+                    text7.setLayoutY(735);
+                    button7.setLayoutX(225);
+                    button7.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant8) {
+                    text8.setLayoutX(250);
+                    text8.setLayoutY(735);
+                    button8.setLayoutX(225);
+                    button8.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant9) {
+                    text9.setLayoutX(250);
+                    text9.setLayoutY(735);
+                    button9.setLayoutX(225);
+                    button9.setLayoutY(560);
+                }
+            }
+            else if(i == 8) {
+                //plant 9
+                if (sortedPlantArrayList.get(i) == plant1) {
+                    text1.setLayoutX(425);
+                    text1.setLayoutY(735);
+                    button1.setLayoutX(400);
+                    button1.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant2) {
+                    text2.setLayoutX(425);
+                    text2.setLayoutY(735);
+                    button2.setLayoutX(400);
+                    button2.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant3) {
+                    text3.setLayoutX(425);
+                    text3.setLayoutY(735);
+                    button3.setLayoutX(400);
+                    button3.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant4) {
+                    text4.setLayoutX(425);
+                    text4.setLayoutY(735);
+                    button4.setLayoutX(400);
+                    button4.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant5) {
+                    text5.setLayoutX(425);
+                    text5.setLayoutY(735);
+                    button5.setLayoutX(400);
+                    button5.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant6) {
+                    text6.setLayoutX(425);
+                    text6.setLayoutY(735);
+                    button6.setLayoutX(400);
+                    button6.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant7) {
+                    text7.setLayoutX(425);
+                    text7.setLayoutY(735);
+                    button7.setLayoutX(400);
+                    button7.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant8) {
+                    text8.setLayoutX(425);
+                    text8.setLayoutY(735);
+                    button8.setLayoutX(400);
+                    button8.setLayoutY(560);
+                }
+                else if (sortedPlantArrayList.get(i) == plant9) {
+                    text9.setLayoutX(425);
+                    text9.setLayoutY(735);
+                    button9.setLayoutX(400);
+                    button9.setLayoutY(560);
+                }
+            }
+        }
+    }
+
+
 }
 
 

@@ -9,6 +9,8 @@ import java.util.ArrayList;
  */
 
 public interface Global {
+
+    Button returnToHome = new Button("Go Home");
     boolean generateCircuitBoard = true;
     String[] plantTypeCompareArray = {"Flower", "Succulent", "Herb", "Fruit", "Tree", "Fern", "Other"};
     String[] plantTypeInfo = {
