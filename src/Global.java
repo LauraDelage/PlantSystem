@@ -24,8 +24,4 @@ public interface Global {
             "Unusual plant types can be challenging to care for. Be sure to do external research on your individual plant.",
     };
 
-    int fakePastWaterVal = 60;
-
-    ArrayList<Integer> allWaterLevels = new ArrayList<>();
-
 }

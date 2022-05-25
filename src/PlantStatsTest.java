@@ -1,7 +1,6 @@
-/*import org.junit.jupiter.apiW.Test;
+import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -9,12 +8,13 @@ import java.util.Date;
  * @author Laura Delage
  */
 
-/*
 public class PlantStatsTest {
+    CircuitBoardConnection plantConnect = new CircuitBoardConnection();
+
     @Test
     void recordWateringsTest() {
         //ArrayList<String> waterDates = new ArrayList<>();
-        Plant bob = new Plant("bob", "coriander", 3, 80);
+        Plant bob = new Plant("bob", "coriander", 3, 80,2);
         bob.setCurrWaterVal(90);
         //bob.hasBeenWatered();
         PlantStats bobStats = new PlantStats();
@@ -33,7 +33,7 @@ public class PlantStatsTest {
 
     @Test
     void calcWateringsTest() {
-        Plant bob = new Plant("bob", "coriander", 3, 80);
+        Plant bob = new Plant("bob", "coriander", 3, 80,3);
         PlantStats bobStats = new PlantStats();
         Date date = new Date();
 
@@ -53,9 +53,13 @@ public class PlantStatsTest {
 
     @Test
     void waterValTest() {
-        System.out.println(Global.allWaterLevels);
+        for (int i = 0; i < plantConnect.getArray().size(); i++) {
+            System.out.println(plantConnect.getArray().get(i));
+        }
+
+        System.out.println();
     }
 
-}
 
-*/
+
+}

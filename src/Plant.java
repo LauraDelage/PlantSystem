@@ -23,6 +23,7 @@ public class Plant implements Global{
     int plantID;
     int plantIndex;
     ArrayList<Date> waterDates = new ArrayList<>();
+    ArrayList<Integer> waterLevels = new ArrayList<>();
     Text name = new Text();
     Text species = new Text();
     Text info = new Text();
@@ -30,6 +31,7 @@ public class Plant implements Global{
     Text waterReqDraw = new Text();
     Text waterCurrDraw = new Text();
     Text waterNeededDraw = new Text();
+    CircuitBoardConnection board = new CircuitBoardConnection();
 
 
     Plant(String name, String species, int plantTypeIndex, int waterRequirements, int ID) {
@@ -40,6 +42,8 @@ public class Plant implements Global{
         plantType = Global.plantTypeCompareArray[plantTypeIndex];
         plantTypeInfoString = Global.plantTypeInfo[plantTypeIndex];
         waterReq = waterRequirements;
+        waterLevels = board.getArray();
+        currWaterVal = waterLevels.get(waterLevels.size());
     }
 
 

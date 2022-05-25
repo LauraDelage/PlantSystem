@@ -6,7 +6,7 @@ public class PlantStats implements Global {
     PlantStats() {
     }
     public void recordWaterings(Plant plant) {
-        if ((plant.getCurrWaterVal() > Global.fakePastWaterVal) && (plant.getCurrWaterVal() >= plant.getWaterReq())) {
+        if ((plant.getCurrWaterVal() > 10) && (plant.getCurrWaterVal() >= plant.getWaterReq())) {
             plant.hasBeenWatered();
         }
     }
@@ -26,10 +26,6 @@ public class PlantStats implements Global {
                 + numWaterings + " times. Congratulations!");
         System.out.println("Watering history:");
         System.out.println(waterSince);
-    }
-
-    public void addData(ArrayList<Integer> dataChunk) {
-        Global.allWaterLevels.addAll(dataChunk);
     }
 
     /*

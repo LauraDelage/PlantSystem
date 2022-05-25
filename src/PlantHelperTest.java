@@ -1,26 +1,22 @@
-/*import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Testing class to evaluate the functionality of the PlantSorter class
  * @author Laura Delage
  */
 
-/*
-class PlantSorterTest {
+class PlantHelperTest {
 
     @Test
     void alphaSortTest() {
         ArrayList<Plant> allPlants = new ArrayList<>();
         PlantHelper plantAssistant = new PlantHelper(allPlants);
-        Plant anna = new Plant("anna", "coriander", 3, 10);
-        Plant bean = new Plant("bean", "coriander", 3, 10);
-        Plant bob = new Plant("bob", "coriander", 3, 10);
-        Plant craig = new Plant("craig", "coriander", 3, 10);
-        Plant donut = new Plant("donut", "coriander", 3, 10);
+        Plant anna = new Plant("anna", "coriander", 3, 10,2);
+        Plant bean = new Plant("bean", "coriander", 3, 10,2);
+        Plant bob = new Plant("bob", "coriander", 3, 10,2);
+        Plant craig = new Plant("craig", "coriander", 3, 10,2);
+        Plant donut = new Plant("donut", "coriander", 3, 10,2);
 
         allPlants.add(craig);
         allPlants.add(bob);
@@ -43,11 +39,11 @@ class PlantSorterTest {
     void waterSortTest() {
         ArrayList<Plant> allPlants = new ArrayList<>();
         PlantHelper plantAssistant = new PlantHelper(allPlants);
-        Plant anna = new Plant("anna", "coriander", 3, 10);
-        Plant bean = new Plant("bean", "coriander", 3, 10);
-        Plant bob = new Plant("bob", "coriander", 3, 10);
-        Plant craig = new Plant("craig", "coriander", 3, 10);
-        Plant donut = new Plant("donut", "coriander", 3, 10);
+        Plant anna = new Plant("anna", "coriander", 3, 10,2);
+        Plant bean = new Plant("bean", "coriander", 3, 10,2);
+        Plant bob = new Plant("bob", "coriander", 3, 10,2);
+        Plant craig = new Plant("craig", "coriander", 3, 10,2);
+        Plant donut = new Plant("donut", "coriander", 3, 10,2);
 
         craig.setCurrWaterVal(9);
         craig.calcWaterNeeded();
@@ -82,10 +78,9 @@ class PlantSorterTest {
 
     @Test
     void waterCalcTest() {
-        Plant bob = new Plant("bob", "coriander", 3, 10);
+        Plant bob = new Plant("bob", "coriander", 3, 10,9);
         bob.setCurrWaterVal(9);
         System.out.println(bob.calcWaterNeeded());
     }
 }
- */
 
