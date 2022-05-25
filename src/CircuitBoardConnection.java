@@ -11,20 +11,9 @@ import java.util.Scanner;
 
 public class CircuitBoardConnection implements Global {
     //
-    static ArrayList<Integer> waterLevelsArrayList;
-
-    public static void main(String[] args) {
-        getArray();
-        while(generateCircuitBoard) {
-            generate();
-            read();
-        }
-    }
+    static ArrayList<Integer> waterLevelsArrayList = new ArrayList<>();
 
     public static ArrayList<Integer> getArray() {
-        if (waterLevelsArrayList == null) {
-            waterLevelsArrayList = new ArrayList<>();
-        }
         return waterLevelsArrayList;
     }
 
@@ -36,11 +25,11 @@ public class CircuitBoardConnection implements Global {
             FileWriter fw = new FileWriter(waterFile, false);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter output = new PrintWriter(bw);
-            System.out.println("Outputting to file...");
-            for(int count = 0; count < 5 ;count++ ) {
+            //System.out.println("Outputting to file...");
+            for(int count = 0; count < 3 ;count++ ) {
                 int value = waterPercentageGenerator.nextInt(100);
                 output.println(value);
-                System.out.println(value);
+                //System.out.println(value);
                 sleep(2000); //every 10 seconds data is simulated
             }
             output.flush();
@@ -57,13 +46,13 @@ public class CircuitBoardConnection implements Global {
         try{
             waterLevelsTxt = new File("WaterLevels.txt");
             fileInput = new Scanner(waterLevelsTxt);
-            System.out.println("Reading file...");
+            //System.out.println("Reading file...");
 
             while (fileInput.hasNext()) {
                 try{
                     int value = fileInput.nextInt();
                     waterLevelsArrayList.add(value);
-                    System.out.println(value);
+                    //System.out.println(value);
                 }
                 catch(InputMismatchException ime){
                     System.out.println("Error");

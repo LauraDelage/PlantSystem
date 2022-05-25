@@ -42,8 +42,10 @@ public class Plant implements Global{
         plantType = Global.plantTypeCompareArray[plantTypeIndex];
         plantTypeInfoString = Global.plantTypeInfo[plantTypeIndex];
         waterReq = waterRequirements;
+        board.generate();
+        board.read();
         waterLevels = board.getArray();
-        currWaterVal = waterLevels.get(waterLevels.size());
+        currWaterVal = waterLevels.get(waterLevels.size() - 1);
     }
 
 
