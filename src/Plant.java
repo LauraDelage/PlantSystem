@@ -111,11 +111,17 @@ public class Plant implements Global{
         deletePlant.setTextFill(Color.WHITE);
         deletePlant.setFont(buttonFont);
 
-        canvas.getChildren().addAll(name, species, plantTypeDraw, waterReqDraw, waterCurrDraw, waterNeededDraw, info, returnToHome, deletePlant);
+        editPlant.setStyle("-fx-background-color: #488940");
+        editPlant.setLayoutX(460);
+        editPlant.setLayoutY(20);
+        editPlant.setTextFill(Color.WHITE);
+        editPlant.setFont(buttonFont);
+
+        canvas.getChildren().addAll(name, species, plantTypeDraw, waterReqDraw, waterCurrDraw, waterNeededDraw, info, returnToHome, deletePlant, editPlant);
     }
 
     public void removePlant(Pane canvas, Plant plant) {
-        canvas.getChildren().removeAll(name, species, plantTypeDraw, waterReqDraw, waterCurrDraw, waterNeededDraw, info, returnToHome, deletePlant);
+        canvas.getChildren().removeAll(name, species, plantTypeDraw, waterReqDraw, waterCurrDraw, waterNeededDraw, info, returnToHome, deletePlant, editPlant);
     }
 
     public int getIndex() { return plantIndex;}
@@ -128,12 +134,23 @@ public class Plant implements Global{
         return plantName;
     }
 
+    public void setName(String name) {
+        plantName = name;
+    }
+
     public String getSpecies() {
         return plantSpecies;
     }
 
+    public void setSpecies(String species) { plantSpecies = species; }
+
     public String getType() {
         return plantType;
+    }
+
+    public void setPlantTypeIndex(int plantIndexOfType) {
+        String tempType = Global.plantTypeCompareArray[plantIndexOfType];
+        plantType = tempType;
     }
 
     public String getInfo() {
@@ -143,6 +160,10 @@ public class Plant implements Global{
     public int getWaterReq() {
         return waterReq;
     }
+
+    public void setWaterReq(int water) {waterReq = water;}
+
+    public void setPlantID(int identity) {plantID = identity;}
 
     public int getCurrWaterVal() {return currWaterVal;}
 

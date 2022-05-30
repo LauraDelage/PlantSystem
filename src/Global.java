@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public interface Global {
     Button returnToHome = new Button("Go Home");
     Button deletePlant = new Button("Delete This Plant");
+    Button editPlant = new Button("Edit Information");
 
     boolean generateCircuitBoard = true;
     String[] plantTypeCompareArray = {"Flower", "Succulent", "Herb", "Fruit", "Tree", "Fern", "Other"};
