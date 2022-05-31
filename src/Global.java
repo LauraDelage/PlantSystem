@@ -9,13 +9,12 @@ import java.util.ArrayList;
  */
 
 public interface Global {
-    Button returnToHome = new Button("Go Home");
-    Button deletePlant = new Button("Delete This Plant");
-    Button editPlant = new Button("Edit Information");
+    Button returnToHome = new Button("Go Home"); //global button, used in multiple classes
+    Button deletePlant = new Button("Delete This Plant"); //global button, used in multiple classes
+    Button editPlant = new Button("Edit Information"); //global button, used in multiple classes
 
-    boolean generateCircuitBoard = true;
-    String[] plantTypeCompareArray = {"Flower", "Succulent", "Herb", "Fruit", "Tree", "Fern", "Other"};
-    String[] plantTypeInfo = {
+    String[] plantTypeCompareArray = {"Flower", "Succulent", "Herb", "Fruit", "Tree", "Fern", "Other"}; //Array of plant types
+    String[] plantTypeInfo = { //This array corresponds to plant type array, has information to be displayed according tp plant type
             "In general, flowers need consistent watering and bright but indirect sunlight.",
             "Succulents are easy beginner plants. They require direct sunlight, but do not need frequent watering.",
             "Herbs are easy and useful beginner plants. They do best when receiving 6-8 hours of direct sunlight per day.",

@@ -24,37 +24,39 @@ import static javafx.scene.text.Font.getFontNames;
  * */
 
 public class PlantDriver extends Application implements Global {
-    ImageView startImage = new ImageView();
-    ImageView tulip = new ImageView();
+    ImageView startImage = new ImageView(); //plant title image, home scene
+    ImageView tulip = new ImageView(); //tulip image, user input scenes
 
-    Pane homeCanvas = new Pane();
-    Pane plantNameCanvas = new Pane();
-    Pane plantSpeciesCanvas = new Pane();
-    Pane plantTypeCanvas = new Pane();
-    Pane plantWaterCanvas = new Pane();
-    Pane plant1Canvas = new Pane();
-    Pane plant2Canvas = new Pane();
-    Pane plant3Canvas = new Pane();
-    Pane plant4Canvas = new Pane();
-    Pane plant5Canvas = new Pane();
-    Pane plant6Canvas = new Pane();
-    Pane plant7Canvas = new Pane();
-    Pane plant8Canvas = new Pane();
-    Pane plant9Canvas = new Pane();
+    Pane homeCanvas = new Pane(); //home canvas
+    Pane plantNameCanvas = new Pane(); //user plant name input canvas
+    Pane plantSpeciesCanvas = new Pane(); //user plant species input canvas
+    Pane plantTypeCanvas = new Pane(); //user plant type input canvas
+    Pane plantWaterCanvas = new Pane(); //user plant water input canvas
+    Pane plant1Canvas = new Pane(); //plant 1 info canvas
+    Pane plant2Canvas = new Pane(); //plant 2 info canvas
+    Pane plant3Canvas = new Pane(); //plant 3 info canvas
+    Pane plant4Canvas = new Pane(); //plant 4 info canvas
+    Pane plant5Canvas = new Pane(); //plant 5 info canvas
+    Pane plant6Canvas = new Pane(); //plant 6 info canvas
+    Pane plant7Canvas = new Pane(); //plant 7 info canvas
+    Pane plant8Canvas = new Pane(); //plant 8 info canvas
+    Pane plant9Canvas = new Pane(); //plant 9 info canvas
 
-    Button addPlant = new Button("Add Plant");
-    Button plantName = new Button("Submit Plant Name");
-    Button plantSpecies = new Button("Submit Plant Species");
-    Button plantType = new Button("Submit Plant Type");
-    Button plantWater = new Button("Submit Water Percentage");
-    Button sortByWater = new Button("Sort by Need of Water");
-    Button sortAlphabet = new Button("Sort Alphabetically");
+    Button addPlant = new Button("Add Plant"); //switches between home scene and plant name scene
+    Button plantName = new Button("Submit Plant Name"); //switches between plant name scene and plant species scene
+    Button plantSpecies = new Button("Submit Plant Species"); //switches between plant species and plant type scene
+    Button plantType = new Button("Submit Plant Type"); //switches between plant type and plant water scene
+    Button plantWater = new Button("Submit Water Percentage"); //switches between plant water and home scene
+    Button sortByWater = new Button("Sort by Need of Water"); //sorts the plants by water levels
+    Button sortAlphabet = new Button("Sort Alphabetically"); //sorts the plants alphabetically
 
+    //Text used in user input scenes:
     Text plantNameText = new Text(30, 75, "What is your plant's name?");
     Text plantSpeciesText = new Text(30, 75, "What is your plant's species?");
     Text plantTypeText = new Text(30, 75, "Select your plant type.");
     Text plantWaterText = new Text(30, 75, "Water requirements (% moisture) of your plant?");
 
+    //Text that will display each plants' name, when added:
     Text text1 = new Text();
     Text text2 = new Text();
     Text text3 = new Text();
@@ -65,19 +67,21 @@ public class PlantDriver extends Application implements Global {
     Text text8 = new Text();
     Text text9 = new Text();
 
+    //Textfields and one ComboBox, allows for user input to be collected:
     TextField plantNameInput = new TextField();
     TextField plantSpeciesInput = new TextField();
     ComboBox<PlantType> plantTypeInput = new ComboBox<>();
     TextField plantWaterInput = new TextField();
 
-    int plantIdentificator;
-    boolean changePlant = false;
+    int plantIdentificator; //used to determine which plant the user has currently selected to view, changes depending on which button has been clicked
+    boolean changePlant = false; //when changePlant() method is called, this boolean is declared true
+    int plantCounter = 1; //determines how many plants have been added, so we know where they will appear on screen
 
-    int plantCounter = 1;
-    ArrayList<Plant> plantArrayList = new ArrayList<>();
-    ArrayList<Plant> sortedPlantArrayList = new ArrayList<>();
+    ArrayList<Plant> plantArrayList = new ArrayList<>(); //plant array list, all created plants are added
+    ArrayList<Plant> sortedPlantArrayList = new ArrayList<>(); //Laura's methods used to sort, returned and used as a sorted array list
+    ArrayList<Button> correspondingButtonArrayList = new ArrayList<>(); //button arraylist, has plant image buttons that correspond to plants of the plant array list
 
-    ArrayList<Button> correspondingButtonArrayList = new ArrayList<>();
+    //Plant buttons, have image of plant:
     Button button1 = new Button();
     Button button2 = new Button();
     Button button3 = new Button();
@@ -88,6 +92,7 @@ public class PlantDriver extends Application implements Global {
     Button button8 = new Button();
     Button button9 = new Button();
 
+    //Plant objects, contain info:
     Plant plant1;
     Plant plant2;
     Plant plant3;
@@ -98,30 +103,31 @@ public class PlantDriver extends Application implements Global {
     Plant plant8;
     Plant plant9;
 
-    PlantHelper sorter = new PlantHelper(plantArrayList);
+    PlantHelper sorter = new PlantHelper(plantArrayList);  //Sorter object, used to sort plants
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Scene homeScene = new Scene(homeCanvas, 600, 780, Color.WHITE);
-        Scene plantNameScene = new Scene(plantNameCanvas, 510, 410, Color.WHITE);
-        Scene plantSpeciesScene = new Scene(plantSpeciesCanvas, 510, 410, Color.WHITE);
-        Scene plantTypeScene = new Scene(plantTypeCanvas, 510, 370, Color.WHITE);
-        Scene plantWaterScene = new Scene(plantWaterCanvas, 510, 410, Color.WHITE);
-        Scene plant1Scene = new Scene(plant1Canvas, 930, 280, Color.WHITE);
-        Scene plant2Scene = new Scene(plant2Canvas, 930, 280, Color.WHITE);
-        Scene plant3Scene = new Scene(plant3Canvas, 930, 280, Color.WHITE);
-        Scene plant4Scene = new Scene(plant4Canvas, 930, 280, Color.WHITE);
-        Scene plant5Scene = new Scene(plant5Canvas, 930, 280, Color.WHITE);
-        Scene plant6Scene = new Scene(plant6Canvas, 930, 280, Color.WHITE);
-        Scene plant7Scene = new Scene(plant7Canvas, 930, 280, Color.WHITE);
-        Scene plant8Scene = new Scene(plant8Canvas, 930, 280, Color.WHITE);
-        Scene plant9Scene = new Scene(plant9Canvas, 930, 280, Color.WHITE);
+        Scene homeScene = new Scene(homeCanvas, 600, 780, Color.WHITE); //home scene
+        Scene plantNameScene = new Scene(plantNameCanvas, 510, 410, Color.WHITE); //user name input scene
+        Scene plantSpeciesScene = new Scene(plantSpeciesCanvas, 510, 410, Color.WHITE); //user species input scene
+        Scene plantTypeScene = new Scene(plantTypeCanvas, 510, 370, Color.WHITE); //user type input scene
+        Scene plantWaterScene = new Scene(plantWaterCanvas, 510, 410, Color.WHITE); //user water input scene
+        Scene plant1Scene = new Scene(plant1Canvas, 930, 280, Color.WHITE); //plant 1 info scene
+        Scene plant2Scene = new Scene(plant2Canvas, 930, 280, Color.WHITE); //plant 2 info scene
+        Scene plant3Scene = new Scene(plant3Canvas, 930, 280, Color.WHITE); //plant 3 info scene
+        Scene plant4Scene = new Scene(plant4Canvas, 930, 280, Color.WHITE); //plant 4 info scene
+        Scene plant5Scene = new Scene(plant5Canvas, 930, 280, Color.WHITE); //plant 5 info scene
+        Scene plant6Scene = new Scene(plant6Canvas, 930, 280, Color.WHITE); //plant 6 info scene
+        Scene plant7Scene = new Scene(plant7Canvas, 930, 280, Color.WHITE); //plant 7 info scene
+        Scene plant8Scene = new Scene(plant8Canvas, 930, 280, Color.WHITE); //plant 8 info scene
+        Scene plant9Scene = new Scene(plant9Canvas, 930, 280, Color.WHITE); //plant 9 info scene
+
+        //home scene appears when program is run:
         primaryStage.setScene(homeScene);
         primaryStage.show();
         startHomeScene();
 
-        //System.out.println(getFontNames());
-
+        //if addPlant button is pressed:
         addPlant.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -133,297 +139,369 @@ public class PlantDriver extends Application implements Global {
                 for(int i = 0; i < correspondingButtonArrayList.size(); i++) {
                     homeCanvas.getChildren().remove(correspondingButtonArrayList.get(i));
                 }
-                //Initiate user input scene:
+                //Initiate plant name user input scene:
                 startPlantNameScene();
                 primaryStage.setScene(plantNameScene);
             }
         });
 
+        //if plantName button is pressed:
         plantName.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                //Remove elements from home scene:
+                //Remove elements from plant name scene:
                 plantNameCanvas.getChildren().remove(plantName);
                 plantNameCanvas.getChildren().remove(plantNameText);
                 plantNameCanvas.getChildren().remove(plantNameInput);
-                //Initiate user input scene:
+                //Initiate plant species user input scene:
                 startPlantSpeciesScene();
                 primaryStage.setScene(plantSpeciesScene);
             }
         });
 
+        //if plantSpecies button is pressed:
         plantSpecies.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                //Remove elements from home scene:
+                //Remove elements from plant species scene:
                 plantSpeciesCanvas.getChildren().remove(plantSpecies);
                 plantSpeciesCanvas.getChildren().remove(plantSpeciesText);
                 plantSpeciesCanvas.getChildren().remove(plantSpeciesInput);
-                //Initiate user input scene:
+                //Initiate plant type user input scene:
                 startPlantTypeScene();
                 primaryStage.setScene(plantTypeScene);
             }
         });
 
+        //if plantType button is pressed:
         plantType.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                //Remove elements from home scene:
+                //Remove elements from plant type scene:
                 plantTypeCanvas.getChildren().remove(plantType);
                 plantTypeCanvas.getChildren().remove(plantTypeText);
                 plantTypeCanvas.getChildren().remove(plantTypeInput);
-                //Initiate user input scene:
+                //Initiate plant water user input scene:
                 startPlantWaterScene();
                 primaryStage.setScene(plantWaterScene);
             }
         });
 
+        //if plantWater button is pressed:
         plantWater.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                //Remove elements from plant water scene:
                 plantWaterCanvas.getChildren().remove(plantWater);
                 plantWaterCanvas.getChildren().remove(plantWaterText);
                 plantWaterCanvas.getChildren().remove(plantWaterInput);
+                //Initiate home scene:
                 primaryStage.setScene(homeScene);
                 startHomeScene();
 
-                //temporary parameters
-                String name = plantNameInput.getText();
-                String species = plantSpeciesInput.getText();
+                //temporary parameters, they hold user input:
+                String name = plantNameInput.getText(); //plant name
+                String species = plantSpeciesInput.getText(); //plant species
                 PlantType typeEnum = plantTypeInput.getValue();
                 String typeString = typeEnum.toString();
-                int type = findPlantTypeIndex(typeString);
+                int type = findPlantTypeIndex(typeString); //plant type index
                 String waterString = plantWaterInput.getText();
-                int water = Integer.parseInt(waterString);
+                int water = Integer.parseInt(waterString); //plant water
 
-                if(changePlant) {
-                    changePlant(name, species, type, water, plantIdentificator);
+                if(changePlant) { //if change plant boolean is true (user has clicked change plant button and updated parameters using same process)
+                    changePlant(name, species, type, water, plantIdentificator); //call change plant method
+
+                    //depending which plant was edited, it must be removed from canvas so that we can return to home scene (avoid duplicate children):
                     if(plantIdentificator == 1) {
+                        //plant 1
                         plant1.removePlant(plant1Canvas, plant1);
                     }
                     else if(plantIdentificator == 2) {
+                        //plant 2
                         plant2.removePlant(plant2Canvas, plant2);
                     }
                     else if(plantIdentificator == 3) {
+                        //plant 3
                         plant3.removePlant(plant3Canvas, plant3);
                     }
                     else if(plantIdentificator == 4) {
+                        //plant 4
                         plant4.removePlant(plant4Canvas, plant4);
                     }
                     else if(plantIdentificator == 5) {
+                        //plant 5
                         plant5.removePlant(plant5Canvas, plant5);
                     }
                     else if(plantIdentificator == 6) {
+                        //plant 6
                         plant6.removePlant(plant6Canvas, plant6);
                     }
                     else if(plantIdentificator == 7) {
+                        //plant 7
                         plant7.removePlant(plant7Canvas, plant7);
                     }
                     else if(plantIdentificator == 8) {
+                        //plant 8
                         plant8.removePlant(plant8Canvas, plant8);
                     }
                     else if(plantIdentificator == 9) {
+                        //plant 9
                         plant9.removePlant(plant9Canvas, plant9);
                     }
                 }
 
+                //if change plant button was not clicked, draw plant on home scene as you would normally
                 else {
                     drawPlantMainScene(name, species, type, water, plantCounter);
                 }
 
+                //plants are automatically sorted by need of water, to get user's attention
                 sortedPlantArrayList = sorter.waterSort(plantArrayList);
-                sortingPlants();
+                sortingPlants(); //position of plants changed accordingly
+                changePlant = false; //changePlant is now false so that it can be used in the future
 
-
-                changePlant = false;
+                //clear past input:
+                plantNameInput.clear();
+                plantSpeciesInput.clear();
+                plantWaterInput.clear();
             }
+
         });
 
+        //on button1 click:
         button1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                //Remove elements from home scene:
                 homeCanvas.getChildren().remove(startImage);
                 homeCanvas.getChildren().remove(addPlant);
                 homeCanvas.getChildren().remove(sortByWater);
                 homeCanvas.getChildren().remove(sortAlphabet);
+                //Initiate plant 1 info scene:
                 primaryStage.setScene(plant1Scene);
                 plant1.drawPlant(plant1Canvas, plant1);
-                plantIdentificator = 1;
+                plantIdentificator = 1; //Identify that user is viewing plant 1
             }
         });
 
+        //on button2 click:
         button2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                //Remove elements from home scene:
                 homeCanvas.getChildren().remove(startImage);
                 homeCanvas.getChildren().remove(addPlant);
                 homeCanvas.getChildren().remove(sortByWater);
                 homeCanvas.getChildren().remove(sortAlphabet);
+                //Initiate plant 2 info scene:
                 primaryStage.setScene(plant2Scene);
                 plant2.drawPlant(plant2Canvas, plant2);
-                plantIdentificator = 2;
+                plantIdentificator = 2; //Identify that user is viewing plant 2
             }
         });
 
+        //on button3 click:
         button3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                //Remove elements from home scene:
                 homeCanvas.getChildren().remove(startImage);
                 homeCanvas.getChildren().remove(addPlant);
                 homeCanvas.getChildren().remove(sortByWater);
                 homeCanvas.getChildren().remove(sortAlphabet);
+                //Initiate plant 3 info scene:
                 primaryStage.setScene(plant3Scene);
                 plant3.drawPlant(plant3Canvas, plant3);
-                plantIdentificator = 3;
+                plantIdentificator = 3; //Identify that user is viewing plant 3
             }
         });
 
+        //on button4 click:
         button4.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                //Remove elements from home scene:
                 homeCanvas.getChildren().remove(startImage);
                 homeCanvas.getChildren().remove(addPlant);
                 homeCanvas.getChildren().remove(sortByWater);
                 homeCanvas.getChildren().remove(sortAlphabet);
+                //Initiate plant 4 info scene:
                 primaryStage.setScene(plant4Scene);
                 plant4.drawPlant(plant4Canvas, plant4);
-                plantIdentificator = 4;
+                plantIdentificator = 4; //Identify that user is viewing plant 4
             }
         });
 
+        //on button5 click:
         button5.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                //Remove elements from home scene:
                 homeCanvas.getChildren().remove(startImage);
                 homeCanvas.getChildren().remove(addPlant);
                 homeCanvas.getChildren().remove(sortByWater);
                 homeCanvas.getChildren().remove(sortAlphabet);
+                //Initiate plant 5 info scene:
                 primaryStage.setScene(plant5Scene);
                 plant5.drawPlant(plant5Canvas, plant5);
-                plantIdentificator = 5;
+                plantIdentificator = 5; //Identify that user is viewing plant 5
             }
         });
 
+        //on button6 click:
         button6.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                //Remove elements from home scene:
                 homeCanvas.getChildren().remove(startImage);
                 homeCanvas.getChildren().remove(addPlant);
                 homeCanvas.getChildren().remove(sortByWater);
                 homeCanvas.getChildren().remove(sortAlphabet);
+                //Initiate plant 6 info scene:
                 primaryStage.setScene(plant6Scene);
                 plant6.drawPlant(plant6Canvas, plant6);
-                plantIdentificator = 6;
+                plantIdentificator = 6; //Identify that user is viewing plant 6
             }
         });
 
+        //on button7 click:
         button7.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                //Remove elements from home scene:
                 homeCanvas.getChildren().remove(startImage);
                 homeCanvas.getChildren().remove(addPlant);
                 homeCanvas.getChildren().remove(sortByWater);
                 homeCanvas.getChildren().remove(sortAlphabet);
+                //Initiate plant 7 info scene:
                 primaryStage.setScene(plant7Scene);
                 plant7.drawPlant(plant7Canvas, plant7);
-                plantIdentificator = 7;
+                plantIdentificator = 7; //Identify that user is viewing plant 7
             }
         });
 
+        //on button8 click:
         button8.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                //Remove elements from home scene:
                 homeCanvas.getChildren().remove(startImage);
                 homeCanvas.getChildren().remove(addPlant);
                 homeCanvas.getChildren().remove(sortByWater);
                 homeCanvas.getChildren().remove(sortAlphabet);
+                //Initiate plant 8 info scene:
                 primaryStage.setScene(plant8Scene);
                 plant8.drawPlant(plant8Canvas, plant8);
-                plantIdentificator = 8;
+                plantIdentificator = 8; //Identify that user is viewing plant 8
             }
         });
 
+        //on button9 click:
         button9.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                //Remove elements from home scene:
                 homeCanvas.getChildren().remove(startImage);
                 homeCanvas.getChildren().remove(addPlant);
                 homeCanvas.getChildren().remove(sortByWater);
                 homeCanvas.getChildren().remove(sortAlphabet);
+                //Initiate plant 9 info scene:
                 primaryStage.setScene(plant9Scene);
                 plant9.drawPlant(plant9Canvas, plant9);
-                plantIdentificator = 9;
+                plantIdentificator = 9; //Identify that user is viewing plant 9
             }
         });
 
+        //on returnToHome click:
         returnToHome.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                //Initiate home scene
                 primaryStage.setScene(homeScene);
                 startHomeScene();
+
+                //Depending which plant was currently being viewed, it must be removed from canvas so that we can return to home scene (avoid duplicate children):
                 if(plantIdentificator == 1) {
+                    //plant 1
                     plant1.removePlant(plant1Canvas, plant1);
                 }
                 else if(plantIdentificator == 2) {
+                    //plant 2
                     plant2.removePlant(plant2Canvas, plant2);
                 }
                 else if(plantIdentificator == 3) {
+                    //plant 3
                     plant3.removePlant(plant3Canvas, plant3);
                 }
                 else if(plantIdentificator == 4) {
+                    //plant 4
                     plant4.removePlant(plant4Canvas, plant4);
                 }
                 else if(plantIdentificator == 5) {
+                    //plant 5
                     plant5.removePlant(plant5Canvas, plant5);
                 }
                 else if(plantIdentificator == 6) {
+                    //plant 6
                     plant6.removePlant(plant6Canvas, plant6);
                 }
                 else if(plantIdentificator == 7) {
+                    //plant 7
                     plant7.removePlant(plant7Canvas, plant7);
                 }
                 else if(plantIdentificator == 8) {
+                    //plant 8
                     plant8.removePlant(plant8Canvas, plant8);
                 }
                 else if(plantIdentificator == 9) {
+                    //plant 9
                     plant9.removePlant(plant9Canvas, plant9);
                 }
             }
         });
 
+        //on deletePlant click:
         deletePlant.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                //Initiate home scene:
                 primaryStage.setScene(homeScene);
-                deletePlant();
+                deletePlant(); //deletePlant() method finds plant that was being viewed, removes it
+                //sort plants in accordance with new data:
                 sortedPlantArrayList = sorter.waterSort(plantArrayList);
-                sortingPlants();
+                sortingPlants(); //position of plants changed accordingly
                 startHomeScene();
             }
         });
 
+        //on sortByWater click:
         sortByWater.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                //sortedPlantArrayList is sorted by water using Laura's methods that return an array list:
                 sortedPlantArrayList = sorter.waterSort(plantArrayList);
-                sortingPlants();
+                sortingPlants(); //position of plants changed accordingly
             }
         });
 
+        //on sortAlphabet click:
         sortAlphabet.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                //sortedPlantArrayList is sorted by water using Laura's methods that return an array list:
                 sortedPlantArrayList = sorter.alphaSort(plantArrayList);
-                sortingPlants();
+                sortingPlants(); //position of plants changed accordingly
             }
         });
 
+        //on editPlant click:
         editPlant.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                //brought to first input scene:
                 startPlantNameScene();
                 primaryStage.setScene(plantNameScene);
-                changePlant = true;
+                changePlant = true; //boolean used to identify if plant is being changed, set to true
             }
         });
 
@@ -443,72 +521,81 @@ public class PlantDriver extends Application implements Global {
      * @author Keelin Saranchuk
      */
     public void deletePlant() {
-        if(plantIdentificator == 1) {
+        if(plantIdentificator == 1) { //plantIdentificator is used to identify which plant the user is currently viewing
+            //Remove all elements from canvas:
             plant1.removePlant(plant1Canvas, plant1);
             homeCanvas.getChildren().remove(button1);
             homeCanvas.getChildren().remove(text1);
-            plantArrayList.remove(plant1);
-            correspondingButtonArrayList.remove(button1);
+            plantArrayList.remove(plant1); //removed from plant array list
+            correspondingButtonArrayList.remove(button1); //corresponding image removed from button array list
         }
         else if(plantIdentificator == 2) {
+            //Remove all elements from canvas:
             plant2.removePlant(plant2Canvas, plant2);
             homeCanvas.getChildren().remove(button2);
             homeCanvas.getChildren().remove(text2);
-            plantArrayList.remove(plant2);
-            correspondingButtonArrayList.remove(button2);
+            plantArrayList.remove(plant2); //removed from plant array list
+            correspondingButtonArrayList.remove(button2); //corresponding image removed from button array list
 
         }
         else if(plantIdentificator == 3) {
+            //Remove all elements from canvas:
             plant3.removePlant(plant3Canvas, plant3);
             homeCanvas.getChildren().remove(button3);
             homeCanvas.getChildren().remove(text3);
-            plantArrayList.remove(plant3);
-            correspondingButtonArrayList.remove(button3);
+            plantArrayList.remove(plant3); //removed from plant array list
+            correspondingButtonArrayList.remove(button3); //corresponding image removed from button array list
 
         }
         else if(plantIdentificator == 4) {
+            //Remove all elements from canvas:
             plant4.removePlant(plant4Canvas, plant4);
             homeCanvas.getChildren().remove(button4);
             homeCanvas.getChildren().remove(text4);
-            plantArrayList.remove(plant4);
-            correspondingButtonArrayList.remove(button4);
+            plantArrayList.remove(plant4); //removed from plant array list
+            correspondingButtonArrayList.remove(button4); //corresponding image removed from button array list
 
         }
         else if(plantIdentificator == 5) {
+            //Remove all elements from canvas:
             plant5.removePlant(plant5Canvas, plant5);
             homeCanvas.getChildren().remove(button5);
             homeCanvas.getChildren().remove(text5);
-            plantArrayList.remove(plant5);
-            correspondingButtonArrayList.remove(button5);
+            plantArrayList.remove(plant5); //removed from plant array list
+            correspondingButtonArrayList.remove(button5); //corresponding image removed from button array list
         }
         else if(plantIdentificator == 6) {
+            //Remove all elements from canvas:
             plant6.removePlant(plant6Canvas, plant6);
             homeCanvas.getChildren().remove(button6);
             homeCanvas.getChildren().remove(text6);
-            plantArrayList.remove(plant6);
-            correspondingButtonArrayList.remove(button6);
+            plantArrayList.remove(plant6); //removed from plant array list
+            correspondingButtonArrayList.remove(button6); //corresponding image removed from button array list
         }
         else if(plantIdentificator == 7) {
+            //Remove all elements from canvas:
             plant7.removePlant(plant7Canvas, plant7);
             homeCanvas.getChildren().remove(button7);
             homeCanvas.getChildren().remove(text7);
-            plantArrayList.remove(plant7);
-            correspondingButtonArrayList.remove(button7);
+            plantArrayList.remove(plant7); //removed from plant array list
+            correspondingButtonArrayList.remove(button7); //corresponding image removed from button array list
         }
         else if(plantIdentificator == 8) {
+            //Remove all elements from canvas:
             plant8.removePlant(plant8Canvas, plant8);
             homeCanvas.getChildren().remove(button8);
             homeCanvas.getChildren().remove(text8);
-            plantArrayList.remove(plant8);
-            correspondingButtonArrayList.remove(button8);
+            plantArrayList.remove(plant8); //removed from plant array list
+            correspondingButtonArrayList.remove(button8); //corresponding image removed from button array list
 
         }
         else if(plantIdentificator == 9) {
+            //Remove all elements from canvas:
             plant9.removePlant(plant9Canvas, plant9);
             homeCanvas.getChildren().remove(button9);
             homeCanvas.getChildren().remove(text9);
-            plantArrayList.remove(plant9);
-            correspondingButtonArrayList.remove(button9);
+            plantArrayList.remove(plant9); //removed from plant array list
+            correspondingButtonArrayList.remove(button9); //corresponding image removed from button array list
         }
     }
 
@@ -713,9 +800,9 @@ public class PlantDriver extends Application implements Global {
      * @author Keelin Saranchuk
      */
     public void drawPlantMainScene(String name, String species, int plantTypeIndex, int waterRequirements, int plantIDCounter) {
-
-        if(plantIDCounter == 1) {
-            ImageView image = new ImageView();
+        if(plantIDCounter == 1) { //plantIDCounter passes information about how many plants have been created by user thus far
+            ImageView image = new ImageView(); //Defining plant image
+            //Defining plant name text for plant1:
             Font font = new Font("Impact", 16);
             text1.setText(name);
             text1.setFont(font);
@@ -723,35 +810,37 @@ public class PlantDriver extends Application implements Global {
             text1.setLayoutY(290);
             text1.setFill(Color.rgb(72, 137, 64));
             homeCanvas.getChildren().add(text1);
-
+            //plant initialized and added to plant array list:
             plant1 = new Plant(name, species, plantTypeIndex, waterRequirements, plantIDCounter);
             plantArrayList.add(plant1);
+            //button added to array list:
             correspondingButtonArrayList.add(button1);
             button1.setStyle("-fx-background-color: #FFFFFF");
             button1.setLayoutX(50);
             button1.setLayoutY(120);
 
-            if(plantTypeIndex == 0) {
+            //Image is changed depending on which plant type hs been selected:
+            if(plantTypeIndex == 0) { //flower
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(141);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 1) {
+            else if(plantTypeIndex == 1) { //succulent
                 image.setImage(new Image("succulent.png"));
                 image.setFitHeight(142);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 2) {
+            else if(plantTypeIndex == 2) { //herb
                 image.setImage(new Image("herb.png"));
                 image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 3) {
+            else if(plantTypeIndex == 3) { //fruit
                 image.setImage(new Image("fruit.png"));
                 image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 4) {
+            else if(plantTypeIndex == 4) { //tree
                 image.setImage(new Image("tree.png"));
                 image.setFitHeight(138);
                 image.setPreserveRatio(true);
@@ -761,7 +850,7 @@ public class PlantDriver extends Application implements Global {
                 image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 6) {
+            else if(plantTypeIndex == 6) { //other
                 image.setImage(new Image("other.png"));
                 image.setFitHeight(133);
                 image.setPreserveRatio(true);
@@ -770,53 +859,56 @@ public class PlantDriver extends Application implements Global {
         }
 
         if(plantIDCounter == 2) {
-            ImageView image = new ImageView();
+            ImageView image = new ImageView();  //Defining plant image
+            //plant initialized and added to plant array list:
             plant2 = new Plant(name, species, plantTypeIndex, waterRequirements, plantIDCounter);
             plantArrayList.add(plant2);
-            correspondingButtonArrayList.add(button2);
             button2.setStyle("-fx-background-color: #FFFFFF");
+            //Defining plant name text for plant2:
             Font font = new Font("Impact", 16);
             text2.setText(name);
             text2.setFont(font);
-            text2.setFill(Color.rgb(72, 137, 64));
-            button2.setLayoutX(225);
-            button2.setLayoutY(120);
             text2.setLayoutX(250);
             text2.setLayoutY(290);
-
+            text2.setFill(Color.rgb(72, 137, 64));
             homeCanvas.getChildren().add(text2);
+            //button added to array list:
+            correspondingButtonArrayList.add(button2);
+            button2.setLayoutX(225);
+            button2.setLayoutY(120);
 
-            if(plantTypeIndex == 0) {
+            //Image is changed depending on which plant type hs been selected:
+            if(plantTypeIndex == 0) { //flower
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(141);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 1) {
+            else if(plantTypeIndex == 1) { //succulent
                 image.setImage(new Image("succulent.png"));
                 image.setFitHeight(142);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 2) {
+            else if(plantTypeIndex == 2) { //herb
                 image.setImage(new Image("herb.png"));
                 image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 3) {
+            else if(plantTypeIndex == 3) { //fruit
                 image.setImage(new Image("fruit.png"));
                 image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 4) {
+            else if(plantTypeIndex == 4) { //tree
                 image.setImage(new Image("tree.png"));
                 image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 5) {
+            else if(plantTypeIndex == 5) { //fern
                 image.setImage(new Image("fern.png"));
                 image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 6) {
+            else if(plantTypeIndex == 6) { //other
                 image.setImage(new Image("other.png"));
                 image.setFitHeight(133);
                 image.setPreserveRatio(true);
@@ -825,52 +917,56 @@ public class PlantDriver extends Application implements Global {
         }
 
         if(plantIDCounter == 3) {
-            ImageView image = new ImageView();
+            ImageView image = new ImageView();  //Defining plant image
+            //plant initialized and added to plant array list:
             plant3 = new Plant(name, species, plantTypeIndex, waterRequirements, plantIDCounter);
             plantArrayList.add(plant3);
-            correspondingButtonArrayList.add(button3);
+            correspondingButtonArrayList.add(button3); //button added to array list
             button3.setStyle("-fx-background-color: #FFFFFF");
+            //Defining plant name text for plant3:
             Font font = new Font("Impact", 16);
             text3.setText(name);
             text3.setFont(font);
             text3.setFill(Color.rgb(72, 137, 64));
-            button3.setLayoutX(400);
-            button3.setLayoutY(120);
             text3.setLayoutX(425);
             text3.setLayoutY(290);
+            //Defining button:
+            button3.setLayoutX(400);
+            button3.setLayoutY(120);
             homeCanvas.getChildren().add(text3);
 
-            if(plantTypeIndex == 0) {
+            //Image is changed depending on which plant type hs been selected:
+            if(plantTypeIndex == 0) { //flower
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(141);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 1) {
+            else if(plantTypeIndex == 1) { //succulent
                 image.setImage(new Image("succulent.png"));
                 image.setFitHeight(142);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 2) {
+            else if(plantTypeIndex == 2) { //herb
                 image.setImage(new Image("herb.png"));
                 image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 3) {
+            else if(plantTypeIndex == 3) { //fruit
                 image.setImage(new Image("fruit.png"));
                 image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 4) {
+            else if(plantTypeIndex == 4) { //tree
                 image.setImage(new Image("tree.png"));
                 image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 5) {
+            else if(plantTypeIndex == 5) { //fern
                 image.setImage(new Image("fern.png"));
                 image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 6) {
+            else if(plantTypeIndex == 6) { //other
                 image.setImage(new Image("other.png"));
                 image.setFitHeight(133);
                 image.setPreserveRatio(true);
@@ -879,54 +975,57 @@ public class PlantDriver extends Application implements Global {
         }
 
         if(plantIDCounter == 4) {
-            ImageView image = new ImageView();
-
+            ImageView image = new ImageView(); //Defining plant image
+            //plant initialized and added to plant array list:
             plant4 = new Plant(name, species, plantTypeIndex, waterRequirements, plantIDCounter);
             plantArrayList.add(plant4);
-            correspondingButtonArrayList.add(button4);
+            correspondingButtonArrayList.add(button4); //button added to array list
             button4.setStyle("-fx-background-color: #FFFFFF");
+            //Defining plant name text for plant4:
             Font font = new Font("Impact", 16);
             text4.setText(name);
             text4.setFont(font);
             text4.setFill(Color.rgb(72, 137, 64));
-            button4.setLayoutX(50);
-            button4.setLayoutY(320);
             text4.setLayoutX(75);
             text4.setLayoutY(490);
+            //Defining button:
+            button4.setLayoutX(50);
+            button4.setLayoutY(320);
 
             homeCanvas.getChildren().add(text4);
 
-            if(plantTypeIndex == 0) {
+            //Image is changed depending on which plant type hs been selected:
+            if(plantTypeIndex == 0) { //flower
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(141);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 1) {
+            else if(plantTypeIndex == 1) { //succulent
                 image.setImage(new Image("succulent.png"));
                 image.setFitHeight(142);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 2) {
+            else if(plantTypeIndex == 2) { //herb
                 image.setImage(new Image("herb.png"));
                 image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 3) {
+            else if(plantTypeIndex == 3) { //fruit
                 image.setImage(new Image("fruit.png"));
                 image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 4) {
+            else if(plantTypeIndex == 4) { //tree
                 image.setImage(new Image("tree.png"));
                 image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 5) {
+            else if(plantTypeIndex == 5) { //fern
                 image.setImage(new Image("fern.png"));
                 image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 6) {
+            else if(plantTypeIndex == 6) { //other
                 image.setImage(new Image("other.png"));
                 image.setFitHeight(133);
                 image.setPreserveRatio(true);
@@ -935,53 +1034,56 @@ public class PlantDriver extends Application implements Global {
         }
 
         if(plantIDCounter == 5) {
-            ImageView image = new ImageView();
-
+            ImageView image = new ImageView(); //Defining plant image
+            //plant initialized and added to plant array list:
             plant5 = new Plant(name, species, plantTypeIndex, waterRequirements, plantIDCounter);
             plantArrayList.add(plant5);
-            correspondingButtonArrayList.add(button5);
+            correspondingButtonArrayList.add(button5); //button added to array list
             button5.setStyle("-fx-background-color: #FFFFFF");
+            //Defining plant name text for plant5:
             Font font = new Font("Impact", 16);
             text5.setFill(Color.rgb(72, 137, 64));
             text5.setText(name);
             text5.setFont(font);
-            button5.setLayoutX(225);
-            button5.setLayoutY(320);
             text5.setLayoutX(250);
             text5.setLayoutY(490);
+            //Defining button:
+            button5.setLayoutX(225);
+            button5.setLayoutY(320);
             homeCanvas.getChildren().add(text5);
 
-            if(plantTypeIndex == 0) {
+            //Image is changed depending on which plant type hs been selected:
+            if(plantTypeIndex == 0) { //flower
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(141);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 1) {
+            else if(plantTypeIndex == 1) { //succulent
                 image.setImage(new Image("succulent.png"));
                 image.setFitHeight(142);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 2) {
+            else if(plantTypeIndex == 2) { //herb
                 image.setImage(new Image("herb.png"));
                 image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 3) {
+            else if(plantTypeIndex == 3) { //fruit
                 image.setImage(new Image("fruit.png"));
                 image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 4) {
+            else if(plantTypeIndex == 4) { //tree
                 image.setImage(new Image("tree.png"));
                 image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 5) {
+            else if(plantTypeIndex == 5) { //fern
                 image.setImage(new Image("fern.png"));
                 image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 6) {
+            else if(plantTypeIndex == 6) { //other
                 image.setImage(new Image("other.png"));
                 image.setFitHeight(133);
                 image.setPreserveRatio(true);
@@ -990,53 +1092,57 @@ public class PlantDriver extends Application implements Global {
         }
 
         if(plantIDCounter == 6) {
-            ImageView image = new ImageView();
-
+            ImageView image = new ImageView();  //Defining plant image
+            //plant initialized and added to plant array list:
             plant6 = new Plant(name, species, plantTypeIndex, waterRequirements, plantIDCounter);
             plantArrayList.add(plant6);
-            correspondingButtonArrayList.add(button6);
+            correspondingButtonArrayList.add(button6); //button added to array list
             button6.setStyle("-fx-background-color: #FFFFFF");
+            //Defining plant name text for plant6:
             Font font = new Font("Impact", 16);
             text6.setText(name);
             text6.setFont(font);
             text6.setFill(Color.rgb(72, 137, 64));
-            button6.setLayoutX(400);
-            button6.setLayoutY(320);
             text6.setLayoutX(425);
             text6.setLayoutY(490);
+            //Defining button:
+            button6.setLayoutX(400);
+            button6.setLayoutY(320);
+
             homeCanvas.getChildren().add(text6);
 
-            if(plantTypeIndex == 0) {
+            //Image is changed depending on which plant type hs been selected:
+            if(plantTypeIndex == 0) { //flower
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(141);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 1) {
+            else if(plantTypeIndex == 1) { //succulent
                 image.setImage(new Image("succulent.png"));
                 image.setFitHeight(142);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 2) {
+            else if(plantTypeIndex == 2) { //herb
                 image.setImage(new Image("herb.png"));
                 image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 3) {
+            else if(plantTypeIndex == 3) { //fruit
                 image.setImage(new Image("fruit.png"));
                 image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 4) {
+            else if(plantTypeIndex == 4) { //tree
                 image.setImage(new Image("tree.png"));
                 image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 5) {
+            else if(plantTypeIndex == 5) { //fern
                 image.setImage(new Image("fern.png"));
                 image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 6) {
+            else if(plantTypeIndex == 6) { //other
                 image.setImage(new Image("other.png"));
                 image.setFitHeight(133);
                 image.setPreserveRatio(true);
@@ -1045,53 +1151,57 @@ public class PlantDriver extends Application implements Global {
         }
 
         if(plantIDCounter == 7) {
-            ImageView image = new ImageView();
-
+            ImageView image = new ImageView(); //Defining plant image
+            //plant initialized and added to plant array list:
             plant7 = new Plant(name, species, plantTypeIndex, waterRequirements, plantIDCounter);
-            plantArrayList.add(plant7);
+            plantArrayList.add(plant7); //button added to array list
             correspondingButtonArrayList.add(button7);
             button7.setStyle("-fx-background-color: #FFFFFF");
+            //Defining plant name text for plant7:
             Font font = new Font("Impact", 16);
             text7.setText(name);
             text7.setFont(font);
             text7.setFill(Color.rgb(72, 137, 64));
-            button7.setLayoutX(50);
-            button7.setLayoutY(525);
             text7.setLayoutX(75);
             text7.setLayoutY(695);
+            //Defining button:
+            button7.setLayoutX(50);
+            button7.setLayoutY(525);
+
             homeCanvas.getChildren().add(text7);
 
-            if(plantTypeIndex == 0) {
+            //Image is changed depending on which plant type hs been selected:
+            if(plantTypeIndex == 0) { //flower
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(141);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 1) {
+            else if(plantTypeIndex == 1) { //succulent
                 image.setImage(new Image("succulent.png"));
                 image.setFitHeight(142);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 2) {
+            else if(plantTypeIndex == 2) { //herb
                 image.setImage(new Image("herb.png"));
                 image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 3) {
+            else if(plantTypeIndex == 3) { //fruit
                 image.setImage(new Image("fruit.png"));
                 image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 4) {
+            else if(plantTypeIndex == 4) { //tree
                 image.setImage(new Image("tree.png"));
                 image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 5) {
+            else if(plantTypeIndex == 5) { //fern
                 image.setImage(new Image("fern.png"));
                 image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 6) {
+            else if(plantTypeIndex == 6) { //other
                 image.setImage(new Image("other.png"));
                 image.setFitHeight(133);
                 image.setPreserveRatio(true);
@@ -1100,53 +1210,57 @@ public class PlantDriver extends Application implements Global {
         }
 
         if(plantIDCounter == 8) {
-            ImageView image = new ImageView();
-
+            ImageView image = new ImageView(); //Defining plant image
+            //plant initialized and added to plant array list:
             plant8 = new Plant(name, species, plantTypeIndex, waterRequirements, plantIDCounter);
             plantArrayList.add(plant8);
-            correspondingButtonArrayList.add(button8);
+            correspondingButtonArrayList.add(button8); //button added to array list
             button8.setStyle("-fx-background-color: #FFFFFF");
+            //Defining plant name text for plant8:
             Font font = new Font("Impact", 16);
             text8.setText(name);
             text8.setFont(font);
             text8.setFill(Color.rgb(72, 137, 64));
-            button8.setLayoutX(225);
-            button8.setLayoutY(525);
             text8.setLayoutX(250);
             text8.setLayoutY(695);
+            //Defining button:
+            button8.setLayoutX(225);
+            button8.setLayoutY(525);
+
             homeCanvas.getChildren().add(text8);
 
-            if(plantTypeIndex == 0) {
+            //Image is changed depending on which plant type hs been selected:
+            if(plantTypeIndex == 0) { //flower
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(141);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 1) {
+            else if(plantTypeIndex == 1) { //succulent
                 image.setImage(new Image("succulent.png"));
                 image.setFitHeight(142);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 2) {
+            else if(plantTypeIndex == 2) { //herb
                 image.setImage(new Image("herb.png"));
                 image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 3) {
+            else if(plantTypeIndex == 3) { //fruit
                 image.setImage(new Image("fruit.png"));
                 image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 4) {
+            else if(plantTypeIndex == 4) { //tree
                 image.setImage(new Image("tree.png"));
                 image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 5) {
+            else if(plantTypeIndex == 5) { //fern
                 image.setImage(new Image("fern.png"));
                 image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 6) {
+            else if(plantTypeIndex == 6) { //other
                 image.setImage(new Image("other.png"));
                 image.setFitHeight(133);
                 image.setPreserveRatio(true);
@@ -1155,53 +1269,57 @@ public class PlantDriver extends Application implements Global {
         }
 
         if(plantIDCounter == 9) {
-            ImageView image = new ImageView();
-
+            ImageView image = new ImageView(); //Defining plant image
+            //plant initialized and added to plant array list:
             plant9 = new Plant(name, species, plantTypeIndex, waterRequirements, plantIDCounter);
             plantArrayList.add(plant9);
-            correspondingButtonArrayList.add(button9);
+            correspondingButtonArrayList.add(button9); //button added to array list
             button9.setStyle("-fx-background-color: #FFFFFF");
+            //Defining plant name text for plant9:
             Font font = new Font("Impact", 16);
             text9.setText(name);
             text9.setFont(font);
             text9.setFill(Color.rgb(72,137, 64));
-            button9.setLayoutX(400);
-            button9.setLayoutY(525);
             text9.setLayoutX(425);
             text9.setLayoutY(695);
+            //Defining button:
+            button9.setLayoutX(400);
+            button9.setLayoutY(525);
+
             homeCanvas.getChildren().add(text9);
 
-            if(plantTypeIndex == 0) {
+            //Image is changed depending on which plant type hs been selected:
+            if(plantTypeIndex == 0) { //flower
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(141);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 1) {
+            else if(plantTypeIndex == 1) { //succulent
                 image.setImage(new Image("succulent.png"));
                 image.setFitHeight(142);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 2) {
+            else if(plantTypeIndex == 2) { //herb
                 image.setImage(new Image("herb.png"));
                 image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 3) {
+            else if(plantTypeIndex == 3) { //fruit
                 image.setImage(new Image("fruit.png"));
                 image.setFitHeight(135);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 4) {
+            else if(plantTypeIndex == 4) { //tree
                 image.setImage(new Image("tree.png"));
                 image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 5) {
+            else if(plantTypeIndex == 5) { //fern
                 image.setImage(new Image("fern.png"));
                 image.setFitHeight(138);
                 image.setPreserveRatio(true);
             }
-            else if(plantTypeIndex == 6) {
+            else if(plantTypeIndex == 6) { //other
                 image.setImage(new Image("other.png"));
                 image.setFitHeight(133);
                 image.setPreserveRatio(true);
@@ -1230,8 +1348,9 @@ public class PlantDriver extends Application implements Global {
      * @author Keelin Saranchuk
      */
     public void changePlant(String name, String species, int plantTypeIndex, int waterRequirements, int plantNumber) {
-        if (plantNumber == 1) {
+        if (plantNumber == 1) { //if plant identificator is 1, identity changes based on which plant the user is currently viewing
             ImageView image = new ImageView();
+            //Defines new plant parameters and new plant name text:
             text1.setText(name);
             plant1.setName(name);
             plant1.setSpecies(species);
@@ -1239,6 +1358,7 @@ public class PlantDriver extends Application implements Global {
             plant1.setWaterReq(waterRequirements);
             plant1.setPlantID(plantNumber);
 
+            //Image is changed depending on which plant type hs been selected:
             if (plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(141);
@@ -1271,8 +1391,9 @@ public class PlantDriver extends Application implements Global {
             button1.setGraphic(image);
         }
 
-        if (plantNumber == 2) {
+        if (plantNumber == 2) { //if plant identificator is 2, identity changes based on which plant the user is currently viewing
             ImageView image = new ImageView();
+            //Defines new plant parameters and new plant name text:
             text2.setText(name);
             plant2.setName(name);
             plant2.setSpecies(species);
@@ -1280,6 +1401,7 @@ public class PlantDriver extends Application implements Global {
             plant2.setWaterReq(waterRequirements);
             plant2.setPlantID(plantNumber);
 
+            //Image is changed depending on which plant type hs been selected:
             if (plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(141);
@@ -1312,8 +1434,9 @@ public class PlantDriver extends Application implements Global {
             button2.setGraphic(image);
         }
 
-        if (plantNumber == 3) {
+        if (plantNumber == 3) { //if plant identificator is 3, identity changes based on which plant the user is currently viewing
             ImageView image = new ImageView();
+            //Defines new plant parameters and new plant name text:
             text3.setText(name);
             plant3.setName(name);
             plant3.setSpecies(species);
@@ -1321,6 +1444,7 @@ public class PlantDriver extends Application implements Global {
             plant3.setWaterReq(waterRequirements);
             plant3.setPlantID(plantNumber);
 
+            //Image is changed depending on which plant type hs been selected:
             if (plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(141);
@@ -1353,8 +1477,9 @@ public class PlantDriver extends Application implements Global {
             button3.setGraphic(image);
         }
 
-        if (plantNumber == 4) {
+        if (plantNumber == 4) { //if plant identificator is 4, identity changes based on which plant the user is currently viewing
             ImageView image = new ImageView();
+            //Defines new plant parameters and new plant name text:
             text4.setText(name);
             plant4.setName(name);
             plant4.setSpecies(species);
@@ -1362,6 +1487,7 @@ public class PlantDriver extends Application implements Global {
             plant4.setWaterReq(waterRequirements);
             plant4.setPlantID(plantNumber);
 
+            //Image is changed depending on which plant type hs been selected:
             if (plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(141);
@@ -1394,8 +1520,9 @@ public class PlantDriver extends Application implements Global {
             button4.setGraphic(image);
         }
 
-        if (plantNumber == 5) {
+        if (plantNumber == 5) { //if plant identificator is 5, identity changes based on which plant the user is currently viewing
             ImageView image = new ImageView();
+            //Defines new plant parameters and new plant name text:
             text5.setText(name);
             plant5.setName(name);
             plant5.setSpecies(species);
@@ -1403,6 +1530,7 @@ public class PlantDriver extends Application implements Global {
             plant5.setWaterReq(waterRequirements);
             plant5.setPlantID(plantNumber);
 
+            //Image is changed depending on which plant type hs been selected:
             if (plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(141);
@@ -1435,8 +1563,9 @@ public class PlantDriver extends Application implements Global {
             button5.setGraphic(image);
         }
 
-        if (plantNumber == 6) {
+        if (plantNumber == 6) { //if plant identificator is 6, identity changes based on which plant the user is currently viewing
             ImageView image = new ImageView();
+            //Defines new plant parameters and new plant name text:
             text6.setText(name);
             plant6.setName(name);
             plant6.setSpecies(species);
@@ -1444,6 +1573,7 @@ public class PlantDriver extends Application implements Global {
             plant6.setWaterReq(waterRequirements);
             plant6.setPlantID(plantNumber);
 
+            //Image is changed depending on which plant type hs been selected:
             if (plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(141);
@@ -1476,8 +1606,9 @@ public class PlantDriver extends Application implements Global {
             button6.setGraphic(image);
         }
 
-        if (plantNumber == 7) {
+        if (plantNumber == 7) { //if plant identificator is 7, identity changes based on which plant the user is currently viewing
             ImageView image = new ImageView();
+            //Defines new plant parameters and new plant name text:
             text7.setText(name);
             plant7.setName(name);
             plant7.setSpecies(species);
@@ -1485,6 +1616,7 @@ public class PlantDriver extends Application implements Global {
             plant7.setWaterReq(waterRequirements);
             plant7.setPlantID(plantNumber);
 
+            //Image is changed depending on which plant type hs been selected:
             if (plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(141);
@@ -1517,8 +1649,9 @@ public class PlantDriver extends Application implements Global {
             button7.setGraphic(image);
         }
 
-        if (plantNumber == 8) {
+        if (plantNumber == 8) { //if plant identificator is 8, identity changes based on which plant the user is currently viewing
             ImageView image = new ImageView();
+            //Defines new plant parameters and new plant name text:
             text8.setText(name);
             plant8.setName(name);
             plant8.setSpecies(species);
@@ -1526,6 +1659,7 @@ public class PlantDriver extends Application implements Global {
             plant8.setWaterReq(waterRequirements);
             plant8.setPlantID(plantNumber);
 
+            //Image is changed depending on which plant type hs been selected:
             if (plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(141);
@@ -1558,8 +1692,9 @@ public class PlantDriver extends Application implements Global {
             button8.setGraphic(image);
         }
 
-        if (plantNumber == 9) {
+        if (plantNumber == 9) { //if plant identificator is 9, identity changes based on which plant the user is currently viewing
             ImageView image = new ImageView();
+            //Defines new plant parameters and new plant name text:
             text9.setText(name);
             plant9.setName(name);
             plant9.setSpecies(species);
@@ -1567,6 +1702,7 @@ public class PlantDriver extends Application implements Global {
             plant9.setWaterReq(waterRequirements);
             plant9.setPlantID(plantNumber);
 
+            //Image is changed depending on which plant type hs been selected:
             if (plantTypeIndex == 0) {
                 image.setImage(new Image("flower.png"));
                 image.setFitHeight(141);
@@ -1607,10 +1743,10 @@ public class PlantDriver extends Application implements Global {
      * @author Keelin Saranchuk
      */
     public int findPlantTypeIndex(String plantType) {
-        int returnCount = 0;
+        int returnCount = 0; //initializing integer to be returned
         for(int count = 0; count < plantTypeCompareArray.length; count++) {
-            if(plantType.compareTo(plantTypeCompareArray[count]) == 0) {
-                returnCount = count;
+            if(plantType.compareTo(plantTypeCompareArray[count]) == 0) { //if the input matches an element of the plant type array
+                returnCount = count; //return current index
             }
         }
         return returnCount;
@@ -1623,511 +1759,595 @@ public class PlantDriver extends Application implements Global {
      * @author Keelin Saranchuk
      */
     public void sortingPlants() {
-        for(int i = 0; i < sortedPlantArrayList.size(); i++) {
-            if(i == 0) {
+        for(int i = 0; i < sortedPlantArrayList.size(); i++) { //for sorted plant array length
+            if(i == 0) { //when at index 0
+                //get plant at that index (which plant matches plant at that index):
                 if (sortedPlantArrayList.get(i) == plant1) {
+                    //change coordinates of text and button:
                     text1.setLayoutX(75);
                     text1.setLayoutY(290);
                     button1.setLayoutX(50);
                     button1.setLayoutY(120);
                 }
                 else if (sortedPlantArrayList.get(i) == plant2) {
+                    //change coordinates of text and button:
                     text2.setLayoutX(75);
                     text2.setLayoutY(290);
                     button2.setLayoutX(50);
                     button2.setLayoutY(120);
                 }
                 else if (sortedPlantArrayList.get(i) == plant3) {
+                    //change coordinates of text and button:
                     text3.setLayoutX(75);
                     text3.setLayoutY(290);
                     button3.setLayoutX(50);
                     button3.setLayoutY(120);
                 }
                 else if (sortedPlantArrayList.get(i) == plant4) {
+                    //change coordinates of text and button:
                     text4.setLayoutX(75);
                     text4.setLayoutY(290);
                     button4.setLayoutX(50);
                     button4.setLayoutY(120);
                 }
                 else if (sortedPlantArrayList.get(i) == plant5) {
+                    //change coordinates of text and button:
                     text5.setLayoutX(75);
                     text5.setLayoutY(290);
                     button5.setLayoutX(50);
                     button5.setLayoutY(120);
                 }
                 else if (sortedPlantArrayList.get(i) == plant6) {
+                    //change coordinates of text and button:
                     text6.setLayoutX(75);
                     text6.setLayoutY(290);
                     button6.setLayoutX(50);
                     button6.setLayoutY(120);
                 }
                 else if (sortedPlantArrayList.get(i) == plant7) {
+                    //change coordinates of text and button:
                     text7.setLayoutX(75);
                     text7.setLayoutY(290);
                     button7.setLayoutX(50);
                     button7.setLayoutY(120);
                 }
                 else if (sortedPlantArrayList.get(i) == plant8) {
+                    //change coordinates of text and button:
                     text8.setLayoutX(75);
                     text8.setLayoutY(290);
                     button8.setLayoutX(50);
                     button8.setLayoutY(120);
                 }
                 else if (sortedPlantArrayList.get(i) == plant9) {
+                    //change coordinates of text and button:
                     text9.setLayoutX(75);
                     text9.setLayoutY(290);
                     button9.setLayoutX(50);
                     button9.setLayoutY(120);
                 }
             }
-            else if(i == 1) {
+            else if(i == 1) { //when at index 1
+                //get plant at that index (which plant matches plant at that index):
                 if (sortedPlantArrayList.get(i) == plant1) {
+                    //change coordinates of text and button:
                     button1.setLayoutX(225);
                     button1.setLayoutY(120);
                     text1.setLayoutX(250);
                     text1.setLayoutY(290);
                 }
                 else if (sortedPlantArrayList.get(i) == plant2) {
+                    //change coordinates of text and button:
                     button2.setLayoutX(225);
                     button2.setLayoutY(120);
                     text2.setLayoutX(250);
                     text2.setLayoutY(290);
                 }
                 else if (sortedPlantArrayList.get(i) == plant3) {
+                    //change coordinates of text and button:
                     button3.setLayoutX(225);
                     button3.setLayoutY(120);
                     text3.setLayoutX(250);
                     text3.setLayoutY(290);
                 }
                 else if (sortedPlantArrayList.get(i) == plant4) {
+                    //change coordinates of text and button:
                     button4.setLayoutX(225);
                     button4.setLayoutY(120);
                     text4.setLayoutX(250);
                     text4.setLayoutY(290);
                 }
                 else if (sortedPlantArrayList.get(i) == plant5) {
+                    //change coordinates of text and button:
                     button5.setLayoutX(225);
                     button5.setLayoutY(120);
                     text5.setLayoutX(250);
                     text5.setLayoutY(290);
                 }
                 else if (sortedPlantArrayList.get(i) == plant6) {
+                    //change coordinates of text and button:
                     button6.setLayoutX(225);
                     button6.setLayoutY(120);
                     text6.setLayoutX(250);
                     text6.setLayoutY(290);
                 }
                 else if (sortedPlantArrayList.get(i) == plant7) {
+                    //change coordinates of text and button:
                     button7.setLayoutX(225);
                     button7.setLayoutY(120);
                     text7.setLayoutX(250);
                     text7.setLayoutY(290);
                 }
                 else if (sortedPlantArrayList.get(i) == plant8) {
+                    //change coordinates of text and button:
                     button8.setLayoutX(225);
                     button8.setLayoutY(120);
                     text8.setLayoutX(250);
                     text8.setLayoutY(290);
                 }
                 else if (sortedPlantArrayList.get(i) == plant9) {
+                    //change coordinates of text and button:
                     button9.setLayoutX(225);
                     button9.setLayoutY(120);
                     text9.setLayoutX(250);
                     text9.setLayoutY(290);
                 }
             }
-            else if(i == 2) {
+            else if(i == 2) { //when at index 2
+                //get plant at that index (which plant matches plant at that index):
                 if (sortedPlantArrayList.get(i) == plant1) {
+                    //change coordinates of text and button:
                     button1.setLayoutX(400);
                     button1.setLayoutY(120);
                     text1.setLayoutX(425);
                     text1.setLayoutY(290);
                 }
                 else if (sortedPlantArrayList.get(i) == plant2) {
+                    //change coordinates of text and button:
                     button2.setLayoutX(400);
                     button2.setLayoutY(120);
                     text2.setLayoutX(425);
                     text2.setLayoutY(290);
                 }
                 else if (sortedPlantArrayList.get(i) == plant3) {
+                    //change coordinates of text and button:
                     button3.setLayoutX(400);
                     button3.setLayoutY(120);
                     text3.setLayoutX(425);
                     text3.setLayoutY(290);
                 }
                 else if (sortedPlantArrayList.get(i) == plant4) {
+                    //change coordinates of text and button:
                     button4.setLayoutX(400);
                     button4.setLayoutY(120);
                     text4.setLayoutX(425);
                     text4.setLayoutY(290);
                 }
                 else if (sortedPlantArrayList.get(i) == plant5) {
+                    //change coordinates of text and button:
                     button5.setLayoutX(400);
                     button5.setLayoutY(120);
                     text5.setLayoutX(425);
                     text5.setLayoutY(290);
                 }
                 else if (sortedPlantArrayList.get(i) == plant6) {
+                    //change coordinates of text and button:
                     button6.setLayoutX(400);
                     button6.setLayoutY(120);
                     text6.setLayoutX(425);
                     text6.setLayoutY(290);
                 }
                 else if (sortedPlantArrayList.get(i) == plant7) {
+                    //change coordinates of text and button:
                     button7.setLayoutX(400);
                     button7.setLayoutY(120);
                     text7.setLayoutX(425);
                     text7.setLayoutY(290);
                 }
                 else if (sortedPlantArrayList.get(i) == plant8) {
+                    //change coordinates of text and button:
                     button8.setLayoutX(400);
                     button8.setLayoutY(120);
                     text8.setLayoutX(425);
                     text8.setLayoutY(290);
                 }
                 else if (sortedPlantArrayList.get(i) == plant9) {
+                    //change coordinates of text and button:
                     button9.setLayoutX(400);
                     button9.setLayoutY(120);
                     text9.setLayoutX(425);
                     text9.setLayoutY(290);
                 }
             }
-            else if(i == 3) {
-                //plant 4
+            else if(i == 3) { //when at index 3
+                //get plant at that index (which plant matches plant at that index):
                 if (sortedPlantArrayList.get(i) == plant1) {
+                    //change coordinates of text and button:
                     button1.setLayoutX(50);
                     button1.setLayoutY(320);
                     text1.setLayoutX(75);
                     text1.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant2) {
+                    //change coordinates of text and button:
                     button2.setLayoutX(50);
                     button2.setLayoutY(320);
                     text2.setLayoutX(75);
                     text2.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant3) {
+                    //change coordinates of text and button:
                     button3.setLayoutX(50);
                     button3.setLayoutY(320);
                     text3.setLayoutX(75);
                     text3.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant4) {
+                    //change coordinates of text and button:
                     button4.setLayoutX(50);
                     button4.setLayoutY(320);
                     text4.setLayoutX(75);
                     text4.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant5) {
+                    //change coordinates of text and button:
                     button5.setLayoutX(50);
                     button5.setLayoutY(320);
                     text5.setLayoutX(75);
                     text5.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant6) {
+                    //change coordinates of text and button:
                     button6.setLayoutX(50);
                     button6.setLayoutY(320);
                     text6.setLayoutX(75);
                     text6.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant7) {
+                    //change coordinates of text and button:
                     button7.setLayoutX(50);
                     button7.setLayoutY(320);
                     text7.setLayoutX(75);
                     text7.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant8) {
+                    //change coordinates of text and button:
                     button8.setLayoutX(50);
                     button8.setLayoutY(320);
                     text8.setLayoutX(75);
                     text8.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant9) {
+                    //change coordinates of text and button:
                     button9.setLayoutX(50);
                     button9.setLayoutY(320);
                     text9.setLayoutX(75);
                     text9.setLayoutY(490);
                 }
             }
-            else if(i == 4) {
-                //plant 5
+            else if(i == 4) { //when at index 4
+                //get plant at that index (which plant matches plant at that index):
                 if (sortedPlantArrayList.get(i) == plant1) {
+                    //change coordinates of text and button:
                     button1.setLayoutX(225);
                     button1.setLayoutY(320);
                     text1.setLayoutX(250);
                     text1.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant2) {
+                    //change coordinates of text and button:
                     button2.setLayoutX(225);
                     button2.setLayoutY(320);
                     text2.setLayoutX(250);
                     text2.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant3) {
+                    //change coordinates of text and button:
                     button3.setLayoutX(225);
                     button3.setLayoutY(320);
                     text3.setLayoutX(250);
                     text3.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant4) {
+                    //change coordinates of text and button:
                     button4.setLayoutX(225);
                     button4.setLayoutY(320);
                     text4.setLayoutX(250);
                     text4.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant5) {
+                    //change coordinates of text and button:
                     button5.setLayoutX(225);
                     button5.setLayoutY(320);
                     text5.setLayoutX(250);
                     text5.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant6) {
+                    //change coordinates of text and button:
                     button6.setLayoutX(225);
                     button6.setLayoutY(320);
                     text6.setLayoutX(250);
                     text6.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant7) {
+                    //change coordinates of text and button:
                     button7.setLayoutX(225);
                     button7.setLayoutY(320);
                     text7.setLayoutX(250);
                     text7.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant8) {
+                    //change coordinates of text and button:
                     button8.setLayoutX(225);
                     button8.setLayoutY(320);
                     text8.setLayoutX(250);
                     text8.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant9) {
+                    //change coordinates of text and button:
                     button9.setLayoutX(225);
                     button9.setLayoutY(320);
                     text9.setLayoutX(250);
                     text9.setLayoutY(490);
                 }
             }
-            else if(i == 5) {
-                //plant 6
+            else if(i == 5) { //when at index 5
+                //get plant at that index (which plant matches plant at that index):
                 if (sortedPlantArrayList.get(i) == plant1) {
+                    //change coordinates of text and button:
                     button1.setLayoutX(400);
                     button1.setLayoutY(320);
                     text1.setLayoutX(425);
                     text1.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant2) {
+                    //change coordinates of text and button:
                     button2.setLayoutX(400);
                     button2.setLayoutY(320);
                     text2.setLayoutX(425);
                     text2.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant3) {
+                    //change coordinates of text and button:
                     button3.setLayoutX(400);
                     button3.setLayoutY(320);
                     text3.setLayoutX(425);
                     text3.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant4) {
+                    //change coordinates of text and button:
                     button4.setLayoutX(400);
                     button4.setLayoutY(320);
                     text4.setLayoutX(425);
                     text4.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant5) {
+                    //change coordinates of text and button:
                     button5.setLayoutX(400);
                     button5.setLayoutY(320);
                     text5.setLayoutX(425);
                     text5.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant6) {
+                    //change coordinates of text and button:
                     button6.setLayoutX(400);
                     button6.setLayoutY(320);
                     text6.setLayoutX(425);
                     text6.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant7) {
+                    //change coordinates of text and button:
                     button7.setLayoutX(400);
                     button7.setLayoutY(320);
                     text7.setLayoutX(425);
                     text7.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant8) {
+                    //change coordinates of text and button:
                     button8.setLayoutX(400);
                     button8.setLayoutY(320);
                     text8.setLayoutX(425);
                     text8.setLayoutY(490);
                 }
                 else if (sortedPlantArrayList.get(i) == plant9) {
+                    //change coordinates of text and button:
                     button9.setLayoutX(400);
                     button9.setLayoutY(320);
                     text9.setLayoutX(425);
                     text9.setLayoutY(490);
                 }
             }
-            else if(i == 6) {
-                //plant 7
+            else if(i == 6) { //when at index 6
+                //get plant at that index (which plant matches plant at that index):
                 if (sortedPlantArrayList.get(i) == plant1) {
+                    //change coordinates of text and button:
                     button1.setLayoutX(50);
                     button1.setLayoutY(525);
                     text1.setLayoutX(75);
                     text1.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant2) {
+                    //change coordinates of text and button:
                     button2.setLayoutX(50);
                     button2.setLayoutY(525);
                     text2.setLayoutX(75);
                     text2.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant3) {
+                    //change coordinates of text and button:
                     button3.setLayoutX(50);
                     button3.setLayoutY(525);
                     text3.setLayoutX(75);
                     text3.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant4) {
+                    //change coordinates of text and button:
                     button4.setLayoutX(50);
                     button4.setLayoutY(525);
                     text4.setLayoutX(75);
                     text4.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant5) {
+                    //change coordinates of text and button:
                     button5.setLayoutX(50);
                     button5.setLayoutY(525);
                     text5.setLayoutX(75);
                     text5.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant6) {
+                    //change coordinates of text and button:
                     button6.setLayoutX(50);
                     button6.setLayoutY(525);
                     text6.setLayoutX(75);
                     text6.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant7) {
+                    //change coordinates of text and button:
                     button7.setLayoutX(50);
                     button7.setLayoutY(525);
                     text7.setLayoutX(75);
                     text7.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant8) {
+                    //change coordinates of text and button:
                     button8.setLayoutX(50);
                     button8.setLayoutY(525);
                     text8.setLayoutX(75);
                     text8.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant9) {
+                    //change coordinates of text and button:
                     button9.setLayoutX(50);
                     button9.setLayoutY(525);
                     text9.setLayoutX(75);
                     text9.setLayoutY(695);
                 }
             }
-            else if(i == 7) {
-                //plant 8
+            else if(i == 7) { //when at index 7
+                //get plant at that index (which plant matches plant at that index):
                 if (sortedPlantArrayList.get(i) == plant1) {
+                    //change coordinates of text and button:
                     button1.setLayoutX(225);
                     button1.setLayoutY(525);
                     text1.setLayoutX(250);
                     text1.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant2) {
+                    //change coordinates of text and button:
                     button2.setLayoutX(225);
                     button2.setLayoutY(525);
                     text2.setLayoutX(250);
                     text2.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant3) {
+                    //change coordinates of text and button:
                     button3.setLayoutX(225);
                     button3.setLayoutY(525);
                     text3.setLayoutX(250);
                     text3.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant4) {
+                    //change coordinates of text and button:
                     button4.setLayoutX(225);
                     button4.setLayoutY(525);
                     text4.setLayoutX(250);
                     text4.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant5) {
+                    //change coordinates of text and button:
                     button5.setLayoutX(225);
                     button5.setLayoutY(525);
                     text5.setLayoutX(250);
                     text5.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant6) {
+                    //change coordinates of text and button:
                     button6.setLayoutX(225);
                     button6.setLayoutY(525);
                     text6.setLayoutX(250);
                     text6.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant7) {
+                    //change coordinates of text and button:
                     button7.setLayoutX(225);
                     button7.setLayoutY(525);
                     text7.setLayoutX(250);
                     text7.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant8) {
+                    //change coordinates of text and button:
                     button8.setLayoutX(225);
                     button8.setLayoutY(525);
                     text8.setLayoutX(250);
                     text8.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant9) {
+                    //change coordinates of text and button:
                     button9.setLayoutX(225);
                     button9.setLayoutY(525);
                     text9.setLayoutX(250);
                     text9.setLayoutY(695);
                 }
             }
-            else if(i == 8) {
-                //plant 9
+            else if(i == 8) { //when at index 8
+                //get plant at that index (which plant matches plant at that index):
                 if (sortedPlantArrayList.get(i) == plant1) {
+                    //change coordinates of text and button:
                     button1.setLayoutX(400);
                     button1.setLayoutY(525);
                     text1.setLayoutX(425);
                     text1.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant2) {
+                    //change coordinates of text and button:
                     button2.setLayoutX(400);
                     button2.setLayoutY(525);
                     text2.setLayoutX(425);
                     text2.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant3) {
+                    //change coordinates of text and button:
                     button3.setLayoutX(400);
                     button3.setLayoutY(525);
                     text3.setLayoutX(425);
                     text3.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant4) {
+                    //change coordinates of text and button:
                     button4.setLayoutX(400);
                     button4.setLayoutY(525);
                     text4.setLayoutX(425);
                     text4.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant5) {
+                    //change coordinates of text and button:
                     button5.setLayoutX(400);
                     button5.setLayoutY(525);
                     text5.setLayoutX(425);
                     text5.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant6) {
+                    //change coordinates of text and button:
                     button6.setLayoutX(400);
                     button6.setLayoutY(525);
                     text6.setLayoutX(425);
                     text6.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant7) {
+                    //change coordinates of text and button:
                     button7.setLayoutX(400);
                     button7.setLayoutY(525);
                     text7.setLayoutX(425);
                     text7.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant8) {
+                    //change coordinates of text and button:
                     button8.setLayoutX(400);
                     button8.setLayoutY(525);
                     text8.setLayoutX(425);
                     text8.setLayoutY(695);
                 }
                 else if (sortedPlantArrayList.get(i) == plant9) {
+                    //change coordinates of text and button:
                     button9.setLayoutX(400);
                     button9.setLayoutY(525);
                     text9.setLayoutX(425);
@@ -2139,6 +2359,3 @@ public class PlantDriver extends Application implements Global {
 
 }
 
-
-//sort by water levels
-//sort by name
