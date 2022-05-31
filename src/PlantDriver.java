@@ -1743,9 +1743,10 @@ public class PlantDriver extends Application implements Global {
      * @author Keelin Saranchuk
      */
     public int findPlantTypeIndex(String plantType) {
+        Plant plant = new Plant("bob","bob",0,0,0);
         int returnCount = 0; //initializing integer to be returned
-        for(int count = 0; count < plantTypeCompareArray.length; count++) {
-            if(plantType.compareTo(plantTypeCompareArray[count]) == 0) { //if the input matches an element of the plant type array
+        for(int count = 0; count < plant.getPlantTypeCompareArray().length; count++) {
+            if(plantType.compareTo(plant.getPlantTypeCompareArray()[count]) == 0) { //if the input matches an element of the plant type array
                 returnCount = count; //return current index
             }
         }

@@ -8,10 +8,13 @@ import java.util.Date;
  * @author Laura Delage
  */
 
-public class PlantStatsTest {
-    CircuitBoardConnection plantConnect = new CircuitBoardConnection();
+public class PlantStatsTest implements Global {
 
     @Test
+    /**
+     * Tests the functionality of the recordWaterings() method which identifies when a plant has been watered.
+     * Should print the current date and time
+     */
     void recordWateringsTest() {
         //ArrayList<String> waterDates = new ArrayList<>();
         Plant bob = new Plant("bob", "coriander", 3, 80,2);
@@ -32,6 +35,11 @@ public class PlantStatsTest {
     }
 
     @Test
+    /**
+     * Tests the functionality of the calcWaterings() method which calculates how many times a plant has been watered since a certain date.
+     * Should print multiple recent dates and times at which the plants have been watered
+     * Note that this test will take a long time to run because of the sleep() method
+     */
     void calcWateringsTest() {
         Plant bob = new Plant("bob", "coriander", 3, 80,3);
         PlantStats bobStats = new PlantStats();
@@ -50,16 +58,5 @@ public class PlantStatsTest {
         bobStats.calcWaterings(bob,date);
         //System.out.println(bob.getWaterDates());
     }
-
-    @Test
-    void waterValTest() {
-        for (int i = 0; i < plantConnect.getArray().size(); i++) {
-            System.out.println(plantConnect.getArray().get(i));
-        }
-
-        System.out.println();
-    }
-
-
 
 }

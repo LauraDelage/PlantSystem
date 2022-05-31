@@ -9,6 +9,10 @@ import java.util.ArrayList;
 class PlantHelperTest {
 
     @Test
+    /**
+     * Tests functionality of the alphaSort() method
+     * Prints a list of plant names, sorts the list of plants alphabetically, and re-prints them in sorted order
+     */
     void alphaSortTest() {
         ArrayList<Plant> allPlants = new ArrayList<>();
         PlantHelper plantAssistant = new PlantHelper(allPlants);
@@ -36,6 +40,10 @@ class PlantHelperTest {
     }
 
     @Test
+    /**
+     * Tests functionality of the waterSort() method
+     * Prints a list of plant info, sorts the list of plants by how much water they need, and re-prints their info in sorted order
+     */
     void waterSortTest() {
         ArrayList<Plant> allPlants = new ArrayList<>();
         PlantHelper plantAssistant = new PlantHelper(allPlants);
@@ -77,6 +85,10 @@ class PlantHelperTest {
     }
 
     @Test
+    /**
+     * Tests functionality of the calcWaterNeeded() method within the Plant class
+     * Determines and prints the % moisture a plant's soil must increase by to meet their minimum moisture requirements.
+     */
     void waterCalcTest() {
         Plant bob = new Plant("bob", "coriander", 3, 10,9);
         bob.setCurrWaterVal(9);

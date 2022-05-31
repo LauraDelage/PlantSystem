@@ -13,6 +13,8 @@ public interface Global {
     Button deletePlant = new Button("Delete This Plant"); //global button, used in multiple classes
     Button editPlant = new Button("Edit Information"); //global button, used in multiple classes
 
+
+    /*
     String[] plantTypeCompareArray = {"Flower", "Succulent", "Herb", "Fruit", "Tree", "Fern", "Other"}; //Array of plant types
     String[] plantTypeInfo = { //This array corresponds to plant type array, has information to be displayed according tp plant type
             "In general, flowers need consistent watering and bright but indirect sunlight.",
@@ -23,5 +25,9 @@ public interface Global {
             "Ferns do best in humid conditions, cooler temperatures with little fluctuation, and moist soil.",
             "Unusual plant types can be challenging to care for. Be sure to do external research on your individual plant.",
     };
+     */
+
+    //ArrayList <Integer> waterLevelsSim = new ArrayList<>();
+    //int firstWaterLevelSim = 60;
 
 }

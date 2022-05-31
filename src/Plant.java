@@ -12,7 +12,7 @@ import javafx.scene.text.Text;
  * @author: Laura Delage, Keelin Saranchuk
  * */
 
-public class Plant implements Global{
+public class Plant implements Global {
     private String plantName; //user input of plant name
     private String plantSpecies; //user input of plant species
     private String plantType; //user input of plant type
@@ -33,21 +33,52 @@ public class Plant implements Global{
     Text waterCurrDraw = new Text();
     Text waterNeededDraw = new Text();
     CircuitBoardConnection board = new CircuitBoardConnection(); //CircuitBoard simulator, delivers data in sets
+    String[] plantTypeCompareArray = {"Flower", "Succulent", "Herb", "Fruit", "Tree", "Fern", "Other"}; //Array of plant types
+    String[] plantTypeInfo = { //This array corresponds to plant type array, has information to be displayed according tp plant type
+            "In general, flowers need consistent watering and bright but indirect sunlight.",
+            "Succulents are easy beginner plants. They require direct sunlight, but do not need frequent watering.",
+            "Herbs are easy and useful beginner plants. They do best when receiving 6-8 hours of direct sunlight per day.",
+            "Care for fruit plants varies depending on the fruit, and can be challenging but very rewarding to grow.", // It's best to do research on your individual fruit plant.
+            "Tree type plants are generally easy to grow and can become several feet high.", // For a shorter plant, make sure you are pruning your tree.
+            "Ferns do best in humid conditions, cooler temperatures with little fluctuation, and moist soil.",
+            "Unusual plant types can be challenging to care for. Be sure to do external research on your individual plant.",
+    };
 
 
+
+
+    /**
+     * Constructor method for the Plant class
+     * Plant draws itself
+     * Has info that includes plant name, plant water levels, plant type and plant species
+     *
+     * @param name The name of a plant object
+     * @param species The species of a plant object
+     * @param plantTypeIndex The index of to a plant type within the plantTypeCompareArray and plantTypeInfo in the Global class
+     * @param waterRequirements The percentage of moisture within the soil that the plant object requires to survive
+     * @param ID the number identifying an individual plant object??????
+     * @author Laura Delage
+     */
     Plant(String name, String species, int plantTypeIndex, int waterRequirements, int ID) {
         plantIndex = plantTypeIndex;
         plantID = ID;
         plantName = name;
         plantSpecies = species;
-        plantType = Global.plantTypeCompareArray[plantTypeIndex]; //plant type is found using plant index
-        plantTypeInfoString = Global.plantTypeInfo[plantTypeIndex]; //information about each plant stored in global class
+        plantType = plantTypeCompareArray[plantTypeIndex]; //plant type is found using plant index
+        plantTypeInfoString = plantTypeInfo[plantTypeIndex]; //information about each plant stored in global class
         waterReq = waterRequirements;
         //when plant is created, current water level is simulated, currWaterVal is the last number given from the set of simulated data
         board.generate();
         board.read();
         waterLevels = board.getArray();
         currWaterVal = waterLevels.get(waterLevels.size() - 1);
+
+        /*
+        waterLevels = waterLevelsSim;
+        waterLevels.add(firstWaterLevelSim);
+        currWaterVal = waterLevels.get(waterLevels.size() - 1);
+         */
+
     }
 
     /**
@@ -61,6 +92,7 @@ public class Plant implements Global{
      */
     public void drawPlant(Pane canvas, Plant plant) {
         Font buttonFont = new Font("Impact", 20); //Impact
+
         canvas.setStyle("-fx-background-color: white;");
         Font bigFont = new Font("Impact", 30);
         Font smallFont = new Font("Impact", 20);
@@ -200,7 +232,7 @@ public class Plant implements Global{
      * @author Keelin Saranchuk
      */
     public void setPlantTypeIndex(int plantIndexOfType) {
-        String tempType = Global.plantTypeCompareArray[plantIndexOfType];
+        String tempType = plantTypeCompareArray[plantIndexOfType];
         plantType = tempType;
     }
 
@@ -230,15 +262,15 @@ public class Plant implements Global{
     public void setPlantID(int identity) {plantID = identity;}
 
     /**
-     * The getCurrWaterVal() returns the plant's current water level
-     *
+     * Getter method
+     * @return the plant's current water level
      * @author Laura Delage
      */
     public int getCurrWaterVal() {return currWaterVal;}
 
     /**
-     * The setCurrWaterVal() allows for a new current water level value to be set
-     *
+     * Setter method
+     * Allows for a new current water level value to be set
      * @param waterVal new current water level of plant
      * @author Keelin Saranchuk
      */
@@ -246,11 +278,14 @@ public class Plant implements Global{
 
     /**
      * The calcWaterNeeded() calculates the difference between the plant's current water level and the water needed
-     *
+     * @return the % increase in soil moisture
      * @author Laura Delage
      */
     public int calcWaterNeeded() {
         waterNeeded = waterReq - currWaterVal;
+        if (waterNeeded < 0) {
+            waterNeeded = 0;
+        }
         return waterNeeded;
     }
 
@@ -267,12 +302,39 @@ public class Plant implements Global{
     }
 
     /**
+     * Takes in a date object and adds it to the waterDates ArrayList as an instance of the plant being watered.
+     * Puts it in the array in the correct spot so that the ArrayList is chronologically ordered.
+     * @param date the day that the plant was watered
+     */
+    public void wasWatered(Date date) {
+        for (int i = 0; i < waterDates.size(); i++) {
+            if (waterDates.get(i).getTime() > date.getTime()) {
+                waterDates.add(i, date);
+            }
+        }
+    }
+
+    /**
      * The getWaterDates() returns array list of last watering dates of all plants
      *
      * @author Laura Delage
      */
     public ArrayList<Date> getWaterDates() {
         return waterDates;
+    }
+
+    /**
+     * @author Laura Delage
+     */
+    public String[] getPlantTypeCompareArray() {
+        return plantTypeCompareArray;
+    }
+
+    /**
+     * @author Laura Delage
+     */
+    public String[] getPlantTypeInfo() {
+        return plantTypeInfo;
     }
 
 }
