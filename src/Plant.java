@@ -283,9 +283,9 @@ public class Plant implements Global {
      */
     public int calcWaterNeeded() {
         waterNeeded = waterReq - currWaterVal;
-        if (waterNeeded < 0) {
+        /*if (waterNeeded < 0) {
             waterNeeded = 0;
-        }
+        }*/
         return waterNeeded;
     }
 
@@ -328,13 +328,6 @@ public class Plant implements Global {
      */
     public String[] getPlantTypeCompareArray() {
         return plantTypeCompareArray;
-    }
-
-    /**
-     * @author Laura Delage
-     */
-    public String[] getPlantTypeInfo() {
-        return plantTypeInfo;
     }
 
 }
